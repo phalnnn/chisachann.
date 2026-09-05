@@ -49,11 +49,12 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        /* PROFILE SECTION */
+        /* PROFILE SECTION - HÌNH NỀN TỰ CHỌN */
         .profile-section {
             text-align: center;
-            background: linear-gradient(145deg, rgba(30, 15, 35, 0.85), rgba(15, 20, 35, 0.85)) !important;
-            border: 1px solid rgba(254, 44, 85, 0.25) !important;
+            background: linear-gradient(rgba(12, 14, 22, 0.68), rgba(12, 14, 22, 0.82)), 
+                        url('bg-profile.jpg') center/cover no-repeat !important;
+            border: 1px solid rgba(254, 44, 85, 0.35) !important;
         }
 
         .avatar-wrap {
@@ -168,13 +169,14 @@
             transform: scale(1.1);
         }
 
-        /* NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ */
+        /* NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ (CĂN GIỮA CHỮ) */
         .btn-toggle-service {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             width: 100%;
-            padding: 16px 20px;
+            padding: 16px 45px;
             background: linear-gradient(135deg, rgba(254, 44, 85, 0.2), rgba(37, 244, 238, 0.2));
             border: 1.5px solid rgba(254, 44, 85, 0.5);
             border-radius: 16px;
@@ -186,6 +188,7 @@
             -webkit-backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         .btn-toggle-service:hover {
@@ -198,7 +201,8 @@
         .btn-toggle-service .service-text {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-toggle-service .service-text i {
@@ -207,6 +211,8 @@
         }
 
         .btn-toggle-service .arrow-icon {
+            position: absolute;
+            right: 20px;
             transition: transform 0.35s ease;
             color: #25f4ee;
             font-size: 1rem;
@@ -617,10 +623,10 @@
                 <svg class="zypage-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
                 </svg>
-                Donate On Zypage
+                Donate ghi âm gì cũng được
             </a>
 
-            <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ -->
+            <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ (ĐÃ CĂN GIỮA) -->
             <button type="button" class="btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
                 <span class="service-text">
                     <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
@@ -644,7 +650,7 @@
         </div>
     </div>
 
-    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN (ĐƯỢC ẨN VÀ MỞ BẰNG NÚT BẤM) -->
+    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN (ẨN VÀ MỞ BẰNG NÚT BẤM) -->
     <div class="card" id="serviceContainer">
         <div class="banner-wrap" onclick="openImageModal()">
             <img id="bannerImg" src="banggia.jpg" alt="Bảng giá dịch vụ" onerror="this.src='https://placehold.co/1000x560/1a1c24/ffffff?text=Vui+long+upload+anh+banggia.jpg'">
@@ -809,7 +815,6 @@
         } else {
             menu.style.display = "block";
             btn.classList.add("active");
-            // Cuộn nhẹ xuống khung cày thuê
             menu.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
