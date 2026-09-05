@@ -13,6 +13,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
+        /* NỀN GRADIENT LƯỚT SÓNG TỐC ĐỘ CAO (FAST WAVE GRADIENT) */
         body {
             color: #ffffff;
             min-height: 100vh;
@@ -20,97 +21,24 @@
             justify-content: center;
             align-items: flex-start;
             padding: 30px 14px;
-            background-color: #0b0c10;
-            position: relative;
-            overflow-x: hidden;
+            background: linear-gradient(125deg, #0d0e15, #fe2c55, #12141d, #25f4ee, #7928ca, #fe2c55, #0d0e15);
+            background-size: 500% 500%;
+            animation: waveFlow 4.5s ease-in-out infinite alternate;
         }
 
-        /* KHỐI NỀN ÁNH SÁNG ĐA SẮC ĐỘNG (AURORA GLOW MESH) */
-        .bg-glow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .glow-sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.65;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease-in-out;
-            animation-direction: alternate;
-        }
-
-        .glow-1 {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, #fe2c55, #ff0055);
-            top: -60px;
-            left: -40px;
-            animation: move1 12s infinite alternate;
-        }
-
-        .glow-2 {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, #25f4ee, #00b4d8);
-            top: 40%;
-            right: -80px;
-            animation: move2 15s infinite alternate;
-        }
-
-        .glow-3 {
-            width: 360px;
-            height: 360px;
-            background: radial-gradient(circle, #7928ca, #b829dd);
-            bottom: -50px;
-            left: 20%;
-            animation: move3 14s infinite alternate;
-        }
-
-        .glow-4 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #ff9e00, #ff5400);
-            top: 20%;
-            left: 35%;
-            opacity: 0.45;
-            animation: move4 10s infinite alternate;
-        }
-
-        @keyframes move1 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(120px, 80px) scale(1.15); }
-            100% { transform: translate(60px, 160px) scale(0.9); }
-        }
-
-        @keyframes move2 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-140px, -90px) scale(1.2); }
-            100% { transform: translate(-70px, 120px) scale(0.95); }
-        }
-
-        @keyframes move3 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(80px, -110px) scale(1.1); }
-            100% { transform: translate(-90px, -40px) scale(1.25); }
-        }
-
-        @keyframes move4 {
-            0% { transform: translate(0, 0) scale(0.9); }
-            50% { transform: translate(-80px, 110px) scale(1.2); }
-            100% { transform: translate(100px, 50px) scale(1); }
+        @keyframes waveFlow {
+            0% {
+                background-position: 0% 20%;
+            }
+            50% {
+                background-position: 100% 80%;
+            }
+            100% {
+                background-position: 20% 100%;
+            }
         }
 
         .container {
-            position: relative;
-            z-index: 1;
             width: 100%;
             max-width: 580px;
             display: flex;
@@ -119,13 +47,13 @@
         }
 
         .card {
-            background: rgba(14, 16, 24, 0.78);
+            background: rgba(14, 16, 24, 0.82);
             border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 22px;
+            border-radius: 20px;
             padding: 24px 18px;
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
         }
 
         /* PROFILE SECTION */
@@ -145,15 +73,14 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #fe2c55;
-            box-shadow: 0 0 24px rgba(254, 44, 85, 0.6);
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.5);
         }
 
         .channel-name {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
             margin-bottom: 6px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .bio {
@@ -179,8 +106,8 @@
             gap: 10px;
             width: 100%;
             padding: 14px 20px;
-            background: rgba(20, 23, 34, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(22, 24, 35, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 14px;
             color: white;
             text-decoration: none;
@@ -227,9 +154,9 @@
 
         /* KHUNG DONATE TÀ TỮA */
         .donate-box {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             padding: 20px 16px;
         }
 
@@ -251,7 +178,7 @@
             border-radius: 14px;
             padding: 10px;
             display: inline-block;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
         }
 
         .qr-img-donate {
@@ -317,7 +244,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            border-bottom: 1px solid rgba(254, 44, 85, 0.35);
+            border-bottom: 1px solid rgba(254, 44, 85, 0.3);
             padding-bottom: 4px;
         }
 
@@ -339,7 +266,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 10px;
             cursor: pointer;
@@ -349,7 +276,7 @@
 
         .map-item:hover {
             border-color: #fe2c55;
-            background: rgba(254, 44, 85, 0.12);
+            background: rgba(254, 44, 85, 0.08);
         }
 
         .map-info {
@@ -387,7 +314,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 18px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.45);
             border-radius: 14px;
             margin: 20px 0;
             border-left: 5px solid #ffb703;
@@ -406,9 +333,9 @@
 
         /* KHUNG VIETQR TỰ ĐỘNG */
         .qr-section {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px dashed rgba(37, 244, 238, 0.4);
-            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed rgba(37, 244, 238, 0.35);
+            border-radius: 16px;
             padding: 18px;
             text-align: center;
             margin-bottom: 20px;
@@ -433,7 +360,7 @@
             padding: 10px;
             display: inline-block;
             margin-bottom: 10px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
         }
 
         .qr-img-auto {
@@ -452,8 +379,8 @@
         .qr-notice {
             margin-top: 12px;
             padding: 10px 14px;
-            background: rgba(254, 44, 85, 0.18);
-            border: 1px solid rgba(254, 44, 85, 0.45);
+            background: rgba(254, 44, 85, 0.15);
+            border: 1px solid rgba(254, 44, 85, 0.35);
             border-radius: 10px;
             font-size: 0.88rem;
             color: #ffb8c6;
@@ -477,8 +404,8 @@
             width: 100%;
             padding: 12px;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.35);
             color: white;
             font-size: 0.95rem;
             outline: none;
@@ -503,14 +430,14 @@
             justify-content: center;
             gap: 10px;
             transition: 0.2s ease;
-            box-shadow: 0 4px 18px rgba(254, 44, 85, 0.45);
+            box-shadow: 0 4px 16px rgba(254, 44, 85, 0.4);
             margin-top: 16px;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(37, 244, 238, 0.55);
+            box-shadow: 0 6px 22px rgba(37, 244, 238, 0.5);
         }
 
         .extra-note {
@@ -527,12 +454,12 @@
             z-index: 9999;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: rgba(0, 0, 0, 0.92);
+            background-color: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
             padding: 16px;
             cursor: zoom-out;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
         }
 
         .modal-content {
@@ -540,7 +467,7 @@
             max-height: 90vh;
             object-fit: contain;
             border-radius: 10px;
-            box-shadow: 0 0 35px rgba(0,0,0,0.85);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
             cursor: default;
         }
 
@@ -560,14 +487,6 @@
     </style>
 </head>
 <body>
-
-<!-- HIỆU ỨNG NỀN ÁNH SÁNG AURORA CHUYỂN ĐỘNG ĐA CHIỀU -->
-<div class="bg-glow-container">
-    <div class="glow-sphere glow-1"></div>
-    <div class="glow-sphere glow-2"></div>
-    <div class="glow-sphere glow-3"></div>
-    <div class="glow-sphere glow-4"></div>
-</div>
 
 <div class="container">
     <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & DONATE LY TÀ TỮA -->
