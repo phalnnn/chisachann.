@@ -169,7 +169,7 @@
             transform: scale(1.1);
         }
 
-        /* NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ (CĂN GIỮA CHỮ) */
+        /* NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ (CĂN GIỮA) */
         .btn-toggle-service {
             position: relative;
             display: flex;
@@ -222,7 +222,7 @@
             transform: rotate(180deg);
         }
 
-        /* KHUNG CHỨA DỊCH VỤ (ẨN MẶC ĐỊNH) */
+        /* KHUNG CHỨA DỊCH VỤ */
         #serviceContainer {
             display: none;
             animation: fadeIn 0.35s ease;
@@ -590,6 +590,45 @@
         .modal-close:hover {
             color: #fe2c55;
         }
+
+        /* NÚT NHẠC NỔI GÓC MÀN HÌNH */
+        .music-btn {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(18, 20, 29, 0.85);
+            border: 2px solid #fe2c55;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 18px rgba(254, 44, 85, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 24px rgba(37, 244, 238, 0.6);
+            border-color: #25f4ee;
+        }
+
+        .music-btn.playing {
+            animation: spinMusic 4s linear infinite;
+            border-color: #25f4ee;
+            color: #25f4ee;
+        }
+
+        @keyframes spinMusic {
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -607,7 +646,7 @@
         <!-- DANH SÁCH NÚT MẠNG XÃ HỘI -->
         <div class="social-links">
             <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-social btn-tiktok">
-                <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
+                <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tôi
             </a>
 
             <a href="https://discord.gg/tCgPMRaqek" target="_blank" rel="noopener noreferrer" class="btn-social btn-discord">
@@ -615,7 +654,7 @@
             </a>
 
             <a href="https://youtube.com/@phalnnn?si=4p5A05Y50ROdZH04" target="_blank" rel="noopener noreferrer" class="btn-social btn-youtube">
-                <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tui
+                <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tôi
             </a>
 
             <!-- NÚT ZYPAGE -->
@@ -623,10 +662,10 @@
                 <svg class="zypage-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
                 </svg>
-                Donate cho Chía bel 
+                Donate on zepage
             </a>
 
-            <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ (ĐÃ CĂN GIỮA) -->
+            <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ -->
             <button type="button" class="btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
                 <span class="service-text">
                     <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
@@ -784,6 +823,16 @@
     </div>
 </div>
 
+<!-- NÚT BẬT/TẮT NHẠC NỔI GÓC MÀN HÌNH -->
+<button class="music-btn" id="musicToggleBtn" onclick="toggleAudio()" title="Bật/Tắt nhạc nền">
+    <i class="fa-solid fa-music" id="musicIcon"></i>
+</button>
+
+<!-- THẺ PHÁT NHẠC ẨN -->
+<audio id="bgAudio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <!-- MODAL PHÓNG TO ẢNH BẢNG GIÁ -->
 <div id="imageModal" class="modal" onclick="closeImageModal()">
     <span class="modal-close">&times;</span>
@@ -803,6 +852,44 @@
     const gameAccountInput = document.getElementById('gameAccount');
     const gamePasswordInput = document.getElementById('gamePassword');
     const memoPreview = document.getElementById('memoPreview');
+
+    // CƠ CHẾ PHÁT NHẠC NỀN
+    const bgAudio = document.getElementById('bgAudio');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    let isMusicPlaying = false;
+
+    function toggleAudio() {
+        if (isMusicPlaying) {
+            bgAudio.pause();
+            musicToggleBtn.classList.remove('playing');
+            musicIcon.className = 'fa-solid fa-volume-xmark';
+            isMusicPlaying = false;
+        } else {
+            bgAudio.play().then(() => {
+                musicToggleBtn.classList.add('playing');
+                musicIcon.className = 'fa-solid fa-music';
+                isMusicPlaying = true;
+            }).catch(e => {
+                console.log('Trình duyệt chặn autoplay:', e);
+            });
+        }
+    }
+
+    // Tự động phát khi người dùng chạm/click lần đầu vào bất kỳ đâu trên màn hình
+    function autoPlayOnce() {
+        if (!isMusicPlaying) {
+            bgAudio.play().then(() => {
+                musicToggleBtn.classList.add('playing');
+                musicIcon.className = 'fa-solid fa-music';
+                isMusicPlaying = true;
+            }).catch(() => {});
+        }
+        document.removeEventListener('click', autoPlayOnce);
+        document.removeEventListener('touchstart', autoPlayOnce);
+    }
+    document.addEventListener('click', autoPlayOnce);
+    document.addEventListener('touchstart', autoPlayOnce);
 
     // BẬT / TẮT KHUNG DỊCH VỤ CÀY THUÊ
     function toggleServiceMenu() {
