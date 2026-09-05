@@ -13,7 +13,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* NỀN GRADIENT LƯỚT SÓNG TỐC ĐỘ CAO (FAST WAVE GRADIENT) */
         body {
             color: #ffffff;
             min-height: 100vh;
@@ -21,21 +20,15 @@
             justify-content: center;
             align-items: flex-start;
             padding: 30px 14px;
-            background: linear-gradient(125deg, #0d0e15, #fe2c55, #12141d, #25f4ee, #7928ca, #fe2c55, #0d0e15);
-            background-size: 500% 500%;
-            animation: waveFlow 4.5s ease-in-out infinite alternate;
+            background: linear-gradient(-45deg, #0d0e15, #fe2c55, #12141d, #25f4ee);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
         }
 
-        @keyframes waveFlow {
-            0% {
-                background-position: 0% 20%;
-            }
-            50% {
-                background-position: 100% 80%;
-            }
-            100% {
-                background-position: 20% 100%;
-            }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -47,13 +40,13 @@
         }
 
         .card {
-            background: rgba(14, 16, 24, 0.82);
-            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(15, 16, 21, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 24px 18px;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         /* PROFILE SECTION */
@@ -91,7 +84,7 @@
             text-shadow: 0 1px 6px rgba(0,0,0,0.4);
         }
 
-        /* KHỐI CÁC NÚT MẠNG XÃ HỘI */
+        /* NÚT MẠNG XÃ HỘI */
         .social-links {
             display: flex;
             flex-direction: column;
@@ -198,7 +191,7 @@
             color: #ffffff;
         }
 
-        /* BẢNG GIÁ WUTHERING WAVES */
+        /* BẢNG GIÁ */
         .banner-wrap {
             position: relative;
             width: 100%;
@@ -376,6 +369,7 @@
             font-weight: 500;
         }
 
+        /* DÒNG THÔNG BÁO ĐÃ ĐỔI */
         .qr-notice {
             margin-top: 12px;
             padding: 10px 14px;
@@ -388,7 +382,7 @@
             font-weight: 600;
         }
 
-        /* FORM THÔNG TIN */
+        /* FORM THÔNG TIN & Ô TÀI KHOẢN MẬT KHẨU */
         .form-group {
             margin-bottom: 12px;
         }
@@ -409,6 +403,31 @@
             color: white;
             font-size: 0.95rem;
             outline: none;
+        }
+
+        .password-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-wrap input {
+            padding-right: 42px;
+        }
+
+        .toggle-pw-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .toggle-pw-btn:hover {
+            color: #25f4ee;
         }
 
         .form-group input:focus, .form-group textarea:focus {
@@ -489,7 +508,7 @@
 <body>
 
 <div class="container">
-    <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & DONATE LY TÀ TỮA -->
+    <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & DONATE -->
     <div class="card profile-section">
         <div class="avatar-wrap">
             <img src="avatar.jpg" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
@@ -609,15 +628,30 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
         </div>
 
-        <!-- FORM THÔNG TIN KHÁCH -->
+        <!-- FORM THÔNG TIN (TÀI KHOẢN & MẬT KHẨU) -->
         <div class="form-group" style="margin-top: 18px;">
-            <label for="clientName">Tên / ID TikTok của bạn (*):</label>
+            <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
             <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label for="clientNote">Ghi chú thêm:</label>
-            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần hoàn thành gấp, rương còn 30%..."></textarea>
+            <label for="gameAccount"><i class="fa-solid fa-user"></i> Tài khoản game (Kuro / Mail / Login):</label>
+            <input type="text" id="gameAccount" placeholder="Nhập tài khoản game để cày" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="gamePassword"><i class="fa-solid fa-lock"></i> Mật khẩu game:</label>
+            <div class="password-wrap">
+                <input type="password" id="gamePassword" placeholder="Nhập mật khẩu game" autocomplete="off">
+                <button type="button" class="toggle-pw-btn" onclick="togglePasswordVisibility()">
+                    <i class="fa-solid fa-eye" id="pwIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Ghi chú thêm (Mã 2FA, yêu cầu đặc biệt...):</label>
+            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Đã tắt 2FA, cần xong trước 24h..."></textarea>
         </div>
 
         <div class="total-box">
@@ -634,8 +668,9 @@
             </div>
             <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
 
+            <!-- DÒNG THÔNG BÁO THEO YÊU CẦU -->
             <div class="qr-notice">
-                ⚠️ Các bạn chuyển khoản xong nhớ bấm nút <strong>"GỬI YÊU CẦU QUA TIKTOK"</strong> ở dưới để mình nhận đơn nha! 💕
+                ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào link tik bên dưới dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn 💕
             </div>
         </div>
 
@@ -663,7 +698,23 @@
     const totalDisplay = document.getElementById('totalDisplay');
     const autoQrImg = document.getElementById('autoQrImg');
     const clientNameInput = document.getElementById('clientName');
+    const gameAccountInput = document.getElementById('gameAccount');
+    const gamePasswordInput = document.getElementById('gamePassword');
     const memoPreview = document.getElementById('memoPreview');
+
+    function togglePasswordVisibility() {
+        const pwInput = document.getElementById("gamePassword");
+        const pwIcon = document.getElementById("pwIcon");
+        if (pwInput.type === "password") {
+            pwInput.type = "text";
+            pwIcon.classList.remove("fa-eye");
+            pwIcon.classList.add("fa-eye-slash");
+        } else {
+            pwInput.type = "password";
+            pwIcon.classList.remove("fa-eye-slash");
+            pwIcon.classList.add("fa-eye");
+        }
+    }
 
     function removeVietnameseTones(str) {
         return str
@@ -728,6 +779,8 @@
 
     function sendOrderToTikTok() {
         const name = clientNameInput.value.trim();
+        const acc = gameAccountInput.value.trim();
+        const pw = gamePasswordInput.value.trim();
         const note = document.getElementById('clientNote').value.trim();
 
         const selectedMaps = [];
@@ -748,6 +801,8 @@
 `🌸 ĐƠN CÀY THUÊ WUTHERING WAVES 🌸
 - Khách hàng (TikTok): ${name || 'Chưa nhập'}
 - Lời nhắn CK: ${removeVietnameseTones(name) || 'PHALNNN CAY THUE'}
+- Tài khoản game: ${acc || 'Chưa cung cấp'}
+- Mật khẩu: ${pw || 'Chưa cung cấp'}
 - Dịch vụ / Map đã chọn:
   + ${selectedMaps.join('\n  + ')}
 ---------------------------
@@ -755,7 +810,7 @@
 - Ghi chú: ${note || 'Không có'}`;
 
         navigator.clipboard.writeText(message).then(() => {
-            alert("✨ Đã copy thông tin đơn hàng!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn cho mình nhé 💕");
+            alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn cho mình nhé 💕");
             window.open('https://www.tiktok.com/@phalnnn', '_blank');
         }).catch(() => {
             prompt("Hãy sao chép nội dung đơn này:", message);
