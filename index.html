@@ -49,9 +49,11 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        /* PROFILE SECTION */
+        /* PROFILE SECTION - ĐÃ ĐỔI MÀU NỀN TÁCH BIỆT */
         .profile-section {
             text-align: center;
+            background: linear-gradient(145deg, rgba(30, 15, 35, 0.85), rgba(15, 20, 35, 0.85)) !important;
+            border: 1px solid rgba(254, 44, 85, 0.25) !important;
         }
 
         .avatar-wrap {
@@ -369,7 +371,6 @@
             font-weight: 500;
         }
 
-        /* DÒNG THÔNG BÁO ĐÃ ĐỔI */
         .qr-notice {
             margin-top: 12px;
             padding: 10px 14px;
@@ -628,7 +629,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
         </div>
 
-        <!-- FORM THÔNG TIN (TÀI KHOẢN & MẬT KHẨU) -->
+        <!-- FORM NHẬP THÔNG TIN CỦA KHÁCH -->
         <div class="form-group" style="margin-top: 18px;">
             <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
             <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off">
@@ -650,8 +651,8 @@
         </div>
 
         <div class="form-group">
-            <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Ghi chú thêm (yêu cầu đặc biệt...):</label>
-            <textarea id="clientNote" rows="2" placeholder="Ví dụ: cần xong trước 24h..."></textarea>
+            <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Yêu cầu đặc biệt:</label>
+            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, ưu tiên nhặt rương..."></textarea>
         </div>
 
         <div class="total-box">
@@ -668,9 +669,8 @@
             </div>
             <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
 
-            <!-- DÒNG THÔNG BÁO THEO YÊU CẦU -->
             <div class="qr-notice">
-                ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào "Gửi yêu cầu qua tiktok" và dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn vào tin nhắn cho mình 💕
+                ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào link tik bên dưới dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn 💕
             </div>
         </div>
 
@@ -807,7 +807,7 @@
   + ${selectedMaps.join('\n  + ')}
 ---------------------------
 👉 TỔNG TIỀN: ${total.toLocaleString('vi-VN')}đ
-- Ghi chú: ${note || 'Không có'}`;
+- Yêu cầu đặc biệt: ${note || 'Không có'}`;
 
         navigator.clipboard.writeText(message).then(() => {
             alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn cho mình nhé 💕");
