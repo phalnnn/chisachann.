@@ -611,11 +611,10 @@
             box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            opacity: 0.35; /* Mờ đi mặc định khi không dùng */
+            opacity: 0.35;
             transition: opacity 0.35s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        /* Rê chuột vào hoặc khi đang phát nhạc sẽ hiện rõ 100% */
         .music-btn:hover,
         .music-btn.playing {
             opacity: 1;
@@ -778,6 +777,18 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
         </div>
 
+        <!-- 6. DỊCH VỤ CONTENT ENDGAME (MỚI THÊM) -->
+        <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
+        <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
+        </div>
+
         <!-- FORM NHẬP THÔNG TIN CỦA KHÁCH -->
         <div class="form-group" style="margin-top: 18px;">
             <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
@@ -801,7 +812,7 @@
 
         <div class="form-group">
             <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Yêu cầu đặc biệt:</label>
-            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, ưu tiên nhặt rương..."></textarea>
+            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, cày holo con nào ghi rõ tại đây..."></textarea>
         </div>
 
         <div class="total-box">
@@ -827,7 +838,7 @@
             <i class="fa-brands fa-tiktok"></i> GỬI YÊU CẦU QUA TIKTOK
         </button>
 
-        <p class="extra-note">✨ Ngoài ra Chía còn nhận cứu full content matrix, thuyền, tháp giá yêu thương nha 💕</p>
+        <p class="extra-note">✨ Ngoài ra Chía còn nhận hỗ trợ mọi content sự kiện theo yêu cầu giá yêu thương nha 💕</p>
     </div>
 </div>
 
@@ -884,7 +895,6 @@
         }
     }
 
-    // Tự động phát khi người dùng chạm/click lần đầu vào bất kỳ đâu trên màn hình
     function autoPlayOnce() {
         if (!isMusicPlaying) {
             bgAudio.play().then(() => {
