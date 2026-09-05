@@ -148,14 +148,25 @@
         }
 
         /* NÚT ZYPAGE */
-        .btn-zypage:hover {
-            border-color: #a855f7;
-            background: rgba(35, 28, 50, 0.95);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        .btn-zypage {
+            color: #ffffff;
         }
-        .btn-zypage i {
-            color: #a855f7;
-            font-size: 1.2rem;
+        .btn-zypage .zypage-icon {
+            width: 20px;
+            height: 20px;
+            fill: #7084ff;
+            display: inline-block;
+            vertical-align: middle;
+            transition: transform 0.25s ease, fill 0.25s ease;
+        }
+        .btn-zypage:hover {
+            border-color: #7084ff;
+            background: rgba(30, 35, 55, 0.95);
+            box-shadow: 0 6px 20px rgba(112, 132, 255, 0.35);
+        }
+        .btn-zypage:hover .zypage-icon {
+            fill: #8fa0ff;
+            transform: scale(1.1);
         }
 
         /* KHUNG DONATE TÀ TỮA */
@@ -543,9 +554,12 @@
                 <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tôi
             </a>
 
-            <!-- NÚT ZYPAGE (DƯỚI YOUTUBE) -->
+            <!-- NÚT ZYPAGE VỚI LOGO VECTOR CHUẨN -->
             <a href="https://zypage.com/phalnnn" target="_blank" rel="noopener noreferrer" class="btn-social btn-zypage">
-                <i class="fa-solid fa-link"></i> Ghé Thăm Zypage Của Tôi
+                <svg class="zypage-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
+                </svg>
+                Donate on zepage
             </a>
         </div>
 
@@ -645,7 +659,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
         </div>
 
-        <!-- FORM NHẬP THÔNG TIN CỦA KHÁCH -->
+        <!-- FORM NHẬP THÔNG TIN -->
         <div class="form-group" style="margin-top: 18px;">
             <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
             <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off">
