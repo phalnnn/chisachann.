@@ -86,7 +86,7 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN CỦA CARD CHÍNH */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -222,12 +222,102 @@
       line-height: 1.5;
     }
 
+    /* ============================================================
+       KHUNG DONATE NEON NỔI BẬT ĐƯA LÊN ĐẦU
+       ============================================================ */
+    .donate-neon-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 22px;
+      padding: 2.5px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                  0 0 20px rgba(254, 44, 85, 0.4),
+                  0 0 12px rgba(255, 255, 255, 0.25);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .donate-neon-wrapper::before {
+      content: "";
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+
+    body.music-active .donate-neon-wrapper {
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8),
+                  0 0 25px rgba(254, 44, 85, 0.7),
+                  0 0 16px rgba(255, 255, 255, 0.4);
+    }
+
+    .donate-box {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      background: rgba(12, 12, 16, 0.94);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 22px 16px;
+    }
+
+    .donate-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fe2c55;
+      text-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .donate-desc {
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      margin-bottom: 16px;
+    }
+
+    .qr-box-donate {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 16px rgba(254, 44, 85, 0.35);
+    }
+
+    .qr-img-donate {
+      width: 220px;
+      height: auto;
+      display: block;
+    }
+
+    .bank-details {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      line-height: 1.6;
+    }
+
+    .bank-details strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
     /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
     .social-links {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .btn-link {
@@ -342,56 +432,6 @@
       color: #ffffff;
     }
 
-    /* KHUNG DONATE TĨNH BAN ĐẦU (PHONG CÁCH NEON ĐỎ - TRẮNG) */
-    .donate-box {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(254, 44, 85, 0.35);
-      border-radius: 18px;
-      padding: 20px 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .donate-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #fe2c55;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
-    }
-
-    .donate-desc {
-      font-size: 0.88rem;
-      color: #cfd3e0;
-      margin-bottom: 16px;
-    }
-
-    .qr-box-donate {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 10px;
-      display: inline-block;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 15px rgba(254, 44, 85, 0.25);
-    }
-
-    .qr-img-donate {
-      width: 220px;
-      height: auto;
-      display: block;
-    }
-
-    .bank-details {
-      margin-top: 14px;
-      font-size: 0.88rem;
-      color: #cfd3e0;
-      line-height: 1.6;
-    }
-
-    .bank-details strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    /* Hiệu ứng khi phát nhạc */
     body.music-active .btn-tiktok,
     body.music-active .btn-toggle-service {
       box-shadow: 0 0 18px rgba(254, 44, 85, 0.6), inset 0 0 10px rgba(254, 44, 85, 0.3);
@@ -705,7 +745,7 @@
 
   <div class="container">
 
-    <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & KHUNG DONATE TĨNH BAN ĐẦU -->
+    <!-- KHỐI 1: PROFILE, DONATE NEON TRÊN ĐẦU & MẠNG XÃ HỘI -->
     <div class="card-border-wrapper">
       <div class="card profile-card">
         <div class="avatar-wrapper">
@@ -714,6 +754,22 @@
 
         <h1 class="channel-name">@phalnnn</h1>
         <p class="bio">kênh của mình 💕</p>
+
+        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU -->
+        <div class="donate-neon-wrapper">
+          <div class="donate-box">
+            <div class="donate-title"><i class="fa-solid fa-heart"></i> Donate Tà Tữa 💕</div>
+            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa 💕</p>
+            <div class="qr-box-donate">
+              <img src="https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA" alt="QR Donate Techcombank" class="qr-img-donate">
+            </div>
+            <div class="bank-details">
+              <div>Ngân hàng: <strong>Techcombank</strong></div>
+              <div>Số tài khoản: <strong>1907 4758 6200 12</strong></div>
+              <div>Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
+            </div>
+          </div>
+        </div>
 
         <!-- DANH SÁCH NÚT MẠNG XÃ HỘI -->
         <div class="social-links">
@@ -741,20 +797,6 @@
             <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
             <i class="fa-solid fa-chevron-down arrow-icon"></i>
           </button>
-        </div>
-
-        <!-- KHUNG DONATE TECHCOMBANK TRỰC TIẾP (NHƯ CODE GỐC) -->
-        <div class="donate-box">
-          <div class="donate-title">Donate 💕</div>
-          <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa 💕</p>
-          <div class="qr-box-donate">
-            <img src="https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA" alt="QR Donate Techcombank" class="qr-img-donate">
-          </div>
-          <div class="bank-details">
-            <div>Ngân hàng: <strong>Techcombank</strong></div>
-            <div>Số tài khoản: <strong>1907 4758 6200 12</strong></div>
-            <div>Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
-          </div>
         </div>
 
         <div class="footer">
