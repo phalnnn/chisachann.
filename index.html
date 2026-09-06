@@ -281,7 +281,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON - LUÔN DI CHUYỂN THEO CUỘN TRANG
+       THANH MINI PLAYER NEON
        ============================================================ */
     .mini-player-dock {
       position: relative;
@@ -947,7 +947,7 @@
       box-shadow: 0 4px 16px rgba(254, 44, 85, 0.5);
       margin-top: 16px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-shadow: 0 0 6px rgba(0,0,0,0.8);
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
     }
     .btn-submit:hover {
       transform: translateY(-2px);
@@ -1187,10 +1187,10 @@
 
     .mascot-bubble {
       position: absolute;
-      top: -28px;
+      top: -32px;
       left: 50%;
       transform: translateX(-50%) !important;
-      background: rgba(14, 14, 18, 0.92);
+      background: rgba(14, 14, 18, 0.95);
       border: 1px solid #fe2c55;
       color: #ffffff;
       font-size: 0.72rem;
@@ -1553,10 +1553,10 @@
   </div>
 
   <!-- ============================================================
-       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
+       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (HIỆN LỜI NHẮN BAN ĐẦU & MỖI 10S)
        ============================================================ -->
   <div class="floating-mascot" id="mascot">
-    <div class="mascot-bubble" id="mascotBubble">Nghỉ 1p nha~ 💤</div>
+    <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
     <div class="mascot-img-wrap" id="mascotImgWrap">
       <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
     </div>
@@ -1705,7 +1705,7 @@
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
     // ==========================================
-    // LOGIC MASCOT BAY LƯỢN & VỆT TÀN ẢNH ĐỎ MỜ
+    // LOGIC MASCOT BAY LƯỢN, TÀN ẢNH & BONG BÓNG LỜI NHẮN (ĐẦU + MỖI 10S)
     // ==========================================
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
@@ -1725,6 +1725,26 @@
     let mascotStartY = 0;
 
     let lastTrailTime = 0;
+
+    // Hiển thị lời nhắn "Cảm ơn bạn đã ủng hộ 💗" ban đầu trong 3s, sau đó lặp lại mỗi 10s
+    function initMascotMessages() {
+      // 1. Ẩn thông điệp mặc định sau 3 giây đầu tiên
+      setTimeout(() => {
+        if (!isPaused) mascotBubble.classList.remove('show');
+      }, 3000);
+
+      // 2. Cứ mỗi 10 giây hiện lại trong 3 giây
+      setInterval(() => {
+        if (!isPaused) {
+          mascotBubble.textContent = "Cảm ơn bạn đã ủng hộ 💗";
+          mascotBubble.classList.add('show');
+          setTimeout(() => {
+            if (!isPaused) mascotBubble.classList.remove('show');
+          }, 3000);
+        }
+      }, 10000);
+    }
+    initMascotMessages();
 
     function createRedTrail(x, y) {
       const now = performance.now();
@@ -1784,6 +1804,7 @@
 
     function triggerStandstill() {
       isPaused = true;
+      mascotBubble.textContent = "Nghỉ 1p nha~ 💤";
       mascotBubble.classList.add('show');
 
       if (pauseTimer) clearTimeout(pauseTimer);
