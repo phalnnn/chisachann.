@@ -1023,7 +1023,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (DÙNG SVG TRỰC TIẾP)
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH
        ============================================================ */
     .mini-player-dock {
       position: fixed;
@@ -1489,7 +1489,7 @@
   </div>
 
   <!-- ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (SVG PLAY/PAUSE & MUTE TRỰC TIẾP)
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (SVG PLAY/PAUSE & MUTE)
        ============================================================ -->
   <div class="mini-player-dock" id="miniPlayerDock">
     <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
@@ -1515,27 +1515,27 @@
         </div>
 
         <div class="player-controls">
-          <!-- NÚT MUTE / UNMUTE (SVG) -->
-          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt tiếng">
+          <!-- NÚT MUTE / UNMUTE (SVG TÁCH BIỆT) -->
+          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
             <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
               <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
             </svg>
           </button>
           
-          <!-- BÀI TRƯỚC (SVG) -->
+          <!-- BÀI TRƯỚC -->
           <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
           </button>
 
-          <!-- NÚT PLAY / PAUSE DÙNG THẺ SVG TRỰC TIẾP -->
+          <!-- NÚT PLAY / PAUSE (SVG ĐỘC LẬP) -->
           <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
             <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
           </button>
 
-          <!-- BÀI TIẾP (SVG) -->
+          <!-- BÀI TIẾP -->
           <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
           </button>
@@ -1624,16 +1624,17 @@
       }
     }
 
-    function syncVisualEffects() {
-      if (isMusicPlaying && !isMuted) {
+    /* 1. XỬ LÝ RIÊNG BIỆT CHO NÚT PLAY / PAUSE */
+    function updatePlayPauseUI() {
+      if (isMusicPlaying) {
         document.body.classList.add('music-active');
         vinylDisk.classList.add('spinning');
-        // Icon Pause (Hai vạch đứng)
+        // SVG Icon Pause (2 vạch đứng)
         playPauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
       } else {
         document.body.classList.remove('music-active');
         vinylDisk.classList.remove('spinning');
-        // Icon Play (Tam giác)
+        // SVG Icon Play (Tam giác)
         playPauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
       }
     }
@@ -1644,14 +1645,24 @@
       if (isMusicPlaying) {
         bgAudio.pause();
         isMusicPlaying = false;
+        updatePlayPauseUI();
       } else {
         bgAudio.play().then(() => {
           isMusicPlaying = true;
-          isMuted = false;
-          muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+          updatePlayPauseUI();
         }).catch(e => console.log('Chặn autoplay:', e));
       }
-      syncVisualEffects();
+    }
+
+    /* 2. XỬ LÝ HOÀN TOÀN TÁCH BIỆT CHO NÚT BẬT / TẮT TIẾNG (MUTE) */
+    function updateMuteUI() {
+      if (isMuted) {
+        // Icon Loa có gạch chéo
+        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+      } else {
+        // Icon Loa có sóng âm bình thường
+        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+      }
     }
 
     function toggleMute(event) {
@@ -1660,20 +1671,19 @@
       if (isMuted) {
         bgAudio.muted = false;
         isMuted = false;
-        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
       } else {
         bgAudio.muted = true;
         isMuted = true;
-        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
       }
-      syncVisualEffects();
+      updateMuteUI();
     }
 
+    /* Tự động chạy nhạc lần chạm đầu tiên */
     function autoPlayOnce() {
       if (!isMusicPlaying) {
         bgAudio.play().then(() => {
           isMusicPlaying = true;
-          syncVisualEffects();
+          updatePlayPauseUI();
         }).catch(() => {});
       }
       document.removeEventListener('click', autoPlayOnce);
