@@ -1023,7 +1023,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (CÓ TÍCH HỢP MUTE/UNMUTE)
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (DÙNG SVG TRỰC TIẾP)
        ============================================================ */
     .mini-player-dock {
       position: fixed;
@@ -1194,15 +1194,14 @@
     .player-ctrl-btn.play-btn {
       background: linear-gradient(135deg, #fe2c55, #ff0033);
       color: #ffffff;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       box-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
     }
 
     .player-ctrl-btn.play-btn:hover {
       transform: scale(1.08);
       box-shadow: 0 0 16px rgba(254, 44, 85, 0.9);
-      color: #fff;
     }
 
     .btn-toggle-dock {
@@ -1490,11 +1489,11 @@
   </div>
 
   <!-- ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (CÓ TÍCH HỢP NÚT MUTE/UNMUTE)
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (SVG PLAY/PAUSE & MUTE TRỰC TIẾP)
        ============================================================ -->
   <div class="mini-player-dock" id="miniPlayerDock">
     <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
-      <i class="fa-solid fa-chevron-down" id="dockToggleIcon"></i>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dockToggleIconSvg"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
     <div class="player-border-glow">
       <div class="player-glass-body">
@@ -1516,18 +1515,29 @@
         </div>
 
         <div class="player-controls">
-          <!-- NÚT TẮT/BẬT TIẾNG (MUTE/UNMUTE) ĐƯỢC ĐƯA XUỐNG ĐÂY -->
-          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
-            <i class="fa-solid fa-volume-high" id="muteIcon"></i>
+          <!-- NÚT MUTE / UNMUTE (SVG) -->
+          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt tiếng">
+            <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
           </button>
+          
+          <!-- BÀI TRƯỚC (SVG) -->
           <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-            <i class="fa-solid fa-backward-step"></i>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
           </button>
+
+          <!-- NÚT PLAY / PAUSE DÙNG THẺ SVG TRỰC TIẾP -->
           <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
-            <i class="fa-solid fa-play" id="dockPlayIcon"></i>
+            <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
           </button>
+
+          <!-- BÀI TIẾP (SVG) -->
           <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-            <i class="fa-solid fa-forward-step"></i>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
           </button>
         </div>
       </div>
@@ -1565,7 +1575,7 @@
     }
 
     // ==========================================
-    // DANH SÁCH BÀI HÁT & TRÌNH PHÁT NHẠC (MINI PLAYER)
+    // DANH SÁCH BÀI HÁT (PLAYLIST NỀN 6 BÀI)
     // ==========================================
     const playlist = [
       { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
@@ -1578,8 +1588,8 @@
 
     let currentSongIndex = 0;
     const bgAudio = document.getElementById('bgAudio');
-    const dockPlayIcon = document.getElementById('dockPlayIcon');
-    const muteIcon = document.getElementById('muteIcon');
+    const playPauseSvg = document.getElementById('playPauseSvg');
+    const muteSvg = document.getElementById('muteSvg');
     const vinylDisk = document.getElementById('vinylDisk');
     const songTitleElem = document.getElementById('currentSongTitle');
     const songArtistElem = document.getElementById('currentSongArtist');
@@ -1618,11 +1628,13 @@
       if (isMusicPlaying && !isMuted) {
         document.body.classList.add('music-active');
         vinylDisk.classList.add('spinning');
-        dockPlayIcon.className = "fa-solid fa-pause";
+        // Icon Pause (Hai vạch đứng)
+        playPauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
       } else {
         document.body.classList.remove('music-active');
         vinylDisk.classList.remove('spinning');
-        dockPlayIcon.className = "fa-solid fa-play";
+        // Icon Play (Tam giác)
+        playPauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
       }
     }
 
@@ -1636,7 +1648,7 @@
         bgAudio.play().then(() => {
           isMusicPlaying = true;
           isMuted = false;
-          muteIcon.className = "fa-solid fa-volume-high";
+          muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         }).catch(e => console.log('Chặn autoplay:', e));
       }
       syncVisualEffects();
@@ -1648,11 +1660,11 @@
       if (isMuted) {
         bgAudio.muted = false;
         isMuted = false;
-        muteIcon.className = "fa-solid fa-volume-high";
+        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
       } else {
         bgAudio.muted = true;
         isMuted = true;
-        muteIcon.className = "fa-solid fa-volume-xmark";
+        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
       }
       syncVisualEffects();
     }
@@ -1672,12 +1684,12 @@
 
     function toggleDockMinimize() {
       const dock = document.getElementById('miniPlayerDock');
-      const icon = document.getElementById('dockToggleIcon');
+      const iconSvg = document.getElementById('dockToggleIconSvg');
       dock.classList.toggle('minimized');
       if (dock.classList.contains('minimized')) {
-        icon.className = "fa-solid fa-chevron-up";
+        iconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
       } else {
-        icon.className = "fa-solid fa-chevron-down";
+        iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
       }
     }
 
