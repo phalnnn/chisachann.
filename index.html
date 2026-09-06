@@ -20,8 +20,8 @@
     body {
       min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       padding: 30px 14px 40px;
       background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
       background-size: 400% 400%;
@@ -281,12 +281,13 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON - DI CHUYỂN THEO TRANG VÀ THU GỌN 100% ĐỘ TRONG SUỐT
+       THANH MINI PLAYER NEON - ĐỘC LẬP TRÔI THEO TOÀN TRANG
        ============================================================ */
     .mini-player-dock {
       position: relative;
       width: 100%;
-      margin: 14px 0 20px;
+      max-width: 540px;
+      margin: 10px 0;
       z-index: 10;
     }
 
@@ -329,14 +330,12 @@
       transition: opacity 0.35s ease;
     }
 
-    /* KHI THỨC GIẤC THU GỌN: TĂNG 100% ĐỘ TRONG SUỐT VÀ THU NHỎ, CHỈ CHƯỜA LẠI NÚT MŨI TÊN */
     .mini-player-dock.minimized .player-border-glow {
       opacity: 0;
       pointer-events: none;
       transform: scale(0.95);
     }
 
-    /* NÚT MŨI TÊN THU GỌN / MỞ RỘNG (NẰM GÓC PHẢI TRÊN THANH PLAYER) */
     .btn-toggle-dock {
       position: absolute;
       top: -22px;
@@ -1277,7 +1276,7 @@
 
   <div class="container">
 
-    <!-- KHỐI 1: PROFILE, DONATE NEON TRÊN ĐẦU, MINI PLAYER & MẠNG XÃ HỘI -->
+    <!-- KHỐI 1: PROFILE & DONATE NEON TRÊN ĐẦU -->
     <div class="card-border-wrapper">
       <div class="card profile-card">
         <div class="avatar-wrapper">
@@ -1304,60 +1303,6 @@
                 </button>
               </div>
               <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- THANH MINI PLAYER NEON DI CHUYỂN THEO THANH CUỘN (CÓ NÚT THU GỌN 100% ĐỘ TRONG SUỐT) -->
-        <div class="mini-player-dock" id="miniPlayerDock">
-          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dockToggleIconSvg"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="player-border-glow">
-            <div class="player-glass-body">
-              <div class="vinyl-disk-wrap" id="vinylDisk">
-                <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-              </div>
-
-              <div class="song-details">
-                <div class="song-title-row">
-                  <span class="song-name" id="currentSongTitle">Styx Helix</span>
-                  <div class="soundwave-bars" id="soundwaveContainer">
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                  </div>
-                </div>
-                <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
-              </div>
-
-              <div class="player-controls">
-                <!-- NÚT MUTE / UNMUTE -->
-                <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
-                  <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                </button>
-                
-                <!-- BÀI TRƯỚC -->
-                <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
-                </button>
-
-                <!-- NÚT PLAY / PAUSE -->
-                <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
-                  <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                </button>
-
-                <!-- BÀI TIẾPS -->
-                <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -1392,6 +1337,62 @@
 
         <div class="footer">
           © @phalnnn • All rights reserved
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         THANH MINI PLAYER NEON (ĐƯỢC TÁCH RA NGOÀI, TRÔI TỰ DO THEO TOÀN TRANG)
+         ============================================================ -->
+    <div class="mini-player-dock" id="miniPlayerDock">
+      <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dockToggleIconSvg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="player-border-glow">
+        <div class="player-glass-body">
+          <div class="vinyl-disk-wrap" id="vinylDisk">
+            <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+          </div>
+
+          <div class="song-details">
+            <div class="song-title-row">
+              <span class="song-name" id="currentSongTitle">Styx Helix</span>
+              <div class="soundwave-bars" id="soundwaveContainer">
+                <span class="soundwave-bar"></span>
+                <span class="soundwave-bar"></span>
+                <span class="soundwave-bar"></span>
+                <span class="soundwave-bar"></span>
+              </div>
+            </div>
+            <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
+          </div>
+
+          <div class="player-controls">
+            <!-- NÚT MUTE / UNMUTE -->
+            <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
+              <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+            </button>
+            
+            <!-- BÀI TRƯỚC -->
+            <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
+            </button>
+
+            <!-- NÚT PLAY / PAUSE -->
+            <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
+              <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
+
+            <!-- BÀI TIẾP -->
+            <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1746,10 +1747,8 @@
       const iconSvg = document.getElementById('dockToggleIconSvg');
       dock.classList.toggle('minimized');
       if (dock.classList.contains('minimized')) {
-        // Đổi mũi tên thành hướng lên khi thu gọn
         iconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
       } else {
-        // Đổi mũi tên thành hướng xuống khi mở rộng
         iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
       }
     }
