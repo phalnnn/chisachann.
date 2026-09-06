@@ -281,7 +281,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON
+       THANH MINI PLAYER NEON - DI CHUYỂN THEO TRANG VÀ THU GỌN 100% ĐỘ TRONG SUỐT
        ============================================================ */
     .mini-player-dock {
       position: relative;
@@ -298,6 +298,7 @@
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
                   0 0 16px rgba(254, 44, 85, 0.35);
+      transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease;
     }
 
     .player-border-glow::before {
@@ -325,6 +326,38 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      transition: opacity 0.35s ease;
+    }
+
+    /* KHI THỨC GIẤC THU GỌN: TĂNG 100% ĐỘ TRONG SUỐT VÀ THU NHỎ, CHỈ CHƯỜA LẠI NÚT MŨI TÊN */
+    .mini-player-dock.minimized .player-border-glow {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    /* NÚT MŨI TÊN THU GỌN / MỞ RỘNG (NẰM GÓC PHẢI TRÊN THANH PLAYER) */
+    .btn-toggle-dock {
+      position: absolute;
+      top: -22px;
+      right: 12px;
+      background: rgba(14, 14, 18, 0.95);
+      border: 1px solid rgba(254, 44, 85, 0.5);
+      border-bottom: none;
+      color: #fe2c55;
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      z-index: 11;
+      box-shadow: 0 -2px 8px rgba(254, 44, 85, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-toggle-dock:hover {
+      background: #fe2c55;
+      color: #fff;
     }
 
     .vinyl-disk-wrap {
@@ -1275,8 +1308,11 @@
           </div>
         </div>
 
-        <!-- THANH MINI PLAYER NEON DI CHUYỂN THEO THANH CUỘN -->
+        <!-- THANH MINI PLAYER NEON DI CHUYỂN THEO THANH CUỘN (CÓ NÚT THU GỌN 100% ĐỘ TRONG SUỐT) -->
         <div class="mini-player-dock" id="miniPlayerDock">
+          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dockToggleIconSvg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
           <div class="player-border-glow">
             <div class="player-glass-body">
               <div class="vinyl-disk-wrap" id="vinylDisk">
@@ -1317,7 +1353,7 @@
                   </svg>
                 </button>
 
-                <!-- BÀI TIẾP -->
+                <!-- BÀI TIẾPS -->
                 <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
                 </button>
@@ -1704,8 +1740,22 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
+    // HÀM BẤM NÚT MŨI TÊN THU GỌN / MỞ RỘNG THANH PLAYER VÀ TĂNG ĐỘ TRONG SUỐT 100%
+    function toggleDockMinimize() {
+      const dock = document.getElementById('miniPlayerDock');
+      const iconSvg = document.getElementById('dockToggleIconSvg');
+      dock.classList.toggle('minimized');
+      if (dock.classList.contains('minimized')) {
+        // Đổi mũi tên thành hướng lên khi thu gọn
+        iconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
+      } else {
+        // Đổi mũi tên thành hướng xuống khi mở rộng
+        iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
+      }
+    }
+
     // ==========================================
-    // LOGIC MASCOT BAY LƯỢN, TÀN ẢNH & BONG BÓNG LỜI NHẮN (ĐẦU + MỖI 10S)
+    // LOGIC MASCOT BAY LƯỢN, TÀN ẢNH & BONG BÓNG LỜI NHẮN
     // ==========================================
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
