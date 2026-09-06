@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>phalnnn Profile Bio</title>
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2224%22 font-size=%2224%22>🌸</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2224%22 font-size=%2224%22>💗</text></svg>">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
@@ -220,6 +220,14 @@
       color: #dedede;
       margin-bottom: 20px;
       line-height: 1.5;
+    }
+
+    /* HIỆU ỨNG PHÁT SÁNG CHO EMOJI TIM GROWING HEART */
+    .custom-heart {
+      display: inline-block;
+      vertical-align: middle;
+      font-style: normal;
+      filter: drop-shadow(0 0 6px rgba(254, 44, 85, 0.75));
     }
 
     /* KHUNG DONATE NEON NỔI BẬT ĐƯA LÊN ĐẦU */
@@ -526,9 +534,7 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
     }
 
-    /* ============================================================
-       KHI ĐƯỢC CHỌN: GIỮ VIỀN ĐỎ NEON SÁNG VÀ NỀN ĐỎ LUÔN
-       ============================================================ */
+    /* KHI ĐƯỢC CHỌN: GIỮ VIỀN ĐỎ NEON VÀ NỀN ĐỎ */
     .map-item:has(input:checked) {
       border-color: #fe2c55 !important;
       background: rgba(254, 44, 85, 0.18) !important;
@@ -777,13 +783,13 @@
         </div>
 
         <h1 class="channel-name">@phalnnn</h1>
-        <p class="bio">kênh của mình 💕</p>
+        <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
 
-        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU (DÙNG ẢNH DONATE.JPG) -->
+        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU (DÙNG ẢNH DONATE.JPG & TIM GROWING HEART) -->
         <div class="donate-neon-wrapper">
           <div class="donate-box">
-            <div class="donate-title"><i class="fa-solid fa-heart"></i> Donate Tà Tữa 💕</div>
-            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa 💕</p>
+            <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
+            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
             <div class="qr-box-donate">
               <img src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
             </div>
@@ -965,7 +971,7 @@
             <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
 
             <div class="qr-notice">
-              ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào "GỬI YÊU CẦU QUA TIKTOK" bên dưới và dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn qua phần tin nhắn cho tui (nhớ chụp cả bill thanh toán gửi cho tui) 💕
+              ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào "GỬI YÊU CẦU QUA TIKTOK" bên dưới và dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn qua phần tin nhắn cho tui (nhớ chụp cả bill thanh toán gửi cho tui) <span class="custom-heart">💗</span>
             </div>
           </div>
 
@@ -1190,7 +1196,7 @@
 - Yêu cầu đặc biệt: ${note || 'Không có'}`;
 
       navigator.clipboard.writeText(message).then(() => {
-        alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💕");
+        alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗");
         window.open('https://www.tiktok.com/@phalnnn', '_blank');
       }).catch(() => {
         prompt("Hãy sao chép nội dung đơn này:", message);
