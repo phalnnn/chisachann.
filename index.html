@@ -506,6 +506,7 @@
       .map-grid { grid-template-columns: 1fr 1fr; }
     }
 
+    /* CÁC Ô TÙY CHỌN DỊCH VỤ / MAP */
     .map-item {
       display: flex;
       align-items: center;
@@ -515,14 +516,36 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       user-select: none;
     }
+
     .map-item:hover {
-      border-color: #fe2c55;
-      background: rgba(254, 44, 85, 0.12);
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.2);
+      border-color: rgba(254, 44, 85, 0.6);
+      background: rgba(254, 44, 85, 0.1);
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
     }
+
+    /* ============================================================
+       KHI ĐƯỢC CHỌN: GIỮ VIỀN ĐỎ NEON SÁNG VÀ NỀN ĐỎ LUÔN
+       ============================================================ */
+    .map-item:has(input:checked) {
+      border-color: #fe2c55 !important;
+      background: rgba(254, 44, 85, 0.18) !important;
+      box-shadow: 0 0 14px rgba(254, 44, 85, 0.55), inset 0 0 6px rgba(254, 44, 85, 0.25) !important;
+    }
+
+    .map-item:has(input:checked) .map-name {
+      color: #ffffff !important;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
+    }
+
+    .map-item:has(input:checked) .map-price {
+      color: #fe2c55 !important;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.8);
+    }
+
     .map-info {
       display: flex;
       align-items: center;
@@ -542,6 +565,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       color: #e6e6e6;
+      transition: color 0.2s ease;
     }
     .map-price {
       font-weight: 700;
@@ -550,6 +574,7 @@
       flex-shrink: 0;
       margin-left: 6px;
       text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+      transition: color 0.2s ease;
     }
 
     .total-box {
