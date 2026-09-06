@@ -1232,15 +1232,20 @@
       -webkit-user-drag: none;
       touch-action: none;
       filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 10px rgba(254, 44, 85, 0.5));
-      transition: transform 0.2s ease;
     }
 
     .floating-mascot:active {
       cursor: grabbing;
-      transform: scale(1.12);
     }
 
-    .floating-mascot img {
+    /* CHỈ LẬT GƯƠNG THẺ IMG, KHÔNG LẬT BONG BÓNG CHỮ */
+    .mascot-img-wrap {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.25s ease;
+    }
+
+    .mascot-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -1248,30 +1253,33 @@
       display: block;
     }
 
+    /* BONG BÓNG CHỮ LUÔN CỐ ĐỊNH XUÔI CHIỀU CHỮ */
     .mascot-bubble {
       position: absolute;
       top: -28px;
       left: 50%;
-      transform: translateX(-50%);
-      background: rgba(14, 14, 18, 0.9);
+      transform: translateX(-50%) !important;
+      background: rgba(14, 14, 18, 0.92);
       border: 1px solid #fe2c55;
       color: #ffffff;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 10px;
+      padding: 4px 10px;
+      border-radius: 12px;
       white-space: nowrap;
       pointer-events: none;
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
       opacity: 0;
       transition: opacity 0.3s ease;
+      direction: ltr !important;
+      unicode-bidi: normal !important;
     }
 
     .mascot-bubble.show {
       opacity: 1;
     }
 
-    /* VỆT ĐỎ MỜ (RED NEON GHOST TRAIL) BIẾN MẤT NGAY SAU ĐÓ */
+    /* VỆT ĐỎ MỜ BIẾN MẤT NGAY SAU ĐÓ */
     .mascot-trail {
       position: fixed;
       pointer-events: none;
@@ -1620,11 +1628,13 @@
   </div>
 
   <!-- ============================================================
-       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (TÀN ẢNH ĐỎ BIẾN MẤT NGAY)
+       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (CHỮ KHÔNG BỊ LẬT GƯƠNG)
        ============================================================ -->
   <div class="floating-mascot" id="mascot">
     <div class="mascot-bubble" id="mascotBubble">Nghỉ 1p nha~ 💤</div>
-    <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
+    <div class="mascot-img-wrap" id="mascotImgWrap">
+      <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
+    </div>
   </div>
 
   <!-- THẺ PHÁT NHẠC NỀN -->
@@ -1785,6 +1795,7 @@
     // LOGIC MASCOT BAY LƯỢN & VỆT TÀN ẢNH ĐỎ MỜ
     // ==========================================
     const mascot = document.getElementById('mascot');
+    const mascotImgWrap = document.getElementById('mascotImgWrap');
     const mascotBubble = document.getElementById('mascotBubble');
 
     let posX = Math.random() * (window.innerWidth - 100) + 10;
@@ -1802,20 +1813,18 @@
 
     let lastTrailTime = 0;
 
-    // Hàm tạo vệt đỏ mờ biến mất ngay sau đó
     function createRedTrail(x, y) {
       const now = performance.now();
-      if (now - lastTrailTime < 45) return; // Khoảng cách thời gian tạo hạt
+      if (now - lastTrailTime < 45) return;
       lastTrailTime = now;
 
       const trail = document.createElement('div');
       trail.className = 'mascot-trail';
       
-      const size = Math.random() * 18 + 20; // Kích thước hạt từ 20-38px
+      const size = Math.random() * 18 + 20;
       trail.style.width = `${size}px`;
       trail.style.height = `${size}px`;
       
-      // Đặt hạt ở tâm phía sau mascot
       const centerX = x + 40 - (size / 2);
       const centerY = y + 45 - (size / 2);
       trail.style.left = `${centerX}px`;
@@ -1823,7 +1832,6 @@
 
       document.body.appendChild(trail);
 
-      // Tự hủy sau khi hoàn thành animation mờ dần
       setTimeout(() => {
         trail.remove();
       }, 600);
@@ -1850,11 +1858,11 @@
           posX += (dx / dist) * speed;
           posY += (dy / dist) * speed;
 
-          // Tạo vệt tàn ảnh đỏ khi di chuyển
           createRedTrail(posX, posY);
 
+          // CHỈ LẬT GƯƠNG RIÊNG THẺ CHỨA ẢNH MASCOT (CHỮ KHÔNG BỊ LẬT)
           const flip = dx < 0 ? -1 : 1;
-          mascot.style.transform = `scaleX(${flip})`;
+          mascotImgWrap.style.transform = `scaleX(${flip})`;
         }
         mascot.style.left = `${posX}px`;
         mascot.style.top = `${posY}px`;
@@ -1895,7 +1903,6 @@
       posX = Math.min(Math.max(10, mascotStartX + dx), window.innerWidth - mascot.offsetWidth - 10);
       posY = Math.min(Math.max(10, mascotStartY + dy), window.innerHeight - mascot.offsetHeight - 10);
 
-      // Tạo vệt đỏ mờ cả khi kéo chuột / vuốt tay
       createRedTrail(posX, posY);
 
       mascot.style.left = `${posX}px`;
