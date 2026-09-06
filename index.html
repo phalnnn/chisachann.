@@ -42,7 +42,7 @@
       filter: saturate(1.3);
     }
 
-    /* NÚT TẮT/BẬT TIẾNG GÓC TRÊN BÊN PHẢI (ĐỎ & TRẮNG NEON) */
+    /* NÚT TẮT/BẬT TIẾNG GÓC TRÊN BÊN PHẢI */
     .floating-mute-btn {
       position: fixed;
       top: 16px;
@@ -130,7 +130,6 @@
     .card {
       position: relative;
       width: 100%;
-      background: linear-gradient(rgba(10, 10, 14, 0.88), rgba(10, 10, 14, 0.94)), url('card-bg.jpg') center/cover no-repeat;
       background-color: rgba(10, 10, 14, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -140,8 +139,17 @@
       z-index: 1;
     }
 
+    /* PROFILE CARD: DÙNG HÌNH NỀN BG-PROFILE.JPG */
     .profile-card {
       text-align: center;
+      background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
+                  url('bg-profile.jpg') center/cover no-repeat !important;
+    }
+
+    /* KHUNG DỊCH VỤ CÀY THUÊ */
+    #serviceContainer {
+      background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
+                  url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
     /* AVATAR VIỀN XOAY ĐỎ - TRẮNG */
@@ -179,7 +187,7 @@
       background-color: #1a1a1a;
     }
 
-    /* TÊN KÊNH: CHUYỂN DẢI ĐỎ - TRẮNG NEON CHẬM RÃI */
+    /* TÊN KÊNH: CHUYỂN DẢI ĐỎ - TRẮNG NEON */
     .channel-name {
       font-size: 1.65rem;
       font-weight: 800;
@@ -214,11 +222,12 @@
       line-height: 1.5;
     }
 
-    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM ĐỎ - TRẮNG - ĐEN */
+    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
     .social-links {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-bottom: 24px;
     }
 
     .btn-link {
@@ -242,7 +251,7 @@
       transform: translateY(-2px);
     }
 
-    /* 1. TikTok: Neon Đỏ Rực */
+    /* 1. TikTok */
     .btn-tiktok {
       background: rgba(254, 44, 85, 0.12);
       color: #ff3366;
@@ -257,7 +266,7 @@
       box-shadow: 0 0 20px rgba(254, 44, 85, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.3);
     }
 
-    /* 2. Discord: Nền Đen Khói Viền Trắng Neon */
+    /* 2. Discord */
     .btn-discord {
       background: rgba(255, 255, 255, 0.06);
       color: #f0f0f5;
@@ -272,7 +281,7 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 10px rgba(254, 44, 85, 0.5);
     }
 
-    /* 3. YouTube: Neon Đỏ Đậm */
+    /* 3. YouTube */
     .btn-youtube {
       background: rgba(255, 0, 0, 0.12);
       color: #ff4d4d;
@@ -287,7 +296,7 @@
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.3);
     }
 
-    /* 4. ZyPage: Trắng Neon Sang Trọng */
+    /* 4. ZyPage */
     .btn-zypage {
       background: rgba(255, 255, 255, 0.08);
       color: #ffffff;
@@ -307,22 +316,7 @@
       fill: currentColor;
     }
 
-    /* 5. Nút Donate Trà Sữa Neon Đỏ */
-    .btn-donate {
-      background: rgba(254, 44, 85, 0.15);
-      color: #ffffff;
-      border: 1.5px solid #fe2c55;
-      box-shadow: 0 0 14px rgba(254, 44, 85, 0.4), inset 0 0 8px rgba(254, 44, 85, 0.25);
-      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
-    }
-    .btn-donate:hover {
-      background: rgba(254, 44, 85, 0.3);
-      color: #ffffff;
-      border-color: #ffffff;
-      box-shadow: 0 0 22px rgba(254, 44, 85, 0.85), inset 0 0 12px rgba(255, 255, 255, 0.4);
-    }
-
-    /* 6. Nút Dịch Vụ Cày Thuê: Viền Đỏ - Trắng Neon */
+    /* 5. Nút Dịch Vụ Cày Thuê */
     .btn-toggle-service {
       position: relative;
       background: rgba(18, 18, 24, 0.85);
@@ -348,9 +342,57 @@
       color: #ffffff;
     }
 
-    /* Khi phát nhạc: Viền các nút phát sáng đậm đà hơn */
+    /* KHUNG DONATE TĨNH BAN ĐẦU (PHONG CÁCH NEON ĐỎ - TRẮNG) */
+    .donate-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(254, 44, 85, 0.35);
+      border-radius: 18px;
+      padding: 20px 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .donate-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fe2c55;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
+    }
+
+    .donate-desc {
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      margin-bottom: 16px;
+    }
+
+    .qr-box-donate {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 15px rgba(254, 44, 85, 0.25);
+    }
+
+    .qr-img-donate {
+      width: 220px;
+      height: auto;
+      display: block;
+    }
+
+    .bank-details {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      line-height: 1.6;
+    }
+
+    .bank-details strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Hiệu ứng khi phát nhạc */
     body.music-active .btn-tiktok,
-    body.music-active .btn-donate,
     body.music-active .btn-toggle-service {
       box-shadow: 0 0 18px rgba(254, 44, 85, 0.6), inset 0 0 10px rgba(254, 44, 85, 0.3);
     }
@@ -608,7 +650,7 @@
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
     }
 
-    /* MODAL OVERLAY CHUNG (ĐỎ - TRẮNG - ĐEN) */
+    /* MODAL BẢNG GIÁ PHÓNG TO */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -625,216 +667,6 @@
       display: flex;
     }
 
-    .modal-border-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 28px;
-      padding: 3px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
-                  0 0 25px rgba(254, 44, 85, 0.4),
-                  0 0 15px rgba(255, 255, 255, 0.25);
-      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes modalScaleUp {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-border-wrapper::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 4s linear infinite;
-      z-index: 0;
-    }
-
-    .modal-content-box {
-      position: relative;
-      width: 100%;
-      background: linear-gradient(rgba(10, 10, 14, 0.9), rgba(10, 10, 14, 0.95)), url('card-bg.jpg') center/cover no-repeat;
-      background-color: rgba(10, 10, 14, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 25px;
-      padding: 24px 20px;
-      text-align: center;
-      color: #ffffff;
-      z-index: 1;
-      max-height: 88vh;
-      overflow-y: auto;
-    }
-
-    .modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
-    }
-    .modal-desc {
-      font-size: 0.82rem;
-      color: #aaa;
-      margin-bottom: 14px;
-    }
-
-    .donate-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-    .donate-input-group {
-      text-align: left;
-    }
-    .donate-input-label {
-      font-size: 0.75rem;
-      color: #a0a0a0;
-      margin-bottom: 4px;
-      display: block;
-      font-weight: 500;
-    }
-    .donate-input {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .donate-input:focus {
-      border-color: #fe2c55;
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
-    }
-
-    .quick-amount-buttons {
-      display: flex;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .amount-tag {
-      flex: 1;
-      padding: 6px 0;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: #ddd;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .amount-tag:hover {
-      background: rgba(254, 44, 85, 0.3);
-      border-color: #fe2c55;
-      color: #fff;
-    }
-
-    .btn-done-submit {
-      width: 100%;
-      margin-top: 8px;
-      padding: 11px 0;
-      background: linear-gradient(135deg, #fe2c55, #111111);
-      border: 1.5px solid #fe2c55;
-      border-radius: 12px;
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(254, 44, 85, 0.5);
-      transition: transform 0.2s ease;
-    }
-    .btn-done-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(254, 44, 85, 0.8);
-    }
-
-    #qrResultScreen {
-      display: none;
-      animation: fadeIn 0.25s ease-out;
-    }
-    .thankyou-box {
-      background: rgba(254, 44, 85, 0.15);
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      padding: 10px 14px;
-      border-radius: 14px;
-      margin-bottom: 12px;
-    }
-    .thankyou-text {
-      color: #fe2c55;
-      font-weight: 700;
-      font-size: 0.88rem;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
-    }
-    .thankyou-sub {
-      color: #ccc;
-      font-size: 0.76rem;
-      margin-top: 3px;
-    }
-    .qr-container {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-    .qr-img {
-      width: 210px;
-      height: 210px;
-      border-radius: 14px;
-      object-fit: contain;
-      background: #ffffff;
-      padding: 6px;
-      border: 2px solid rgba(254, 44, 85, 0.3);
-      box-shadow: 0 0 15px rgba(254, 44, 85, 0.3);
-    }
-    .qr-info-summary {
-      font-size: 0.8rem;
-      color: #aaa;
-      margin-bottom: 12px;
-    }
-    .qr-info-summary strong {
-      color: #fe2c55;
-    }
-
-    .btn-modal-action {
-      width: 100%;
-      padding: 10px 0;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: 0.2s;
-    }
-    .btn-edit-back {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ddd;
-    }
-    .btn-edit-back:hover {
-      background: rgba(255, 255, 255, 0.16);
-      color: #fff;
-    }
-    .close-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #aaa;
-    }
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-    }
-
-    /* MODAL BẢNG GIÁ PHÓNG TO */
     .image-modal-content {
       max-width: 95vw;
       max-height: 90vh;
@@ -857,7 +689,7 @@
     }
 
     .footer {
-      margin-top: 14px;
+      margin-top: 18px;
       font-size: 0.78rem;
       color: #777777;
       text-align: center;
@@ -873,7 +705,7 @@
 
   <div class="container">
 
-    <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & NÚT DONATE (ĐỎ - TRẮNG - ĐEN NEON) -->
+    <!-- KHỐI 1: PROFILE, MẠNG XÃ HỘI & KHUNG DONATE TĨNH BAN ĐẦU -->
     <div class="card-border-wrapper">
       <div class="card profile-card">
         <div class="avatar-wrapper">
@@ -904,16 +736,25 @@
             Donate Cho Chía Bel (ZyPage)
           </a>
 
-          <!-- NÚT MỞ POPUP DONATE TÀ TỮA (TECHCOMBANK 2 BƯỚC) -->
-          <button type="button" class="btn-link btn-donate" onclick="openQRModal()">
-            <i class="fa-solid fa-qrcode"></i> Donate Tà Tữa Trực Tiếp 💕
-          </button>
-
           <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ -->
           <button type="button" class="btn-link btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
             <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
             <i class="fa-solid fa-chevron-down arrow-icon"></i>
           </button>
+        </div>
+
+        <!-- KHUNG DONATE TECHCOMBANK TRỰC TIẾP (NHƯ CODE GỐC) -->
+        <div class="donate-box">
+          <div class="donate-title">Donate 💕</div>
+          <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa 💕</p>
+          <div class="qr-box-donate">
+            <img src="https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA" alt="QR Donate Techcombank" class="qr-img-donate">
+          </div>
+          <div class="bank-details">
+            <div>Ngân hàng: <strong>Techcombank</strong></div>
+            <div>Số tài khoản: <strong>1907 4758 6200 12</strong></div>
+            <div>Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
+          </div>
         </div>
 
         <div class="footer">
@@ -922,7 +763,7 @@
       </div>
     </div>
 
-    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN CÀY THUÊ (VIỀN XOAY ĐỎ - TRẮNG - ĐEN) -->
+    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN CÀY THUÊ -->
     <div id="serviceContainerWrapper">
       <div class="card-border-wrapper">
         <div class="card" id="serviceContainer">
@@ -1071,70 +912,7 @@
 
   </div>
 
-  <!-- ============================================================
-       POPUP DONATE TECHCOMBANK 2 BƯỚC (ĐỎ - TRẮNG - ĐEN NEON)
-       ============================================================ -->
-  <div id="qrModal" class="modal-overlay" onclick="closeQRModal(event)">
-    <div class="modal-border-wrapper" onclick="event.stopPropagation()">
-      <div class="modal-content-box">
-
-        <!-- BƯỚC 1: NHẬP SỐ TIỀN & LỜI NHẮN -->
-        <div id="donateInputScreen">
-          <h3 class="modal-title">Gửi Tà Tữa cho phalnnn 💕</h3>
-          <p class="modal-desc">Nhập số tiền và lời nhắn ngọt ngào dành tặng cho mình nha</p>
-
-          <div class="donate-form">
-            <div class="donate-input-group">
-              <label class="donate-input-label"><i class="fa-solid fa-coins"></i> Số tiền ủng hộ (VNĐ):</label>
-              <input type="text" id="donateAmount" class="donate-input" placeholder="Nhập số tiền (ví dụ: 10.000)" oninput="handleAmountInput(this)" />
-              <div class="quick-amount-buttons">
-                <button type="button" class="amount-tag" onclick="setQuickAmount(10000)">10.000 đ</button>
-                <button type="button" class="amount-tag" onclick="setQuickAmount(20000)">20.000 đ</button>
-                <button type="button" class="amount-tag" onclick="setQuickAmount(50000)">50.000 đ</button>
-                <button type="button" class="amount-tag" onclick="setQuickAmount(100000)">100.000 đ</button>
-              </div>
-            </div>
-
-            <div class="donate-input-group">
-              <label class="donate-input-label"><i class="fa-solid fa-message"></i> Lời nhắn gửi:</label>
-              <input type="text" id="donateMessage" class="donate-input" placeholder="Nhập lời nhắn..." value="Cho phalnnn coc tra sua" />
-            </div>
-
-            <button type="button" class="btn-done-submit" onclick="submitDonateDone()">
-              <i class="fa-solid fa-check"></i> Xong / Done
-            </button>
-          </div>
-
-          <button type="button" class="btn-modal-action close-btn" onclick="closeQRModal()">Đóng lại</button>
-        </div>
-
-        <!-- BƯỚC 2: HIỂN THỊ MÃ QR TECHCOMBANK & LỜI CẢM ƠN -->
-        <div id="qrResultScreen">
-          <div class="thankyou-box">
-            <div class="thankyou-text">Cảm ơn bạn rất nhiều! 💕</div>
-            <div class="thankyou-sub">Đã tiếp thêm năng lượng và yêu thương cho phalnnn!</div>
-          </div>
-
-          <div class="qr-container">
-            <img class="qr-img" id="dynamicQR" src="" alt="Mã QR VietQR Techcombank" />
-          </div>
-
-          <div class="qr-info-summary" id="qrSummaryText">
-            Quét bằng MoMo hoặc mọi ứng dụng Ngân hàng
-          </div>
-
-          <button type="button" class="btn-modal-action btn-edit-back" onclick="backToEditDonate()">
-            <i class="fa-solid fa-pen-to-square"></i> Đổi số tiền / Lời nhắn khác
-          </button>
-
-          <button type="button" class="btn-modal-action close-btn" onclick="closeQRModal()">Đóng lại</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL PHÓNG TO ẢNH BẢNG GIÁ -->
+  <!-- MODAL BẢNG GIÁ PHÓNG TO -->
   <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="image-modal-close">&times;</span>
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
@@ -1215,58 +993,6 @@
     }
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
-
-    // ==========================================
-    // CƠ CHẾ DONATE 2 BƯỚC
-    // ==========================================
-    function formatNumberWithDots(val) {
-      return val.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    function handleAmountInput(input) {
-      const rawValue = input.value.replace(/\D/g, "");
-      input.value = formatNumberWithDots(rawValue);
-    }
-
-    function setQuickAmount(val) {
-      document.getElementById("donateAmount").value = formatNumberWithDots(val.toString());
-    }
-
-    function submitDonateDone() {
-      const amountRaw = document.getElementById("donateAmount").value.replace(/\D/g, "");
-      const messageRaw = document.getElementById("donateMessage").value.trim();
-      const qrImg = document.getElementById("dynamicQR");
-      const summary = document.getElementById("qrSummaryText");
-
-      const amount = amountRaw ? parseInt(amountRaw, 10) : "";
-      const memo = messageRaw ? encodeURIComponent(messageRaw) : encodeURIComponent("Cho phalnnn coc tra sua");
-
-      const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${amount}&addInfo=${memo}&accountName=${encodeURIComponent(myBankConfig.accountName)}`;
-      qrImg.src = qrUrl;
-
-      if (amount) {
-        summary.innerHTML = `Số tiền: <strong>${formatNumberWithDots(amount.toString())} VNĐ</strong><br>Lời nhắn: "${messageRaw || 'Cho phalnnn coc tra sua'}"`;
-      } else {
-        summary.innerHTML = `Lời nhắn: "${messageRaw || 'Cho phalnnn coc tra sua'}"`;
-      }
-
-      document.getElementById("donateInputScreen").style.display = "none";
-      document.getElementById("qrResultScreen").style.display = "block";
-    }
-
-    function backToEditDonate() {
-      document.getElementById("qrResultScreen").style.display = "none";
-      document.getElementById("donateInputScreen").style.display = "block";
-    }
-
-    function openQRModal() {
-      document.getElementById('qrModal').classList.add('active');
-      backToEditDonate();
-    }
-
-    function closeQRModal() {
-      document.getElementById('qrModal').classList.remove('active');
-    }
 
     // ==========================================
     // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
@@ -1361,7 +1087,6 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === "Escape") {
         closeImageModal();
-        closeQRModal();
       }
     });
 
