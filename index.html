@@ -477,7 +477,7 @@
       background: #fe2c55;
     }
 
-    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (ĐƯỢC TÁCH RIÊNG NẰM CỐ ĐỊNH KHI THU GỌN) */
+    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
     .floating-music-bubble {
       position: fixed;
       bottom: 25px;
@@ -489,13 +489,18 @@
       border: 2px solid #fe2c55;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
       z-index: 10001;
-      display: none; /* Ban đầu ẩn đi vì thanh nhạc đang hiển thị đầy đủ */
+      display: none; /* Ban đầu ẩn đi */
       align-items: center;
       justify-content: center;
       cursor: grab;
       user-select: none;
       touch-action: none;
-      transition: transform 0.2s ease;
+      opacity: 1;
+      transition: opacity 0.4s ease, transform 0.2s ease;
+    }
+
+    .floating-music-bubble.fade-out {
+      opacity: 0.25 !important;
     }
 
     .floating-music-bubble:active {
@@ -1740,7 +1745,7 @@
   </div>
 
   <!-- ============================================================
-       BONG BÓNG CHAT ÂM NHẠC KHI THU GỌN (KÉO THẢ & BẤM MỞ MODAL)
+       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (KÉO THẢ & BẤM MỞ MODAL)
        ============================================================ -->
   <div class="floating-music-bubble" id="musicBubble">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
@@ -1960,36 +1965,44 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // Thu gọn thanh nhạc thành bong bóng
+    // Thu gọn thành bong bóng
     function toggleDockMinimize() {
       const dock = document.getElementById('miniPlayerDock');
       const musicBubble = document.getElementById('musicBubble');
       
       dock.style.display = 'none';
       musicBubble.style.display = 'flex';
-    }
-
-    // Mở lại thanh nhạc từ bong bóng
-    function restoreDockFromBubble() {
-      const dock = document.getElementById('miniPlayerDock');
-      const musicBubble = document.getElementById('musicBubble');
-      
-      musicBubble.style.display = 'none';
-      dock.style.display = 'block';
+      musicBubble.style.bottom = '25px';
+      musicBubble.style.right = '25px';
+      musicBubble.style.left = 'auto';
+      musicBubble.style.top = 'auto';
     }
 
     // ==========================================
-    // LOGIC KÉO THẢ BONG BÓNG ÂM NHẠC
+    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC
     // ==========================================
     const musicBubble = document.getElementById('musicBubble');
     let isBubbleDragging = false;
     let bubbleStartX = 0, bubbleStartY = 0;
     let bubblePosX = 0, bubblePosY = 0;
     let hasMoved = false;
+    let bubbleFadeTimer = null;
+
+    function resetBubbleFade() {
+      musicBubble.classList.remove('fade-out');
+      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
+      bubbleFadeTimer = setTimeout(() => {
+        if (!isBubbleDragging) {
+          musicBubble.classList.add('fade-out');
+        }
+      }, 3000); // Mờ đi sau 3 giây không chạm
+    }
 
     function onBubbleDragStart(e) {
       isBubbleDragging = true;
       hasMoved = false;
+      resetBubbleFade();
+
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       bubbleStartX = clientX;
@@ -2007,6 +2020,8 @@
 
     function onBubbleDragMove(e) {
       if (!isBubbleDragging) return;
+      resetBubbleFade();
+
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       
@@ -2027,6 +2042,7 @@
     function onBubbleDragEnd(e) {
       if (isBubbleDragging) {
         isBubbleDragging = false;
+        resetBubbleFade();
         if (!hasMoved) {
           openMusicModal();
         }
@@ -2040,6 +2056,14 @@
     musicBubble.addEventListener('touchstart', onBubbleDragStart, { passive: false });
     window.addEventListener('touchmove', onBubbleDragMove, { passive: false });
     window.addEventListener('touchend', onBubbleDragEnd);
+
+    musicBubble.addEventListener('mouseenter', () => {
+      musicBubble.classList.remove('fade-out');
+      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
+    });
+    musicBubble.addEventListener('mouseleave', () => {
+      resetBubbleFade();
+    });
 
 
     // ==========================================
