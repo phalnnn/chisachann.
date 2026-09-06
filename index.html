@@ -22,7 +22,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 30px 14px 110px; /* Thêm khoảng trống đáy để không bị Mini Player che */
+      padding: 30px 14px;
       background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
       background-size: 400% 400%;
       animation: redWhiteBlackGradient 10s ease infinite;
@@ -42,6 +42,41 @@
       filter: saturate(1.3);
     }
 
+    /* NÚT TẮT/BẬT TIẾNG GÓC TRÊN BÊN PHẢI */
+    .floating-mute-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      background: rgba(12, 12, 16, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7), 0 0 12px rgba(254, 44, 85, 0.4);
+      opacity: 1;
+      transition: opacity 0.4s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .floating-mute-btn:hover {
+      transform: scale(1.08);
+      opacity: 1 !important;
+      background: rgba(22, 22, 28, 0.95);
+      box-shadow: 0 0 18px rgba(254, 44, 85, 0.8), 0 0 10px #ffffff;
+    }
+
+    .floating-mute-btn.idle {
+      opacity: 0.35;
+    }
+
     .container {
       width: 100%;
       max-width: 540px;
@@ -51,7 +86,7 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN CỦA CARD CHÍNH */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -104,12 +139,14 @@
       z-index: 1;
     }
 
+    /* PROFILE CARD: DÙNG HÌNH NỀN BG-PROFILE.JPG */
     .profile-card {
       text-align: center;
       background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
+    /* KHUNG DỊCH VỤ CÀY THUÊ */
     #serviceContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
@@ -362,55 +399,64 @@
       transform: translateY(-2px);
     }
 
+    /* 1. TikTok */
     .btn-tiktok {
       background: rgba(254, 44, 85, 0.12);
       color: #ff3366;
       border: 1.5px solid #fe2c55;
       box-shadow: 0 0 12px rgba(254, 44, 85, 0.35), inset 0 0 8px rgba(254, 44, 85, 0.2);
+      text-shadow: 0 0 6px rgba(254, 44, 85, 0.5);
     }
     .btn-tiktok:hover {
       background: rgba(254, 44, 85, 0.25);
       color: #ffffff;
       border-color: #ffffff;
-      box-shadow: 0 0 20px rgba(254, 44, 85, 0.8);
+      box-shadow: 0 0 20px rgba(254, 44, 85, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.3);
     }
 
+    /* 2. Discord */
     .btn-discord {
       background: rgba(255, 255, 255, 0.06);
       color: #f0f0f5;
       border: 1.5px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.1);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
     }
     .btn-discord:hover {
       background: rgba(255, 255, 255, 0.16);
       color: #ffffff;
       border-color: #fe2c55;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 10px rgba(254, 44, 85, 0.5);
     }
 
+    /* 3. YouTube */
     .btn-youtube {
       background: rgba(255, 0, 0, 0.12);
       color: #ff4d4d;
       border: 1.5px solid #ff1a1a;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.35);
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.35), inset 0 0 8px rgba(255, 0, 0, 0.2);
+      text-shadow: 0 0 6px rgba(255, 0, 0, 0.5);
     }
     .btn-youtube:hover {
       background: rgba(255, 0, 0, 0.25);
       color: #ffffff;
       border-color: #ffffff;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), inset 0 0 12px rgba(255, 255, 255, 0.3);
     }
 
+    /* 4. ZyPage */
     .btn-zypage {
       background: rgba(255, 255, 255, 0.08);
       color: #ffffff;
       border: 1.5px solid rgba(255, 255, 255, 0.45);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.25), inset 0 0 8px rgba(255, 255, 255, 0.15);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
     }
     .btn-zypage:hover {
       background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
       border-color: #fe2c55;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), inset 0 0 12px rgba(254, 44, 85, 0.4);
     }
     .zypage-icon {
       width: 20px;
@@ -418,17 +464,19 @@
       fill: currentColor;
     }
 
+    /* 5. Nút Dịch Vụ Cày Thuê */
     .btn-toggle-service {
       background: rgba(18, 18, 24, 0.85);
       color: #ffffff;
       border: 1.5px solid #fe2c55;
-      box-shadow: 0 0 14px rgba(254, 44, 85, 0.35);
+      box-shadow: 0 0 14px rgba(254, 44, 85, 0.35), inset 0 0 8px rgba(255, 255, 255, 0.1);
+      text-shadow: 0 0 6px rgba(254, 44, 85, 0.4);
     }
     .btn-toggle-service:hover {
       background: rgba(28, 28, 36, 0.95);
       color: #ffffff;
       border-color: #ffffff;
-      box-shadow: 0 0 22px rgba(254, 44, 85, 0.75);
+      box-shadow: 0 0 22px rgba(254, 44, 85, 0.75), 0 0 12px rgba(255, 255, 255, 0.4);
     }
     .btn-toggle-service .arrow-icon {
       position: absolute;
@@ -439,6 +487,15 @@
     .btn-toggle-service.active .arrow-icon {
       transform: rotate(180deg);
       color: #ffffff;
+    }
+
+    body.music-active .btn-tiktok,
+    body.music-active .btn-toggle-service {
+      box-shadow: 0 0 18px rgba(254, 44, 85, 0.6), inset 0 0 10px rgba(254, 44, 85, 0.3);
+    }
+    body.music-active .btn-discord,
+    body.music-active .btn-zypage {
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
     /* KHUNG DỊCH VỤ CÀY THUÊ */
@@ -507,6 +564,7 @@
       .map-grid { grid-template-columns: 1fr 1fr; }
     }
 
+    /* CÁC Ô TÙY CHỌN DỊCH VỤ / MAP */
     .map-item {
       display: flex;
       align-items: center;
@@ -526,6 +584,7 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
     }
 
+    /* KHI ĐƯỢC CHỌN */
     .map-item:has(input:checked) {
       border-color: #fe2c55 !important;
       background: rgba(254, 44, 85, 0.18) !important;
@@ -602,7 +661,9 @@
       transition: color 0.2s ease;
     }
 
-    /* THANH TỔNG TIỀN TỐI ƯU 2 TẦNG CHO MOBILE */
+    /* ============================================================
+       THANH TỔNG TIỀN ĐƯỢC TỐI ƯU 2 TẦNG CHUYÊN BIỆT CHO MOBILE
+       ============================================================ */
     .total-box {
       display: flex;
       flex-direction: column;
@@ -616,6 +677,7 @@
       box-shadow: 0 0 18px rgba(254, 44, 85, 0.2);
     }
 
+    /* TẦNG 1: TỔNG TIỀN & GIÁ TIỀN NẰM 2 ĐẦU CÂN ĐỐI */
     .total-row-main {
       display: flex;
       justify-content: space-between;
@@ -637,6 +699,7 @@
       letter-spacing: -0.5px;
     }
 
+    /* TẦNG 2: THANH CÔNG CỤ PHỤ (SỐ MỤC & NÚT XEM CHI TIẾT) */
     .total-row-sub {
       display: flex;
       justify-content: space-between;
@@ -1016,209 +1079,6 @@
       color: #fff;
     }
 
-    /* ============================================================
-       THANH MINI PLAYER NEON CỐ ĐỊNH Ở ĐÁY MÀN HÌNH (DOCK PLAYER)
-       ============================================================ */
-    .mini-player-dock {
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 24px);
-      max-width: 520px;
-      z-index: 9998;
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .mini-player-dock.minimized {
-      transform: translateX(-50%) translateY(calc(100% + 20px));
-    }
-
-    .player-border-glow {
-      position: relative;
-      width: 100%;
-      border-radius: 20px;
-      padding: 1.5px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85),
-                  0 0 18px rgba(254, 44, 85, 0.4);
-    }
-
-    .player-border-glow::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 5s linear infinite;
-      z-index: 0;
-    }
-
-    body.music-active .player-border-glow::before {
-      animation: spin 2.5s linear infinite;
-    }
-
-    .player-glass-body {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      background: rgba(12, 12, 16, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 19px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    /* Đĩa xoay Vinyl */
-    .vinyl-disk-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #000;
-      border: 1.5px solid rgba(254, 44, 85, 0.6);
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .vinyl-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .spinning {
-      animation: spin 4s linear infinite;
-    }
-
-    /* Thông tin bài hát */
-    .song-details {
-      flex: 1;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-    }
-
-    .song-title-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .song-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #ffffff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .song-artist {
-      font-size: 0.7rem;
-      color: #888899;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Sóng âm Equalizer */
-    .soundwave-bars {
-      display: inline-flex;
-      align-items: flex-end;
-      gap: 2.5px;
-      height: 12px;
-    }
-
-    .soundwave-bar {
-      width: 2.5px;
-      height: 3px;
-      background: #fe2c55;
-      border-radius: 2px;
-      transition: height 0.15s ease;
-    }
-
-    body.music-active .soundwave-bar:nth-child(1) { animation: soundWave 0.7s ease-in-out infinite alternate; }
-    body.music-active .soundwave-bar:nth-child(2) { animation: soundWave 0.5s ease-in-out infinite alternate 0.2s; }
-    body.music-active .soundwave-bar:nth-child(3) { animation: soundWave 0.9s ease-in-out infinite alternate 0.1s; }
-    body.music-active .soundwave-bar:nth-child(4) { animation: soundWave 0.6s ease-in-out infinite alternate 0.3s; }
-
-    @keyframes soundWave {
-      0% { height: 3px; }
-      100% { height: 12px; }
-    }
-
-    /* Nút bấm điều khiển Player */
-    .player-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .player-ctrl-btn {
-      background: none;
-      border: none;
-      color: #ccc;
-      font-size: 0.95rem;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: all 0.2s ease;
-    }
-
-    .player-ctrl-btn:hover {
-      color: #fe2c55;
-      transform: scale(1.1);
-    }
-
-    .player-ctrl-btn.play-btn {
-      background: linear-gradient(135deg, #fe2c55, #ff0033);
-      color: #ffffff;
-      width: 36px;
-      height: 36px;
-      box-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
-    }
-
-    .player-ctrl-btn.play-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 16px rgba(254, 44, 85, 0.9);
-      color: #fff;
-    }
-
-    /* Nút ẩn/hiện Player */
-    .btn-toggle-dock {
-      position: absolute;
-      top: -24px;
-      right: 18px;
-      background: rgba(14, 14, 18, 0.9);
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      border-bottom: none;
-      color: #fe2c55;
-      font-size: 0.68rem;
-      padding: 3px 8px;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
     .footer {
       margin-top: 18px;
       font-size: 0.78rem;
@@ -1403,7 +1263,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
           </div>
 
-          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ CÓ NÚT XEM CHI TIẾT (TỐI ƯU GIAO DIỆN) -->
+          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ CÓ NÚT XEM CHI TIẾT (ĐÃ ĐƯỢC TỐI ƯU GIAO DIỆN) -->
           <div class="total-box">
             <div class="total-row-main">
               <span class="total-label">Tổng thanh toán:</span>
@@ -1475,6 +1335,7 @@
         <h3 class="selected-modal-title"><i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> Các mục bạn đã chọn</h3>
         <p class="selected-modal-desc">Kiểm tra lại danh sách trước khi gửi đơn nhé</p>
 
+        <!-- DANH SÁCH RENDER ĐỘNG BẰNG JS -->
         <div class="selected-items-list" id="selectedItemsList"></div>
 
         <div class="selected-summary-box">
@@ -1493,49 +1354,10 @@
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
   </div>
 
-  <!-- ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH
-       ============================================================ -->
-  <div class="mini-player-dock" id="miniPlayerDock">
-    <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
-      <i class="fa-solid fa-chevron-down" id="dockToggleIcon"></i>
-    </button>
-    <div class="player-border-glow">
-      <div class="player-glass-body">
-        <div class="vinyl-disk-wrap" id="vinylDisk">
-          <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-        </div>
-
-        <div class="song-details">
-          <div class="song-title-row">
-            <span class="song-name" id="currentSongTitle">Saving Light (Chill)</span>
-            <div class="soundwave-bars">
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-            </div>
-          </div>
-          <span class="song-artist" id="currentSongArtist">phalnnn Background Beats 💕</span>
-        </div>
-
-        <div class="player-controls">
-          <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-            <i class="fa-solid fa-backward-step"></i>
-          </button>
-          <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio()" title="Phát/Dừng">
-            <i class="fa-solid fa-play" id="dockPlayIcon"></i>
-          </button>
-          <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-            <i class="fa-solid fa-forward-step"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- THẺ PHÁT NHẠC NỀN -->
-  <audio id="bgAudio" preload="auto"></audio>
+  <audio id="bgAudio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     // ==========================================
@@ -1547,6 +1369,7 @@
       accountName: "PHAM NGUYEN BAO LAN"
     };
 
+    // SAO CHÉP SỐ TÀI KHOẢN NHANH
     function copySTK(btn) {
       const stkClean = "19074758620012";
       if (navigator.clipboard) {
@@ -1565,78 +1388,13 @@
     }
 
     // ==========================================
-    // DANH SÁCH BÀI HÁT MINI PLAYER (PLAYLIST NGẦM)
+    // CƠ CHẾ NHẠC NỀN & NÚT ÂM THANH MỜ DẦN
     // ==========================================
-    const playlist = [
-      {
-        title: "Saving Light",
-        artist: "Wuthering Waves OST",
-        src: "music.mp3"
-      },
-      {
-        title: "An Unfinished Song",
-        artist: "EP 1.3 Remix",
-        src: "music2.mp3"
-      },
-      {
-        title: "Dancing In The Wind",
-        artist: "Chill Lo-Fi Beat",
-        src: "music3.mp3"
-      }
-    ];
-
-    let currentSongIndex = 0;
     const bgAudio = document.getElementById('bgAudio');
     const muteBtn = document.getElementById('floatingMuteBtn');
     const muteIcon = document.getElementById('floatingMuteIcon');
-    const dockPlayIcon = document.getElementById('dockPlayIcon');
-    const vinylDisk = document.getElementById('vinylDisk');
-    const songTitleElem = document.getElementById('currentSongTitle');
-    const songArtistElem = document.getElementById('currentSongArtist');
-
     let isMusicPlaying = false;
     let idleTimer = null;
-
-    function loadSong(index) {
-      currentSongIndex = (index + playlist.length) % playlist.length;
-      const song = playlist[currentSongIndex];
-      bgAudio.src = song.src;
-      songTitleElem.textContent = song.title;
-      songArtistElem.textContent = song.artist;
-    }
-    loadSong(0);
-
-    bgAudio.addEventListener('ended', () => {
-      nextSong();
-    });
-
-    function nextSong() {
-      loadSong(currentSongIndex + 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
-    }
-
-    function prevSong() {
-      loadSong(currentSongIndex - 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
-    }
-
-    function syncVisualEffects() {
-      if (isMusicPlaying) {
-        document.body.classList.add('music-active');
-        vinylDisk.classList.add('spinning');
-        muteIcon.className = "fa-solid fa-volume-high";
-        dockPlayIcon.className = "fa-solid fa-pause";
-      } else {
-        document.body.classList.remove('music-active');
-        vinylDisk.classList.remove('spinning');
-        muteIcon.className = "fa-solid fa-volume-xmark";
-        dockPlayIcon.className = "fa-solid fa-play";
-      }
-    }
 
     function resetIdleTimer() {
       muteBtn.classList.remove('idle');
@@ -1651,6 +1409,14 @@
     });
     resetIdleTimer();
 
+    function syncVisualEffects() {
+      if (isMusicPlaying) {
+        document.body.classList.add('music-active');
+      } else {
+        document.body.classList.remove('music-active');
+      }
+    }
+
     function toggleAudio(event) {
       if (event) event.stopPropagation();
       resetIdleTimer();
@@ -1658,9 +1424,11 @@
       if (isMusicPlaying) {
         bgAudio.pause();
         isMusicPlaying = false;
+        muteIcon.className = "fa-solid fa-volume-xmark";
       } else {
         bgAudio.play().then(() => {
           isMusicPlaying = true;
+          muteIcon.className = "fa-solid fa-volume-high";
         }).catch(e => console.log('Chặn autoplay:', e));
       }
       syncVisualEffects();
@@ -1670,6 +1438,7 @@
       if (!isMusicPlaying) {
         bgAudio.play().then(() => {
           isMusicPlaying = true;
+          muteIcon.className = "fa-solid fa-volume-high";
           syncVisualEffects();
         }).catch(() => {});
       }
@@ -1678,17 +1447,6 @@
     }
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
-
-    function toggleDockMinimize() {
-      const dock = document.getElementById('miniPlayerDock');
-      const icon = document.getElementById('dockToggleIcon');
-      dock.classList.toggle('minimized');
-      if (dock.classList.contains('minimized')) {
-        icon.className = "fa-solid fa-chevron-up";
-      } else {
-        icon.className = "fa-solid fa-chevron-down";
-      }
-    }
 
     // ==========================================
     // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
