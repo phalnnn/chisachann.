@@ -1023,7 +1023,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (CÓ TÍCH HỢP MUTE/UNMUTE)
        ============================================================ */
     .mini-player-dock {
       position: fixed;
@@ -1490,7 +1490,7 @@
   </div>
 
   <!-- ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (PLAYLIST 6 BÀI)
+       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (CÓ TÍCH HỢP NÚT MUTE/UNMUTE)
        ============================================================ -->
   <div class="mini-player-dock" id="miniPlayerDock">
     <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
@@ -1516,10 +1516,14 @@
         </div>
 
         <div class="player-controls">
+          <!-- NÚT TẮT/BẬT TIẾNG (MUTE/UNMUTE) ĐƯỢC ĐƯA XUỐNG ĐÂY -->
+          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
+            <i class="fa-solid fa-volume-high" id="muteIcon"></i>
+          </button>
           <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
             <i class="fa-solid fa-backward-step"></i>
           </button>
-          <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio()" title="Phát/Dừng">
+          <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
             <i class="fa-solid fa-play" id="dockPlayIcon"></i>
           </button>
           <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
@@ -1561,7 +1565,7 @@
     }
 
     // ==========================================
-    // DANH SÁCH BÀI HÁT (PLAYLIST NỀN 6 BÀI)
+    // DANH SÁCH BÀI HÁT & TRÌNH PHÁT NHẠC (MINI PLAYER)
     // ==========================================
     const playlist = [
       { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
@@ -1575,11 +1579,13 @@
     let currentSongIndex = 0;
     const bgAudio = document.getElementById('bgAudio');
     const dockPlayIcon = document.getElementById('dockPlayIcon');
+    const muteIcon = document.getElementById('muteIcon');
     const vinylDisk = document.getElementById('vinylDisk');
     const songTitleElem = document.getElementById('currentSongTitle');
     const songArtistElem = document.getElementById('currentSongArtist');
 
     let isMusicPlaying = false;
+    let isMuted = false;
 
     function loadSong(index) {
       currentSongIndex = (index + playlist.length) % playlist.length;
@@ -1609,7 +1615,7 @@
     }
 
     function syncVisualEffects() {
-      if (isMusicPlaying) {
+      if (isMusicPlaying && !isMuted) {
         document.body.classList.add('music-active');
         vinylDisk.classList.add('spinning');
         dockPlayIcon.className = "fa-solid fa-pause";
@@ -1629,7 +1635,24 @@
       } else {
         bgAudio.play().then(() => {
           isMusicPlaying = true;
+          isMuted = false;
+          muteIcon.className = "fa-solid fa-volume-high";
         }).catch(e => console.log('Chặn autoplay:', e));
+      }
+      syncVisualEffects();
+    }
+
+    function toggleMute(event) {
+      if (event) event.stopPropagation();
+
+      if (isMuted) {
+        bgAudio.muted = false;
+        isMuted = false;
+        muteIcon.className = "fa-solid fa-volume-high";
+      } else {
+        bgAudio.muted = true;
+        isMuted = true;
+        muteIcon.className = "fa-solid fa-volume-xmark";
       }
       syncVisualEffects();
     }
