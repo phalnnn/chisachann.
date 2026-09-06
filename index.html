@@ -1219,6 +1219,81 @@
       backdrop-filter: blur(10px);
     }
 
+    /* ============================================================
+       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ (TRAIL PARTICLES)
+       ============================================================ */
+    .floating-mascot {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-drag: none;
+      touch-action: none;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 10px rgba(254, 44, 85, 0.5));
+      transition: transform 0.2s ease;
+    }
+
+    .floating-mascot:active {
+      cursor: grabbing;
+      transform: scale(1.12);
+    }
+
+    .floating-mascot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      display: block;
+    }
+
+    .mascot-bubble {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14, 14, 18, 0.9);
+      border: 1px solid #fe2c55;
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mascot-bubble.show {
+      opacity: 1;
+    }
+
+    /* VỆT ĐỎ MỜ (RED NEON GHOST TRAIL) BIẾN MẤT NGAY SAU ĐÓ */
+    .mascot-trail {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 44, 85, 0.65) 0%, rgba(254, 44, 85, 0.2) 60%, transparent 100%);
+      filter: blur(5px);
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
+      animation: fadeTrail 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes fadeTrail {
+      0% {
+        opacity: 0.75;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.25);
+      }
+    }
+
     .footer {
       margin-top: 18px;
       font-size: 0.78rem;
@@ -1544,6 +1619,14 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (TÀN ẢNH ĐỎ BIẾN MẤT NGAY)
+       ============================================================ -->
+  <div class="floating-mascot" id="mascot">
+    <div class="mascot-bubble" id="mascotBubble">Nghỉ 1p nha~ 💤</div>
+    <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
+  </div>
+
   <!-- THẺ PHÁT NHẠC NỀN -->
   <audio id="bgAudio" preload="auto"></audio>
 
@@ -1629,12 +1712,10 @@
       if (isMusicPlaying) {
         document.body.classList.add('music-active');
         vinylDisk.classList.add('spinning');
-        // SVG Icon Pause (2 vạch đứng)
         playPauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
       } else {
         document.body.classList.remove('music-active');
         vinylDisk.classList.remove('spinning');
-        // SVG Icon Play (Tam giác)
         playPauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
       }
     }
@@ -1657,10 +1738,8 @@
     /* 2. XỬ LÝ HOÀN TOÀN TÁCH BIỆT CHO NÚT BẬT / TẮT TIẾNG (MUTE) */
     function updateMuteUI() {
       if (isMuted) {
-        // Icon Loa có gạch chéo
         muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
       } else {
-        // Icon Loa có sóng âm bình thường
         muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
       }
     }
@@ -1678,7 +1757,6 @@
       updateMuteUI();
     }
 
-    /* Tự động chạy nhạc lần chạm đầu tiên */
     function autoPlayOnce() {
       if (!isMusicPlaying) {
         bgAudio.play().then(() => {
@@ -1702,6 +1780,145 @@
         iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
       }
     }
+
+    // ==========================================
+    // LOGIC MASCOT BAY LƯỢN & VỆT TÀN ẢNH ĐỎ MỜ
+    // ==========================================
+    const mascot = document.getElementById('mascot');
+    const mascotBubble = document.getElementById('mascotBubble');
+
+    let posX = Math.random() * (window.innerWidth - 100) + 10;
+    let posY = Math.random() * (window.innerHeight - 200) + 50;
+    let targetX = posX;
+    let targetY = posY;
+    let speed = 1.2;
+    let isDragging = false;
+    let isPaused = false;
+    let pauseTimer = null;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let mascotStartX = 0;
+    let mascotStartY = 0;
+
+    let lastTrailTime = 0;
+
+    // Hàm tạo vệt đỏ mờ biến mất ngay sau đó
+    function createRedTrail(x, y) {
+      const now = performance.now();
+      if (now - lastTrailTime < 45) return; // Khoảng cách thời gian tạo hạt
+      lastTrailTime = now;
+
+      const trail = document.createElement('div');
+      trail.className = 'mascot-trail';
+      
+      const size = Math.random() * 18 + 20; // Kích thước hạt từ 20-38px
+      trail.style.width = `${size}px`;
+      trail.style.height = `${size}px`;
+      
+      // Đặt hạt ở tâm phía sau mascot
+      const centerX = x + 40 - (size / 2);
+      const centerY = y + 45 - (size / 2);
+      trail.style.left = `${centerX}px`;
+      trail.style.top = `${centerY}px`;
+
+      document.body.appendChild(trail);
+
+      // Tự hủy sau khi hoàn thành animation mờ dần
+      setTimeout(() => {
+        trail.remove();
+      }, 600);
+    }
+
+    function pickNewTarget() {
+      if (isPaused || isDragging) return;
+      const margin = 20;
+      const maxX = window.innerWidth - mascot.offsetWidth - margin;
+      const maxY = window.innerHeight - mascot.offsetHeight - 120;
+      targetX = Math.random() * (maxX - margin) + margin;
+      targetY = Math.random() * (maxY - margin) + margin;
+    }
+
+    function animateMascot() {
+      if (!isDragging && !isPaused) {
+        const dx = targetX - posX;
+        const dy = targetY - posY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < 15) {
+          pickNewTarget();
+        } else {
+          posX += (dx / dist) * speed;
+          posY += (dy / dist) * speed;
+
+          // Tạo vệt tàn ảnh đỏ khi di chuyển
+          createRedTrail(posX, posY);
+
+          const flip = dx < 0 ? -1 : 1;
+          mascot.style.transform = `scaleX(${flip})`;
+        }
+        mascot.style.left = `${posX}px`;
+        mascot.style.top = `${posY}px`;
+      }
+      requestAnimationFrame(animateMascot);
+    }
+
+    function triggerStandstill() {
+      isPaused = true;
+      mascotBubble.classList.add('show');
+
+      if (pauseTimer) clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        isPaused = false;
+        mascotBubble.classList.remove('show');
+        pickNewTarget();
+      }, 60000);
+    }
+
+    function onDragStart(e) {
+      isDragging = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      dragStartX = clientX;
+      dragStartY = clientY;
+      mascotStartX = posX;
+      mascotStartY = posY;
+      triggerStandstill();
+    }
+
+    function onDragMove(e) {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const dx = clientX - dragStartX;
+      const dy = clientY - dragStartY;
+
+      posX = Math.min(Math.max(10, mascotStartX + dx), window.innerWidth - mascot.offsetWidth - 10);
+      posY = Math.min(Math.max(10, mascotStartY + dy), window.innerHeight - mascot.offsetHeight - 10);
+
+      // Tạo vệt đỏ mờ cả khi kéo chuột / vuốt tay
+      createRedTrail(posX, posY);
+
+      mascot.style.left = `${posX}px`;
+      mascot.style.top = `${posY}px`;
+    }
+
+    function onDragEnd() {
+      if (isDragging) {
+        isDragging = false;
+        triggerStandstill();
+      }
+    }
+
+    mascot.addEventListener('mousedown', onDragStart);
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', onDragEnd);
+
+    mascot.addEventListener('touchstart', onDragStart, { passive: false });
+    window.addEventListener('touchmove', onDragMove, { passive: false });
+    window.addEventListener('touchend', onDragEnd);
+
+    pickNewTarget();
+    requestAnimationFrame(animateMascot);
 
     // ==========================================
     // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
