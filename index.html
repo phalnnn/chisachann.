@@ -20,8 +20,8 @@
     body {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
       padding: 30px 14px 40px;
       background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
       background-size: 400% 400%;
@@ -281,13 +281,12 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON - ĐỘC LẬP TRÔI THEO TOÀN TRANG
+       THANH MINI PLAYER NEON - TRÔI THEO TRANG VÀ THU GỌN THÀNH BONG BÓNG
        ============================================================ */
     .mini-player-dock {
       position: relative;
       width: 100%;
-      max-width: 540px;
-      margin: 10px 0;
+      margin: 14px 0 20px;
       z-index: 10;
     }
 
@@ -299,7 +298,8 @@
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
                   0 0 16px rgba(254, 44, 85, 0.35);
-      transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease;
+      transition: opacity 0.35s ease, transform 0.35s ease, max-height 0.35s ease;
+      max-height: 200px;
     }
 
     .player-border-glow::before {
@@ -327,13 +327,50 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      transition: opacity 0.35s ease;
+    }
+
+    /* KHI THU GỌN: BIẾN THANH PLAYER THÀNH BONG BÓNG ĐĨA NHẠC NỔI DI CHUYỂN ĐƯỢC */
+    .mini-player-dock.minimized {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      margin: 0;
+      z-index: 10001;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .mini-player-dock.minimized:active {
+      cursor: grabbing;
     }
 
     .mini-player-dock.minimized .player-border-glow {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.95);
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 18px rgba(254, 44, 85, 0.7);
+      max-height: 60px;
+    }
+
+    .mini-player-dock.minimized .player-glass-body {
+      padding: 0;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background: rgba(12, 12, 16, 0.95);
+      justify-content: center;
+    }
+
+    .mini-player-dock.minimized .vinyl-disk-wrap {
+      width: 100%;
+      height: 100%;
+      border: none;
+      box-shadow: none;
+    }
+
+    .mini-player-dock.minimized .song-details,
+    .mini-player-dock.minimized .player-controls {
+      display: none;
     }
 
     .btn-toggle-dock {
@@ -352,6 +389,10 @@
       z-index: 11;
       box-shadow: 0 -2px 8px rgba(254, 44, 85, 0.3);
       transition: all 0.2s ease;
+    }
+
+    .mini-player-dock.minimized .btn-toggle-dock {
+      display: none; /* Ẩn nút mũi tên khi đã thu gọn thành bong bóng, bấm trực tiếp vào bong bóng để mở lại */
     }
 
     .btn-toggle-dock:hover {
@@ -482,6 +523,131 @@
       transform: scale(1.08);
       box-shadow: 0 0 16px rgba(254, 44, 85, 0.95);
       background: #fe2c55;
+    }
+
+    /* POPUP ĐIỀU KHIỂN ÂM NHẠC KHI BẤM VÀO BONG BÓNG LÚC THU GỌN */
+    .music-popup-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10002;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .music-popup-modal.active {
+      display: flex;
+    }
+
+    .music-popup-content {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 15, 22, 0.95);
+      border: 1.5px solid #fe2c55;
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .music-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .music-popup-close:hover {
+      color: #fe2c55;
+    }
+
+    .popup-vinyl-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #000;
+      border: 2px solid #fe2c55;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
+      margin: 0 auto 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-vinyl-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .popup-song-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-song-artist {
+      font-size: 0.8rem;
+      color: #9999aa;
+      margin-bottom: 18px;
+    }
+
+    .popup-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .popup-ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .popup-ctrl-btn:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      transform: scale(1.08);
+    }
+
+    .popup-ctrl-btn.play-main-btn {
+      background: linear-gradient(135deg, #fe2c55, #ff0033);
+      border-color: #fe2c55;
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
     }
 
     /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
@@ -1342,7 +1508,7 @@
     </div>
 
     <!-- ============================================================
-         THANH MINI PLAYER NEON (ĐƯỢC TÁCH RA NGOÀI, TRÔI TỰ DO THEO TOÀN TRANG)
+         THANH MINI PLAYER NEON (ĐỘC LẬP TRÔI THEO TOÀN TRANG Ở BÊN DƯỚI)
          ============================================================ -->
     <div class="mini-player-dock" id="miniPlayerDock">
       <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
@@ -1645,10 +1811,9 @@
     const bgAudio = document.getElementById('bgAudio');
     const playPauseSvg = document.getElementById('playPauseSvg');
     const muteSvg = document.getElementById('muteSvg');
-    const vinylDisk = document.getElementById('vinylDisk');
-    const soundwaveContainer = document.getElementById('soundwaveContainer');
-    const songTitleElem = document.getElementById('currentSongTitle');
-    const songArtistElem = document.getElementById('currentSongArtist');
+    const bubbleVinyl = document.getElementById('bubbleVinyl');
+    const popupSongTitle = document.getElementById('popupSongTitle');
+    const popupSongArtist = document.getElementById('popupSongArtist');
 
     let isMusicPlaying = false;
     let isMuted = false;
@@ -1657,8 +1822,8 @@
       currentSongIndex = (index + playlist.length) % playlist.length;
       const song = playlist[currentSongIndex];
       bgAudio.src = song.src;
-      songTitleElem.textContent = song.title;
-      songArtistElem.textContent = song.artist;
+      popupSongTitle.textContent = song.title;
+      popupSongArtist.textContent = song.artist;
     }
     loadSong(0);
 
@@ -1682,13 +1847,11 @@
 
     function updatePlayPauseUI() {
       if (isMusicPlaying) {
-        soundwaveContainer.classList.add('playing-active');
-        vinylDisk.classList.add('spinning');
-        playPauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+        bubbleVinyl.classList.add('spinning');
+        popupPlayPauseSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
       } else {
-        soundwaveContainer.classList.remove('playing-active');
-        vinylDisk.classList.remove('spinning');
-        playPauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+        bubbleVinyl.classList.remove('spinning');
+        popupPlayPauseSvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
       }
     }
 
@@ -1709,9 +1872,9 @@
 
     function updateMuteUI() {
       if (isMuted) {
-        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+        popupMuteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
       } else {
-        muteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+        popupMuteSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
       }
     }
 
@@ -1728,6 +1891,14 @@
       updateMuteUI();
     }
 
+    function openMusicModal() {
+      document.getElementById('musicModal').classList.add('active');
+    }
+
+    function closeMusicModal() {
+      document.getElementById('musicModal').classList.remove('active');
+    }
+
     function autoPlayOnce() {
       if (!isMusicPlaying) {
         bgAudio.play().then(() => {
@@ -1741,20 +1912,72 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // HÀM BẤM NÚT MŨI TÊN THU GỌN / MỞ RỘNG THANH PLAYER VÀ TĂNG ĐỘ TRONG SUỐT 100%
-    function toggleDockMinimize() {
-      const dock = document.getElementById('miniPlayerDock');
-      const iconSvg = document.getElementById('dockToggleIconSvg');
-      dock.classList.toggle('minimized');
-      if (dock.classList.contains('minimized')) {
-        iconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
-      } else {
-        iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
+    // ==========================================
+    // LOGIC KÉO THẢ BONG BÓNG CHAT ÂM NHẠC
+    // ==========================================
+    const musicBubble = document.getElementById('musicBubble');
+    let isBubbleDragging = false;
+    let bubbleStartX = 0, bubbleStartY = 0;
+    let bubblePosX = 0, bubblePosY = 0;
+    let hasMoved = false;
+
+    function onBubbleDragStart(e) {
+      isBubbleDragging = true;
+      hasMoved = false;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      bubbleStartX = clientX;
+      bubbleStartY = clientY;
+      
+      const rect = musicBubble.getBoundingClientRect();
+      bubblePosX = rect.left;
+      bubblePosY = rect.top;
+      
+      musicBubble.style.bottom = 'auto';
+      musicBubble.style.right = 'auto';
+      musicBubble.style.left = `${bubblePosX}px`;
+      musicBubble.style.top = `${bubblePosY}px`;
+    }
+
+    function onBubbleDragMove(e) {
+      if (!isBubbleDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      
+      if (Math.abs(clientX - bubbleStartX) > 5 || Math.abs(clientY - bubbleStartY) > 5) {
+        hasMoved = true;
+      }
+
+      const dx = clientX - bubbleStartX;
+      const dy = clientY - bubbleStartY;
+
+      let newX = Math.min(Math.max(10, bubblePosX + dx), window.innerWidth - musicBubble.offsetWidth - 10);
+      let newY = Math.min(Math.max(10, bubblePosY + dy), window.innerHeight - musicBubble.offsetHeight - 10);
+
+      musicBubble.style.left = `${newX}px`;
+      musicBubble.style.top = `${newY}px`;
+    }
+
+    function onBubbleDragEnd(e) {
+      if (isBubbleDragging) {
+        isBubbleDragging = false;
+        if (!hasMoved) {
+          openMusicModal();
+        }
       }
     }
 
+    musicBubble.addEventListener('mousedown', onBubbleDragStart);
+    window.addEventListener('mousemove', onBubbleDragMove);
+    window.addEventListener('mouseup', onBubbleDragEnd);
+
+    musicBubble.addEventListener('touchstart', onBubbleDragStart, { passive: false });
+    window.addEventListener('touchmove', onBubbleDragMove, { passive: false });
+    window.addEventListener('touchend', onBubbleDragEnd);
+
+
     // ==========================================
-    // LOGIC MASCOT BAY LƯỢN, TÀN ẢNH & BONG BÓNG LỜI NHẮN
+    // LOGIC MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
     // ==========================================
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
