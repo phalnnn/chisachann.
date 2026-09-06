@@ -22,7 +22,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 30px 14px 110px;
+      padding: 30px 14px 40px;
       background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
       background-size: 400% 400%;
       animation: redWhiteBlackGradient 10s ease infinite;
@@ -1023,21 +1023,13 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH
+       THANH MINI PLAYER NEON NẰM NỘI BỘ THEO THANH CUỘN
        ============================================================ */
     .mini-player-dock {
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 24px);
-      max-width: 520px;
-      z-index: 9998;
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .mini-player-dock.minimized {
-      transform: translateX(-50%) translateY(calc(100% + 20px));
+      position: relative;
+      width: 100%;
+      margin: 10px 0 0;
+      z-index: 10;
     }
 
     .player-border-glow {
@@ -1204,21 +1196,6 @@
       box-shadow: 0 0 16px rgba(254, 44, 85, 0.9);
     }
 
-    .btn-toggle-dock {
-      position: absolute;
-      top: -24px;
-      right: 18px;
-      background: rgba(14, 14, 18, 0.9);
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      border-bottom: none;
-      color: #fe2c55;
-      font-size: 0.68rem;
-      padding: 3px 8px;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
     /* ============================================================
        MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ (TRAIL PARTICLES)
        ============================================================ */
@@ -1238,7 +1215,6 @@
       cursor: grabbing;
     }
 
-    /* CHỈ LẬT GƯƠNG THẺ IMG, KHÔNG LẬT BONG BÓNG CHỮ */
     .mascot-img-wrap {
       width: 100%;
       height: 100%;
@@ -1253,7 +1229,6 @@
       display: block;
     }
 
-    /* BONG BÓNG CHỮ LUÔN CỐ ĐỊNH XUÔI CHIỀU CHỮ */
     .mascot-bubble {
       position: absolute;
       top: -28px;
@@ -1279,7 +1254,6 @@
       opacity: 1;
     }
 
-    /* VỆT ĐỎ MỜ BIẾN MẤT NGAY SAU ĐÓ */
     .mascot-trail {
       position: fixed;
       pointer-events: none;
@@ -1314,7 +1288,7 @@
 
   <div class="container">
 
-    <!-- KHỐI 1: PROFILE, DONATE NEON TRÊN ĐẦU & MẠNG XÃ HỘI -->
+    <!-- KHỐI 1: PROFILE, DONATE NEON TRÊN ĐẦU, MINI PLAYER & MẠNG XÃ HỘI -->
     <div class="card-border-wrapper">
       <div class="card profile-card">
         <div class="avatar-wrapper">
@@ -1345,8 +1319,59 @@
           </div>
         </div>
 
+        <!-- THANH MINI PLAYER NEON NẰM NỘI BỘ THEO THANH CUỘN -->
+        <div class="mini-player-dock" id="miniPlayerDock">
+          <div class="player-border-glow">
+            <div class="player-glass-body">
+              <div class="vinyl-disk-wrap" id="vinylDisk">
+                <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+              </div>
+
+              <div class="song-details">
+                <div class="song-title-row">
+                  <span class="song-name" id="currentSongTitle">Styx Helix</span>
+                  <div class="soundwave-bars">
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                  </div>
+                </div>
+                <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
+              </div>
+
+              <div class="player-controls">
+                <!-- NÚT MUTE / UNMUTE (SVG TÁCH BIỆT) -->
+                <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
+                  <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                </button>
+                
+                <!-- BÀI TRƯỚC -->
+                <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
+                </button>
+
+                <!-- NÚT PLAY / PAUSE (SVG ĐỘC LẬP) -->
+                <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
+                  <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </button>
+
+                <!-- BÀI TIẾP -->
+                <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- DANH SÁCH NÚT MẠNG XÃ HỘI -->
-        <div class="social-links">
+        <div class="social-links" style="margin-top: 18px;">
           <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
             <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
           </a>
@@ -1572,62 +1597,6 @@
   </div>
 
   <!-- ============================================================
-       THANH MINI PLAYER NEON DOCK ĐÁY MÀN HÌNH (SVG PLAY/PAUSE & MUTE)
-       ============================================================ -->
-  <div class="mini-player-dock" id="miniPlayerDock">
-    <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Ẩn/Hiện thanh phát nhạc">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dockToggleIconSvg"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </button>
-    <div class="player-border-glow">
-      <div class="player-glass-body">
-        <div class="vinyl-disk-wrap" id="vinylDisk">
-          <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-        </div>
-
-        <div class="song-details">
-          <div class="song-title-row">
-            <span class="song-name" id="currentSongTitle">Styx Helix</span>
-            <div class="soundwave-bars">
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-              <span class="soundwave-bar"></span>
-            </div>
-          </div>
-          <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
-        </div>
-
-        <div class="player-controls">
-          <!-- NÚT MUTE / UNMUTE (SVG TÁCH BIỆT) -->
-          <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
-            <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            </svg>
-          </button>
-          
-          <!-- BÀI TRƯỚC -->
-          <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
-          </button>
-
-          <!-- NÚT PLAY / PAUSE (SVG ĐỘC LẬP) -->
-          <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
-            <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-          </button>
-
-          <!-- BÀI TIẾP -->
-          <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================================================
        MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (CHỮ KHÔNG BỊ LẬT GƯƠNG)
        ============================================================ -->
   <div class="floating-mascot" id="mascot">
@@ -1780,17 +1749,6 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    function toggleDockMinimize() {
-      const dock = document.getElementById('miniPlayerDock');
-      const iconSvg = document.getElementById('dockToggleIconSvg');
-      dock.classList.toggle('minimized');
-      if (dock.classList.contains('minimized')) {
-        iconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
-      } else {
-        iconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
-      }
-    }
-
     // ==========================================
     // LOGIC MASCOT BAY LƯỢN & VỆT TÀN ẢNH ĐỎ MỜ
     // ==========================================
@@ -1841,7 +1799,7 @@
       if (isPaused || isDragging) return;
       const margin = 20;
       const maxX = window.innerWidth - mascot.offsetWidth - margin;
-      const maxY = window.innerHeight - mascot.offsetHeight - 120;
+      const maxY = window.innerHeight - mascot.offsetHeight - 40;
       targetX = Math.random() * (maxX - margin) + margin;
       targetY = Math.random() * (maxY - margin) + margin;
     }
@@ -1860,7 +1818,6 @@
 
           createRedTrail(posX, posY);
 
-          // CHỈ LẬT GƯƠNG RIÊNG THẺ CHỨA ẢNH MASCOT (CHỮ KHÔNG BỊ LẬT)
           const flip = dx < 0 ? -1 : 1;
           mascotImgWrap.style.transform = `scaleX(${flip})`;
         }
