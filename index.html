@@ -139,12 +139,14 @@
       z-index: 1;
     }
 
+    /* PROFILE CARD: DÙNG HÌNH NỀN BG-PROFILE.JPG */
     .profile-card {
       text-align: center;
       background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
+    /* KHUNG DỊCH VỤ CÀY THUÊ */
     #serviceContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
@@ -316,7 +318,7 @@
       font-weight: 700;
     }
 
-    /* NÚT COPY STK TIỆN LỢI */
+    /* NÚT COPY STK */
     .stk-copy-box {
       display: inline-flex;
       align-items: center;
@@ -348,7 +350,7 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
     }
 
-    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM & VỆT SÁNG QUÉT (SHINE SWEEP) */
+    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
     .social-links {
       display: flex;
       flex-direction: column;
@@ -375,7 +377,6 @@
       overflow: hidden;
     }
 
-    /* Hiệu ứng vệt sáng quét qua nút */
     .btn-link::after {
       content: "";
       position: absolute;
@@ -583,7 +584,6 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
     }
 
-    /* HIỆU ỨNG KHI ĐƯỢC CHỌN */
     .map-item:has(input:checked) {
       border-color: #fe2c55 !important;
       background: rgba(254, 44, 85, 0.18) !important;
@@ -608,7 +608,6 @@
       overflow: hidden;
     }
 
-    /* ẨN CHECKBOX MẶC ĐỊNH & THAY BẰNG NEON SWITCH */
     .map-item input[type="checkbox"] {
       display: none;
     }
@@ -661,7 +660,7 @@
       transition: color 0.2s ease;
     }
 
-    /* THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ LƯỢNG DỊCH VỤ */
+    /* THANH TỔNG TIỀN VÀ NÚT XEM CHI TIẾT */
     .total-box {
       display: flex;
       justify-content: space-between;
@@ -679,12 +678,40 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 2px;
+      gap: 3px;
+    }
+
+    /* Vùng chứa số lượng mục & nút bấm xem chi tiết */
+    .count-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .count-text {
       font-size: 0.78rem;
       color: #aaa;
+    }
+
+    .btn-view-selected {
+      background: rgba(254, 44, 85, 0.15);
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      color: #fe2c55;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-view-selected:hover {
+      background: #fe2c55;
+      color: #fff;
+      box-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
     }
 
     .total-amount {
@@ -834,7 +861,7 @@
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
     }
 
-    /* MODAL BẢNG GIÁ PHÓNG TO */
+    /* MODAL CHUNG */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -851,6 +878,7 @@
       display: flex;
     }
 
+    /* MODAL BẢNG GIÁ PHÓNG TO */
     .image-modal-content {
       max-width: 95vw;
       max-height: 90vh;
@@ -870,6 +898,167 @@
     }
     .image-modal-close:hover {
       color: #fe2c55;
+    }
+
+    /* MODAL XEM CHI TIẾT CÁC MỤC ĐÃ CHỌN */
+    .selected-modal-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 28px;
+      padding: 3px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
+                  0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .selected-modal-wrapper::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+
+    .selected-modal-box {
+      position: relative;
+      width: 100%;
+      background: linear-gradient(rgba(10, 10, 14, 0.92), rgba(10, 10, 14, 0.97)), url('bg-profile.jpg') center/cover no-repeat;
+      background-color: rgba(10, 10, 14, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #ffffff;
+      z-index: 1;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .selected-modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
+    }
+
+    .selected-modal-desc {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 14px;
+    }
+
+    .selected-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 48vh;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .selected-items-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .selected-items-list::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+    }
+    .selected-items-list::-webkit-scrollbar-thumb {
+      background: rgba(254, 44, 85, 0.5);
+      border-radius: 4px;
+    }
+
+    .selected-single-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(254, 44, 85, 0.25);
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .selected-single-item .item-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .selected-single-item .item-title {
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .selected-single-item .item-cost {
+      color: #fe2c55;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .btn-remove-item {
+      background: none;
+      border: none;
+      color: #777;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-left: 8px;
+      transition: color 0.2s;
+    }
+
+    .btn-remove-item:hover {
+      color: #fe2c55;
+    }
+
+    .selected-summary-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(254, 44, 85, 0.12);
+      border: 1px solid rgba(254, 44, 85, 0.35);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .btn-close-selected {
+      width: 100%;
+      padding: 11px 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ccc;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-close-selected:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
     }
 
     .footer {
@@ -1056,11 +1245,16 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
           </div>
 
-          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ -->
+          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ CÓ NÚT XEM CHI TIẾT -->
           <div class="total-box">
             <div class="total-left">
               <span style="font-weight: 700; font-size: 1.05rem;">Tổng tiền:</span>
-              <span class="count-text" id="selectedCountDisplay">Đã chọn: 0 mục</span>
+              <div class="count-wrapper">
+                <span class="count-text" id="selectedCountDisplay">Đã chọn: 0 mục</span>
+                <button type="button" class="btn-view-selected" onclick="openSelectedModal()">
+                  <i class="fa-regular fa-eye"></i> Xem mục đã chọn
+                </button>
+              </div>
             </div>
             <span class="total-amount" id="totalDisplay">0đ</span>
           </div>
@@ -1112,6 +1306,26 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- MODAL XEM CHI TIẾT CÁC MỤC ĐÃ CHỌN (VIỀN XOAY NEON) -->
+  <div id="selectedModal" class="modal-overlay" onclick="closeSelectedModal(event)">
+    <div class="selected-modal-wrapper" onclick="event.stopPropagation()">
+      <div class="selected-modal-box">
+        <h3 class="selected-modal-title"><i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> Các mục bạn đã chọn</h3>
+        <p class="selected-modal-desc">Kiểm tra lại danh sách trước khi gửi đơn nhé</p>
+
+        <!-- DANH SÁCH RENDER ĐỘNG BẰNG JS -->
+        <div class="selected-items-list" id="selectedItemsList"></div>
+
+        <div class="selected-summary-box">
+          <span>Tổng số tiền:</span>
+          <strong id="modalTotalSum" style="color: #fe2c55; font-size: 1.05rem;">0đ</strong>
+        </div>
+
+        <button type="button" class="btn-close-selected" onclick="closeSelectedModal()">Đóng lại</button>
+      </div>
+    </div>
   </div>
 
   <!-- MODAL BẢNG GIÁ PHÓNG TO -->
@@ -1289,6 +1503,11 @@
       const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${total}&addInfo=${encodedMemo}&accountName=${encodedAccName}`;
       
       autoQrImg.src = qrUrl;
+
+      // Cập nhật lại danh sách modal nếu đang mở
+      if (document.getElementById('selectedModal').classList.contains('active')) {
+        renderSelectedList();
+      }
     }
 
     function clearAllSelections() {
@@ -1299,6 +1518,69 @@
     checkboxes.forEach(cb => cb.addEventListener('change', updateQR));
     clientNameInput.addEventListener('input', updateQR);
     updateQR();
+
+    // ==========================================
+    // POPUP XEM DANH SÁCH MỤC ĐÃ CHỌN
+    // ==========================================
+    function renderSelectedList() {
+      const listContainer = document.getElementById('selectedItemsList');
+      listContainer.innerHTML = "";
+
+      let count = 0;
+      let total = 0;
+
+      checkboxes.forEach((cb, idx) => {
+        if (cb.checked) {
+          count++;
+          const name = cb.getAttribute('data-name');
+          const price = parseInt(cb.getAttribute('data-price'), 10);
+          total += price;
+
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'selected-single-item';
+          itemDiv.innerHTML = `
+            <div class="item-info">
+              <span style="color: #fe2c55; font-weight: bold;">${count}.</span>
+              <span class="item-title">${name}</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+              <span class="item-cost">${price.toLocaleString('vi-VN')}đ</span>
+              <button type="button" class="btn-remove-item" title="Bỏ chọn" onclick="removeItemByCheckbox(${idx})">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          `;
+          listContainer.appendChild(itemDiv);
+        }
+      });
+
+      if (count === 0) {
+        listContainer.innerHTML = `
+          <div style="text-align: center; color: #888; padding: 25px 0; font-size: 0.88rem;">
+            <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; display: block; color: #555;"></i>
+            Bạn chưa chọn mục nào cả!
+          </div>
+        `;
+      }
+
+      document.getElementById('modalTotalSum').textContent = total.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function removeItemByCheckbox(checkboxIndex) {
+      if (checkboxes[checkboxIndex]) {
+        checkboxes[checkboxIndex].checked = false;
+        updateQR();
+      }
+    }
+
+    function openSelectedModal() {
+      renderSelectedList();
+      document.getElementById('selectedModal').classList.add('active');
+    }
+
+    function closeSelectedModal(event) {
+      document.getElementById('selectedModal').classList.remove('active');
+    }
 
     // MODAL PHÓNG TO BẢNG GIÁ
     function openImageModal() {
@@ -1316,6 +1598,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === "Escape") {
         closeImageModal();
+        closeSelectedModal();
       }
     });
 
