@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>phalnnn Profile Bio</title>
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2224%22 font-size=%2224%22>💗</text></svg>">
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     * {
@@ -279,7 +281,7 @@
     }
 
     /* ============================================================
-       THANH MINI PLAYER NEON (CÓ CHỨC NĂNG THU GỌN THÀNH BONG BÓNG)
+       THANH MINI PLAYER NEON - TRÔI THEO TRANG VÀ THU GỌN THÀNH BONG BÓNG
        ============================================================ */
     .mini-player-dock {
       position: relative;
@@ -327,7 +329,7 @@
       gap: 12px;
     }
 
-    /* KHI THU GỌN: BIẾN THANH PLAYER THÀNH BONG BÓNG TRÔI DI CHUYỂN ĐƯỢC */
+    /* KHI THU GỌN: BIẾN THÀNH BONG BÓNG TRÔI NỔI DI CHUYỂN ĐƯỢC */
     .mini-player-dock.minimized {
       position: fixed;
       bottom: 25px;
@@ -363,17 +365,13 @@
       height: 100%;
       border: none;
       box-shadow: none;
+      cursor: pointer;
     }
 
     .mini-player-dock.minimized .song-details,
     .mini-player-dock.minimized .player-controls,
     .mini-player-dock.minimized .btn-toggle-dock {
       display: none;
-    }
-
-    /* Bấm trực tiếp vào bong bóng khi thu gọn để mở lại thanh nhạc */
-    .mini-player-dock.minimized .vinyl-disk-wrap {
-      cursor: pointer;
     }
 
     .btn-toggle-dock {
@@ -522,6 +520,131 @@
       transform: scale(1.08);
       box-shadow: 0 0 16px rgba(254, 44, 85, 0.95);
       background: #fe2c55;
+    }
+
+    /* POPUP ĐIỀU KHIỂN ÂM NHẠC KHI BẤM VÀO BONG BÓNG */
+    .music-popup-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10002;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .music-popup-modal.active {
+      display: flex;
+    }
+
+    .music-popup-content {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 15, 22, 0.95);
+      border: 1.5px solid #fe2c55;
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .music-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .music-popup-close:hover {
+      color: #fe2c55;
+    }
+
+    .popup-vinyl-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #000;
+      border: 2px solid #fe2c55;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
+      margin: 0 auto 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-vinyl-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .popup-song-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-song-artist {
+      font-size: 0.8rem;
+      color: #9999aa;
+      margin-bottom: 18px;
+    }
+
+    .popup-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .popup-ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .popup-ctrl-btn:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      transform: scale(1.08);
+    }
+
+    .popup-ctrl-btn.play-main-btn {
+      background: linear-gradient(135deg, #fe2c55, #ff0033);
+      border-color: #fe2c55;
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
     }
 
     /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
@@ -1316,6 +1439,7 @@
 
   <div class="container">
 
+    <!-- KHỐI 1: PROFILE & DONATE NEON TRÊN ĐẦU -->
     <div class="card-border-wrapper">
       <div class="card profile-card">
         <div class="avatar-wrapper">
@@ -1325,6 +1449,7 @@
         <h1 class="channel-name">@phalnnn</h1>
         <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
 
+        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU -->
         <div class="donate-neon-wrapper">
           <div class="donate-box">
             <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
@@ -1345,9 +1470,10 @@
           </div>
         </div>
 
+        <!-- THANH MINI PLAYER NEON DI CHUYỂN THEO THANH CUỘN -->
         <div class="mini-player-dock" id="miniPlayerDock">
-          <button type="button" class="btn-toggle-dock" onclick="openMusicModal()" title="Mở bảng điều khiển nhạc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Thu gọn thành bong bóng nhạc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
           </button>
           <div class="player-border-glow">
             <div class="player-glass-body">
@@ -1369,6 +1495,7 @@
               </div>
 
               <div class="player-controls">
+                <!-- NÚT MUTE / UNMUTE -->
                 <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
                   <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1376,16 +1503,19 @@
                   </svg>
                 </button>
                 
+                <!-- BÀI TRƯỚC -->
                 <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
                 </button>
 
+                <!-- NÚT PLAY / PAUSE -->
                 <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
                   <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                   </svg>
                 </button>
 
+                <!-- BÀI TIẾP -->
                 <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
                 </button>
@@ -1394,6 +1524,7 @@
           </div>
         </div>
 
+        <!-- DANH SÁCH NÚT MẠNG XÃ HỘI -->
         <div class="social-links">
           <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
             <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
@@ -1414,6 +1545,7 @@
             Donate Cho Chía Bel (ZyPage)
           </a>
 
+          <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ -->
           <button type="button" class="btn-link btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
             <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
             <i class="fa-solid fa-chevron-down arrow-icon"></i>
@@ -1426,6 +1558,7 @@
       </div>
     </div>
 
+    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN CÀY THUÊ -->
     <div id="serviceContainerWrapper">
       <div class="card-border-wrapper">
         <div class="card" id="serviceContainer">
@@ -1434,12 +1567,14 @@
             <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm để phóng to</div>
           </div>
 
+          <!-- NÚT HỦY CHỌN TẤT CẢ -->
           <div style="text-align: right;">
             <button type="button" class="btn-clear-all" onclick="clearAllSelections()">
               <i class="fa-solid fa-rotate-left"></i> Xóa chọn tất cả
             </button>
           </div>
 
+          <!-- 1. JINZHOU -->
           <div class="section-title"><i class="fa-solid fa-compass"></i> JINZHOU</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Gorges Of Spirits" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Gorges Of Spirits</span></div><span class="map-price">50k</span></label>
@@ -1455,12 +1590,14 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="MT. Firmament" data-price="80000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">MT. Firmament</span></div><span class="map-price">80k</span></label>
           </div>
 
+          <!-- 2. THE BLACK SHORES -->
           <div class="section-title"><i class="fa-solid fa-water"></i> THE BLACK SHORES</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Black Shores" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Black Shores</span></div><span class="map-price">60k</span></label>
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tethys Deep" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tethys Deep</span></div><span class="map-price">60k</span></label>
           </div>
 
+          <!-- 3. RINASCITA -->
           <div class="section-title"><i class="fa-solid fa-feather"></i> RINASCITA</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Ragunna City" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Ragunna City</span></div><span class="map-price">15k</span></label>
@@ -1480,6 +1617,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Hallowed Reach" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Hallowed Reach</span></div><span class="map-price">50k</span></label>
           </div>
 
+          <!-- 4. ROYA FROSTLANDS -->
           <div class="section-title"><i class="fa-regular fa-snowflake"></i> ROYA FROSTLANDS</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Frostlands Transit Port" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Frostlands Transit Port</span></div><span class="map-price">60k</span></label>
@@ -1498,6 +1636,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Giant's Gaze" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Giant's Gaze</span></div><span class="map-price">40k</span></label>
           </div>
 
+          <!-- 5. MENGZHOU & DAILY -->
           <div class="section-title"><i class="fa-solid fa-mountain-sun"></i> MENGZHOU & DAILY</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Xuanfang Hold" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Xuanfang Hold</span></div><span class="map-price">60k</span></label>
@@ -1509,6 +1648,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
           </div>
 
+          <!-- 6. DỊCH VỤ CONTENT ENDGAME -->
           <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
           <div class="map-grid">
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
@@ -1520,6 +1660,7 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
           </div>
 
+          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ CÓ NÚT XEM CHI TIẾT -->
           <div class="total-box">
             <div class="total-row-main">
               <span class="total-label">Tổng thanh toán:</span>
@@ -1535,6 +1676,7 @@
             </div>
           </div>
 
+          <!-- FORM ĐIỀN THÔNG TIN CỦA KHÁCH -->
           <div class="form-group" style="margin-top: 18px;">
             <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
             <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off" />
@@ -1560,6 +1702,7 @@
             <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, cày holo con nào ghi rõ tại đây..."></textarea>
           </div>
 
+          <!-- KHUNG VIETQR TECHCOMBANK TỰ ĐỘNG CẬP NHẬT THEO ĐƠN -->
           <div class="qr-section">
             <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Quét Mã Techcombank VietQR</div>
             <p class="qr-sub">Mã QR tự động cập nhật số tiền & lời nhắn là tên TikTok của bạn</p>
@@ -1582,6 +1725,7 @@
 
   </div>
 
+  <!-- MODAL XEM CHI TIẾT CÁC MỤC ĐÃ CHỌN -->
   <div id="selectedModal" class="modal-overlay" onclick="closeSelectedModal(event)">
     <div class="selected-modal-wrapper" onclick="event.stopPropagation()">
       <div class="selected-modal-box">
@@ -1600,15 +1744,20 @@
     </div>
   </div>
 
+  <!-- MODAL BẢNG GIÁ PHÓNG TO -->
   <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="image-modal-close">&times;</span>
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
   </div>
 
-  <div class="floating-music-bubble" id="musicBubble" onclick="openMusicModal()" style="display: none;">
+  <!-- ============================================================
+       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (KÉO THẢ & BẤM HIỆN MODAL)
+       ============================================================ -->
+  <div class="floating-music-bubble" id="musicBubble" style="display: none;">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
   </div>
 
+  <!-- POPUP ĐIỀU KHIỂN ÂM NHẠC -->
   <div id="musicModal" class="music-popup-modal" onclick="closeMusicModal()">
     <div class="music-popup-content" onclick="event.stopPropagation()">
       <button type="button" class="music-popup-close" onclick="closeMusicModal()">&times;</button>
@@ -1621,6 +1770,7 @@
       <div class="popup-song-artist" id="popupSongArtist">Re:Zero OST</div>
 
       <div class="popup-controls-row">
+        <!-- Nút Tắt/Bật tiếng -->
         <button type="button" class="popup-ctrl-btn" onclick="toggleMute(event)" title="Bật/Tắt tiếng">
           <svg id="popupMuteSvg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1628,16 +1778,19 @@
           </svg>
         </button>
 
+        <!-- Bài trước -->
         <button type="button" class="popup-ctrl-btn" onclick="prevSong()" title="Bài trước">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
         </button>
 
+        <!-- Play / Pause -->
         <button type="button" class="popup-ctrl-btn play-main-btn" onclick="toggleAudio(event)" title="Phát/Dừng">
           <svg id="popupPlayPauseSvg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
         </button>
 
+        <!-- Bài tiếp -->
         <button type="button" class="popup-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
         </button>
@@ -1645,6 +1798,9 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
+       ============================================================ -->
   <div class="floating-mascot" id="mascot">
     <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
     <div class="mascot-img-wrap" id="mascotImgWrap">
@@ -1652,6 +1808,7 @@
     </div>
   </div>
 
+  <!-- THẺ PHÁT NHẠC NỀN -->
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
@@ -1793,6 +1950,14 @@
       updateMuteUI();
     }
 
+    function openMusicModal() {
+      document.getElementById('musicModal').classList.add('active');
+    }
+
+    function closeMusicModal() {
+      document.getElementById('musicModal').classList.remove('active');
+    }
+
     function autoPlayOnce() {
       if (!isMusicPlaying) {
         bgAudio.play().then(() => {
@@ -1806,28 +1971,17 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // Thu gọn thanh nhạc thành bong bóng
+    // Thu gọn thành bong bóng
     function toggleDockMinimize() {
       const dock = document.getElementById('miniPlayerDock');
       const musicBubble = document.getElementById('musicBubble');
       
       dock.classList.add('minimized');
       musicBubble.style.display = 'flex';
-      
-      // Đặt vị trí bong bóng xuất hiện ở góc dưới bên phải màn hình
-      musicBubble.style.bottom = '30px';
-      musicBubble.style.right = '30px';
+      musicBubble.style.bottom = '25px';
+      musicBubble.style.right = '25px';
       musicBubble.style.left = 'auto';
       musicBubble.style.top = 'auto';
-    }
-
-    // Mở lại thanh nhạc từ bong bóng
-    function openMusicModal() {
-      const dock = document.getElementById('miniPlayerDock');
-      const musicBubble = document.getElementById('musicBubble');
-      
-      dock.classList.remove('minimized');
-      musicBubble.style.display = 'none';
     }
 
     // ==========================================
