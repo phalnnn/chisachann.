@@ -86,7 +86,7 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN CỦA CARD CHÍNH */
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -139,14 +139,12 @@
       z-index: 1;
     }
 
-    /* PROFILE CARD: DÙNG HÌNH NỀN BG-PROFILE.JPG */
     .profile-card {
       text-align: center;
       background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
-    /* KHUNG DỊCH VỤ CÀY THUÊ */
     #serviceContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
@@ -222,7 +220,6 @@
       line-height: 1.5;
     }
 
-    /* HIỆU ỨNG PHÁT SÁNG CHO EMOJI TIM GROWING HEART */
     .custom-heart {
       display: inline-block;
       vertical-align: middle;
@@ -230,7 +227,7 @@
       filter: drop-shadow(0 0 6px rgba(254, 44, 85, 0.75));
     }
 
-    /* KHUNG DONATE NEON NỔI BẬT ĐƯA LÊN ĐẦU */
+    /* KHUNG DONATE NEON NỔI BẬT */
     .donate-neon-wrapper {
       position: relative;
       width: 100%;
@@ -319,7 +316,39 @@
       font-weight: 700;
     }
 
-    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
+    /* NÚT COPY STK TIỆN LỢI */
+    .stk-copy-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(254, 44, 85, 0.3);
+      margin-top: 4px;
+    }
+
+    .btn-copy-stk {
+      background: rgba(254, 44, 85, 0.2);
+      border: 1px solid #fe2c55;
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-stk:hover {
+      background: #fe2c55;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+    }
+
+    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM & VỆT SÁNG QUÉT (SHINE SWEEP) */
     .social-links {
       display: flex;
       flex-direction: column;
@@ -328,6 +357,7 @@
     }
 
     .btn-link {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -342,6 +372,26 @@
       width: 100%;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    /* Hiệu ứng vệt sáng quét qua nút */
+    .btn-link::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(25deg);
+      transition: none;
+      pointer-events: none;
+    }
+
+    .btn-link:hover::after {
+      left: 130%;
+      transition: left 0.75s ease-in-out;
     }
 
     .btn-link:hover {
@@ -415,7 +465,6 @@
 
     /* 5. Nút Dịch Vụ Cày Thuê */
     .btn-toggle-service {
-      position: relative;
       background: rgba(18, 18, 24, 0.85);
       color: #ffffff;
       border: 1.5px solid #fe2c55;
@@ -514,7 +563,7 @@
       .map-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* CÁC Ô TÙY CHỌN DỊCH VỤ / MAP */
+    /* CÁC Ô TÙY CHỌN DỊCH VỤ / MAP VỚI NÚT TOGGLE NEON */
     .map-item {
       display: flex;
       align-items: center;
@@ -534,7 +583,7 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
     }
 
-    /* KHI ĐƯỢC CHỌN: GIỮ VIỀN ĐỎ NEON VÀ NỀN ĐỎ */
+    /* HIỆU ỨNG KHI ĐƯỢC CHỌN */
     .map-item:has(input:checked) {
       border-color: #fe2c55 !important;
       background: rgba(254, 44, 85, 0.18) !important;
@@ -558,13 +607,41 @@
       gap: 10px;
       overflow: hidden;
     }
+
+    /* ẨN CHECKBOX MẶC ĐỊNH & THAY BẰNG NEON SWITCH */
     .map-item input[type="checkbox"] {
-      width: 17px;
-      height: 17px;
-      accent-color: #fe2c55;
-      cursor: pointer;
-      flex-shrink: 0;
+      display: none;
     }
+
+    .neon-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .neon-checkbox i {
+      font-size: 10px;
+      color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .map-item:has(input:checked) .neon-checkbox {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      box-shadow: 0 0 8px #fe2c55;
+    }
+
+    .map-item:has(input:checked) .neon-checkbox i {
+      color: #ffffff;
+    }
+
     .map-name {
       font-size: 0.88rem;
       white-space: nowrap;
@@ -573,6 +650,7 @@
       color: #e6e6e6;
       transition: color 0.2s ease;
     }
+
     .map-price {
       font-weight: 700;
       color: #ffffff;
@@ -583,6 +661,7 @@
       transition: color 0.2s ease;
     }
 
+    /* THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ LƯỢNG DỊCH VỤ */
     .total-box {
       display: flex;
       justify-content: space-between;
@@ -590,16 +669,51 @@
       padding: 14px 18px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 14px;
-      margin: 20px 0;
+      margin: 20px 0 10px;
       border-left: 5px solid #fe2c55;
       border: 1px solid rgba(254, 44, 85, 0.3);
       box-shadow: 0 0 15px rgba(254, 44, 85, 0.2);
     }
+
+    .total-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .count-text {
+      font-size: 0.78rem;
+      color: #aaa;
+    }
+
     .total-amount {
       color: #fe2c55;
       font-size: 1.35rem;
       font-weight: 800;
       text-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+    }
+
+    .btn-clear-all {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ddd;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-end;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-clear-all:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      color: #fff;
     }
 
     .qr-section {
@@ -785,7 +899,7 @@
         <h1 class="channel-name">@phalnnn</h1>
         <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
 
-        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU (DÙNG ẢNH DONATE.JPG & TIM GROWING HEART) -->
+        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU -->
         <div class="donate-neon-wrapper">
           <div class="donate-box">
             <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
@@ -795,8 +909,13 @@
             </div>
             <div class="bank-details">
               <div>Ngân hàng: <strong>Techcombank</strong></div>
-              <div>Số tài khoản: <strong>1907 4758 6200 12</strong></div>
-              <div>Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
+              <div class="stk-copy-box">
+                Số TK: <strong id="stkNumber">1907 4758 6200 12</strong>
+                <button type="button" class="btn-copy-stk" onclick="copySTK(this)">
+                  <i class="fa-regular fa-copy"></i> Copy
+                </button>
+              </div>
+              <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
             </div>
           </div>
         </div>
@@ -844,90 +963,106 @@
             <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm để phóng to</div>
           </div>
 
+          <!-- NÚT HỦY CHỌN TẤT CẢ -->
+          <div style="text-align: right;">
+            <button type="button" class="btn-clear-all" onclick="clearAllSelections()">
+              <i class="fa-solid fa-rotate-left"></i> Xóa chọn tất cả
+            </button>
+          </div>
+
           <!-- 1. JINZHOU -->
           <div class="section-title"><i class="fa-solid fa-compass"></i> JINZHOU</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Gorges Of Spirits" data-price="50000"><span class="map-name">Gorges Of Spirits</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Jinzhou" data-price="40000"><span class="map-name">Jinzhou</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Central Plains" data-price="70000"><span class="map-name">Central Plains</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Desorock Highlands" data-price="70000"><span class="map-name">Desorock Highlands</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Port City Of Guixu" data-price="70000"><span class="map-name">Port City Of Guixu</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Dim Forest" data-price="70000"><span class="map-name">Dim Forest</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Wumming Bay" data-price="50000"><span class="map-name">Wumming Bay</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Norfall Barrens" data-price="50000"><span class="map-name">Norfall Barrens</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whining Aix's Mire" data-price="75000"><span class="map-name">Whining Aix's Mire</span></div><span class="map-price">75k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tiger's Maw Mine" data-price="50000"><span class="map-name">Tiger's Maw Mine</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="MT. Firmament" data-price="80000"><span class="map-name">MT. Firmament</span></div><span class="map-price">80k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Gorges Of Spirits" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Gorges Of Spirits</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Jinzhou" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Jinzhou</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Central Plains" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Central Plains</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Desorock Highlands" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Desorock Highlands</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Port City Of Guixu" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Port City Of Guixu</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Dim Forest" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Dim Forest</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Wumming Bay" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Wumming Bay</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Norfall Barrens" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Norfall Barrens</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whining Aix's Mire" data-price="75000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whining Aix's Mire</span></div><span class="map-price">75k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tiger's Maw Mine" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tiger's Maw Mine</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="MT. Firmament" data-price="80000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">MT. Firmament</span></div><span class="map-price">80k</span></label>
           </div>
 
           <!-- 2. THE BLACK SHORES -->
           <div class="section-title"><i class="fa-solid fa-water"></i> THE BLACK SHORES</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Black Shores" data-price="60000"><span class="map-name">Black Shores</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tethys Deep" data-price="60000"><span class="map-name">Tethys Deep</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Black Shores" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Black Shores</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tethys Deep" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tethys Deep</span></div><span class="map-price">60k</span></label>
           </div>
 
           <!-- 3. RINASCITA -->
           <div class="section-title"><i class="fa-solid fa-feather"></i> RINASCITA</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Ragunna City" data-price="15000"><span class="map-name">Ragunna City</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Averado Vault" data-price="60000"><span class="map-name">Averado Vault</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Penitent's End" data-price="50000"><span class="map-name">Penitent's End</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whisperwind Haven" data-price="50000"><span class="map-name">Whisperwind Haven</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Nimbus Sanctum" data-price="60000"><span class="map-name">Nimbus Sanctum</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fagaceae Peninsula" data-price="50000"><span class="map-name">Fagaceae Peninsula</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thessaleo Fells" data-price="50000"><span class="map-name">Thessaleo Fells</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Riccioli Islands" data-price="50000"><span class="map-name">Riccioli Islands</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Vault Underground" data-price="60000"><span class="map-name">Vault Underground</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Avinoleum" data-price="70000"><span class="map-name">Avinoleum</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Beohr Waters" data-price="60000"><span class="map-name">Beohr Waters</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Septimont" data-price="60000"><span class="map-name">Septimont</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fabricatorium of Deep" data-price="40000"><span class="map-name">Fabricatorium of Deep</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Sanguis Plateaus" data-price="50000"><span class="map-name">Sanguis Plateaus</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Hallowed Reach" data-price="50000"><span class="map-name">Hallowed Reach</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Ragunna City" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Ragunna City</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Averado Vault" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Averado Vault</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Penitent's End" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Penitent's End</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whisperwind Haven" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whisperwind Haven</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Nimbus Sanctum" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Nimbus Sanctum</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fagaceae Peninsula" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fagaceae Peninsula</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thessaleo Fells" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thessaleo Fells</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Riccioli Islands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Riccioli Islands</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Vault Underground" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Vault Underground</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Avinoleum" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Avinoleum</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Beohr Waters" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Beohr Waters</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Septimont" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Septimont</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fabricatorium of Deep" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fabricatorium of Deep</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Sanguis Plateaus" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Sanguis Plateaus</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Hallowed Reach" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Hallowed Reach</span></div><span class="map-price">50k</span></label>
           </div>
 
           <!-- 4. ROYA FROSTLANDS -->
           <div class="section-title"><i class="fa-regular fa-snowflake"></i> ROYA FROSTLANDS</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Frostlands Transit Port" data-price="60000"><span class="map-name">Frostlands Transit Port</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mount Gjallar" data-price="60000"><span class="map-name">Mount Gjallar</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starblind Crashsite" data-price="60000"><span class="map-name">Starblind Crashsite</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Upphaf Forest Ruins" data-price="70000"><span class="map-name">Upphaf Forest Ruins</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tidelost Forest" data-price="60000"><span class="map-name">Tidelost Forest</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Etching Plains" data-price="60000"><span class="map-name">Etching Plains</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Startorch Academy" data-price="15000"><span class="map-name">Startorch Academy</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starward Riseway" data-price="15000"><span class="map-name">Starward Riseway</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fangspire Chasm" data-price="60000"><span class="map-name">Fangspire Chasm</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Bjartr Woods" data-price="40000"><span class="map-name">Bjartr Woods</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Stagnant Run" data-price="50000"><span class="map-name">Stagnant Run</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Rebirth Uplands" data-price="50000"><span class="map-name">Rebirth Uplands</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mawburrow Desert" data-price="20000"><span class="map-name">Mawburrow Desert</span></div><span class="map-price">20k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Giant's Gaze" data-price="40000"><span class="map-name">Giant's Gaze</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Frostlands Transit Port" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Frostlands Transit Port</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mount Gjallar" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mount Gjallar</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starblind Crashsite" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starblind Crashsite</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Upphaf Forest Ruins" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Upphaf Forest Ruins</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tidelost Forest" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tidelost Forest</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Etching Plains" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Etching Plains</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Startorch Academy" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Startorch Academy</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starward Riseway" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starward Riseway</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fangspire Chasm" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fangspire Chasm</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Bjartr Woods" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Bjartr Woods</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Stagnant Run" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Stagnant Run</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Rebirth Uplands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Rebirth Uplands</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mawburrow Desert" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mawburrow Desert</span></div><span class="map-price">20k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Giant's Gaze" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Giant's Gaze</span></div><span class="map-price">40k</span></label>
           </div>
 
           <!-- 5. MENGZHOU & DAILY -->
           <div class="section-title"><i class="fa-solid fa-mountain-sun"></i> MENGZHOU & DAILY</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Xuanfang Hold" data-price="60000"><span class="map-name">Xuanfang Hold</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Western Fang Peaks" data-price="70000"><span class="map-name">Western Fang Peaks</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Southern Yuan Hills" data-price="70000"><span class="map-name">Southern Yuan Hills</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Eastern Xuan Peaks" data-price="70000"><span class="map-name">Eastern Xuan Peaks</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Ngày" data-price="5000"><span class="map-name">Daily: 1 Ngày</span></div><span class="map-price">5k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tuần" data-price="30000"><span class="map-name">Daily: 1 Tuần</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Xuanfang Hold" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Xuanfang Hold</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Western Fang Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Western Fang Peaks</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Southern Yuan Hills" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Southern Yuan Hills</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Eastern Xuan Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Eastern Xuan Peaks</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Ngày" data-price="5000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Ngày</span></div><span class="map-price">5k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tuần" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tuần</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
           </div>
 
           <!-- 6. DỊCH VỤ CONTENT ENDGAME -->
           <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
           <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
+          </div>
+
+          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ -->
+          <div class="total-box">
+            <div class="total-left">
+              <span style="font-weight: 700; font-size: 1.05rem;">Tổng tiền:</span>
+              <span class="count-text" id="selectedCountDisplay">Đã chọn: 0 mục</span>
+            </div>
+            <span class="total-amount" id="totalDisplay">0đ</span>
           </div>
 
           <!-- FORM ĐIỀN THÔNG TIN CỦA KHÁCH -->
@@ -954,11 +1089,6 @@
           <div class="form-group">
             <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Yêu cầu đặc biệt:</label>
             <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, cày holo con nào ghi rõ tại đây..."></textarea>
-          </div>
-
-          <div class="total-box">
-            <span>Tổng tiền:</span>
-            <span class="total-amount" id="totalDisplay">0đ</span>
           </div>
 
           <!-- KHUNG VIETQR TECHCOMBANK TỰ ĐỘNG CẬP NHẬT THEO ĐƠN -->
@@ -1004,6 +1134,24 @@
       accountNo: "19074758620012",
       accountName: "PHAM NGUYEN BAO LAN"
     };
+
+    // SAO CHÉP SỐ TÀI KHOẢN NHANH
+    function copySTK(btn) {
+      const stkClean = "19074758620012";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(stkClean);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = stkClean;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép!';
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
 
     // ==========================================
     // CƠ CHẾ NHẠC NỀN & NÚT ÂM THANH MỜ DẦN
@@ -1071,6 +1219,7 @@
     // ==========================================
     const checkboxes = document.querySelectorAll('.map-cb');
     const totalDisplay = document.getElementById('totalDisplay');
+    const selectedCountDisplay = document.getElementById('selectedCountDisplay');
     const autoQrImg = document.getElementById('autoQrImg');
     const clientNameInput = document.getElementById('clientName');
     const gameAccountInput = document.getElementById('gameAccount');
@@ -1117,9 +1266,11 @@
 
     function updateQR() {
       let total = 0;
+      let count = 0;
       checkboxes.forEach(item => {
         if (item.checked) {
           total += parseInt(item.getAttribute('data-price'));
+          count++;
         }
       });
 
@@ -1130,6 +1281,7 @@
       if (memo.length > 25) memo = memo.substring(0, 25);
 
       totalDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
+      selectedCountDisplay.textContent = `Đã chọn: ${count} mục`;
       memoPreview.textContent = `Lời nhắn chuyển khoản: ${memo}`;
 
       const encodedMemo = encodeURIComponent(memo);
@@ -1137,6 +1289,11 @@
       const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${total}&addInfo=${encodedMemo}&accountName=${encodedAccName}`;
       
       autoQrImg.src = qrUrl;
+    }
+
+    function clearAllSelections() {
+      checkboxes.forEach(cb => { cb.checked = false; });
+      updateQR();
     }
 
     checkboxes.forEach(cb => cb.addEventListener('change', updateQR));
