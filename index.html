@@ -329,51 +329,6 @@
       gap: 12px;
     }
 
-    /* KHI THU GỌN: BIẾN THÀNH BONG BÓNG TRÔI NỔI DI CHUYỂN ĐƯỢC */
-    .mini-player-dock.minimized {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 60px;
-      height: 60px;
-      margin: 0;
-      z-index: 10001;
-      cursor: grab;
-      touch-action: none;
-    }
-
-    .mini-player-dock.minimized:active {
-      cursor: grabbing;
-    }
-
-    .mini-player-dock.minimized .player-border-glow {
-      border-radius: 50%;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
-    }
-
-    .mini-player-dock.minimized .player-glass-body {
-      padding: 0;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      background: rgba(12, 12, 16, 0.96);
-      justify-content: center;
-    }
-
-    .mini-player-dock.minimized .vinyl-disk-wrap {
-      width: 100%;
-      height: 100%;
-      border: none;
-      box-shadow: none;
-      cursor: pointer;
-    }
-
-    .mini-player-dock.minimized .song-details,
-    .mini-player-dock.minimized .player-controls,
-    .mini-player-dock.minimized .btn-toggle-dock {
-      display: none;
-    }
-
     .btn-toggle-dock {
       position: absolute;
       top: -22px;
@@ -522,7 +477,41 @@
       background: #fe2c55;
     }
 
-    /* POPUP ĐIỀU KHIỂN ÂM NHẠC KHI BẤM VÀO BONG BÓNG */
+    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (ĐƯỢC TÁCH RIÊNG NẰM CỐ ĐỊNH KHI THU GỌN) */
+    .floating-music-bubble {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(12, 12, 16, 0.96);
+      border: 2px solid #fe2c55;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
+      z-index: 10001;
+      display: none; /* Ban đầu ẩn đi vì thanh nhạc đang hiển thị đầy đủ */
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transition: transform 0.2s ease;
+    }
+
+    .floating-music-bubble:active {
+      cursor: grabbing;
+      transform: scale(1.1);
+    }
+
+    .bubble-vinyl-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* POPUP ĐIỀU KHIỂN ÂM NHẠC */
     .music-popup-modal {
       display: none;
       position: fixed;
@@ -1751,9 +1740,9 @@
   </div>
 
   <!-- ============================================================
-       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (KÉO THẢ & BẤM HIỆN MODAL)
+       BONG BÓNG CHAT ÂM NHẠC KHI THU GỌN (KÉO THẢ & BẤM MỞ MODAL)
        ============================================================ -->
-  <div class="floating-music-bubble" id="musicBubble" style="display: none;">
+  <div class="floating-music-bubble" id="musicBubble">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
   </div>
 
@@ -1971,17 +1960,22 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // Thu gọn thành bong bóng
+    // Thu gọn thanh nhạc thành bong bóng
     function toggleDockMinimize() {
       const dock = document.getElementById('miniPlayerDock');
       const musicBubble = document.getElementById('musicBubble');
       
-      dock.classList.add('minimized');
+      dock.style.display = 'none';
       musicBubble.style.display = 'flex';
-      musicBubble.style.bottom = '25px';
-      musicBubble.style.right = '25px';
-      musicBubble.style.left = 'auto';
-      musicBubble.style.top = 'auto';
+    }
+
+    // Mở lại thanh nhạc từ bong bóng
+    function restoreDockFromBubble() {
+      const dock = document.getElementById('miniPlayerDock');
+      const musicBubble = document.getElementById('musicBubble');
+      
+      musicBubble.style.display = 'none';
+      dock.style.display = 'block';
     }
 
     // ==========================================
@@ -2392,7 +2386,7 @@
       });
 
       if (selectedMaps.length === 0) {
-        alert('Bạn hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!');
+        alert('Hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!');
         return;
       }
 
