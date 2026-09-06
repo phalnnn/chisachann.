@@ -1553,7 +1553,7 @@
   </div>
 
   <!-- ============================================================
-       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO (HIỆN LỜI NHẮN BAN ĐẦU & MỖI 10S)
+       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
        ============================================================ -->
   <div class="floating-mascot" id="mascot">
     <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
@@ -1726,14 +1726,11 @@
 
     let lastTrailTime = 0;
 
-    // Hiển thị lời nhắn "Cảm ơn bạn đã ủng hộ 💗" ban đầu trong 3s, sau đó lặp lại mỗi 10s
     function initMascotMessages() {
-      // 1. Ẩn thông điệp mặc định sau 3 giây đầu tiên
       setTimeout(() => {
         if (!isPaused) mascotBubble.classList.remove('show');
       }, 3000);
 
-      // 2. Cứ mỗi 10 giây hiện lại trong 3 giây
       setInterval(() => {
         if (!isPaused) {
           mascotBubble.textContent = "Cảm ơn bạn đã ủng hộ 💗";
