@@ -46,7 +46,7 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN (TĂNG TỐC PHẦN CỨNG GPU) */
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -495,7 +495,7 @@
       background: #fe2c55;
     }
 
-    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM, TĂNG TỐC PHẦN CỨNG GPU) */
+    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
     .floating-music-bubble {
       position: fixed;
       bottom: 25px;
@@ -1364,7 +1364,7 @@
     }
 
     /* ============================================================
-       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ (TĂNG TỐC PHẦN CỨNG GPU)
+       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ
        ============================================================ */
     .floating-mascot {
       position: fixed;
@@ -2255,6 +2255,7 @@
       if (bgAudio) {
         bgAudio.pause();
         bgAudio.currentTime = 0;
+        bgAudio.src = "";
       }
       isMusicPlaying = false;
       updatePlayPauseUI();
