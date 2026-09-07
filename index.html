@@ -1809,6 +1809,7 @@
     ];
 
     let currentSongIndex = 0;
+    let savedCurrentTime = 0; // Biến lưu thời gian bài hát đang phát dở
     const bgAudio = document.getElementById('bgAudio');
     const playPauseSvg = document.getElementById('playPauseSvg');
     const popupPlayPauseSvg = document.getElementById('popupPlayPauseSvg');
@@ -1825,7 +1826,7 @@
     let isMusicPlaying = false;
     let isMuted = false;
 
-    function loadSong(index) {
+    function loadSong(index, shouldPlay = false, resumeTime = 0) {
       currentSongIndex = (index + playlist.length) % playlist.length;
       const song = playlist[currentSongIndex];
       bgAudio.src = song.src;
@@ -1833,25 +1834,38 @@
       songArtistElem.textContent = song.artist;
       popupSongTitle.textContent = song.title;
       popupSongArtist.textContent = song.artist;
+      
+      if (resumeTime > 0) {
+        bgAudio.currentTime = resumeTime;
+      }
+
+      if (shouldPlay) {
+        bgAudio.play().then(() => {
+          isMusicPlaying = true;
+          updatePlayPauseUI();
+        }).catch(() => {});
+      }
     }
-    loadSong(0);
+
+    const firstSong = playlist[0];
+    songTitleElem.textContent = firstSong.title;
+    songArtistElem.textContent = firstSong.artist;
+    popupSongTitle.textContent = firstSong.title;
+    popupSongArtist.textContent = firstSong.artist;
 
     bgAudio.addEventListener('ended', () => {
+      savedCurrentTime = 0;
       nextSong();
     });
 
     function nextSong() {
-      loadSong(currentSongIndex + 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
+      savedCurrentTime = 0;
+      loadSong(currentSongIndex + 1, isMusicPlaying, 0);
     }
 
     function prevSong() {
-      loadSong(currentSongIndex - 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
+      savedCurrentTime = 0;
+      loadSong(currentSongIndex - 1, isMusicPlaying, 0);
     }
 
     function updatePlayPauseUI() {
@@ -1876,10 +1890,17 @@
       if (event) event.stopPropagation();
 
       if (isMusicPlaying) {
+        savedCurrentTime = bgAudio.currentTime;
         bgAudio.pause();
         isMusicPlaying = false;
         updatePlayPauseUI();
       } else {
+        if (!bgAudio.src || bgAudio.src === window.location.href) {
+          bgAudio.src = playlist[currentSongIndex].src;
+        }
+        if (savedCurrentTime > 0) {
+          bgAudio.currentTime = savedCurrentTime;
+        }
         bgAudio.play().then(() => {
           isMusicPlaying = true;
           updatePlayPauseUI();
@@ -1918,6 +1939,8 @@
 
     function autoPlayOnce() {
       if (!isMusicPlaying) {
+        bgAudio.src = playlist[currentSongIndex].src;
+        if (savedCurrentTime > 0) bgAudio.currentTime = savedCurrentTime;
         bgAudio.play().then(() => {
           isMusicPlaying = true;
           updatePlayPauseUI();
@@ -1929,11 +1952,13 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // Tự động dừng nhạc khi rời khỏi trang / khóa màn hình (không chạy ngầm / mất thông báo nền)
+    // Khi ẩn trang: Lưu lại thời điểm đang chạy, pause và xóa src để mất thông báo hệ thống
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         if (isMusicPlaying) {
+          savedCurrentTime = bgAudio.currentTime;
           bgAudio.pause();
+          bgAudio.removeAttribute('src');
           isMusicPlaying = false;
           updatePlayPauseUI();
         }
@@ -1972,7 +1997,7 @@
         if (!isBubbleDragging) {
           musicBubble.classList.add('fade-out');
         }
-      }, 3000); // Tự mờ đi sau 3 giây không chạm
+      }, 3000);
     }
 
     function onBubbleDragStart(e) {
