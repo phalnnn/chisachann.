@@ -1,2440 +1,2405 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>phalnnn Profile Bio</title>
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2224%22 font-size=%2224%22>💗</text></svg>">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    /* NỀN NGOÀI: ĐỎ - TRẮNG - ĐEN NEON CHUYỂN ĐỘNG */
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 30px 14px 40px;
-      background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
-      background-size: 400% 400%;
-      animation: redWhiteBlackGradient 10s ease infinite;
-      overflow-x: hidden;
-      color: #ffffff;
-      transition: filter 0.5s ease;
-    }
-
-    @keyframes redWhiteBlackGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      width: 100%;
-      max-width: 540px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
-    .card-border-wrapper {
-      position: relative;
-      width: 100%;
-      border-radius: 30px;
-      padding: 3px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9),
-                  0 0 25px rgba(254, 44, 85, 0.3),
-                  0 0 15px rgba(255, 255, 255, 0.2);
-      transition: box-shadow 0.4s ease;
-    }
-
-    .card-border-wrapper::before {
-      content: "";
-      position: absolute;
-      width: 160%;
-      height: 160%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 5s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-
-    /* KHUNG NỘI DUNG CARD CHÍNH */
-    .card {
-      position: relative;
-      width: 100%;
-      background-color: rgba(10, 10, 14, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 28px;
-      padding: 30px 20px;
-      color: #ffffff;
-      z-index: 1;
-    }
-
-    .profile-card {
-      text-align: center;
-      background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
-                  url('bg-profile.jpg') center/cover no-repeat !important;
-    }
-
-    #serviceContainer {
-      background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
-                  url('bg-profile.jpg') center/cover no-repeat !important;
-    }
-
-    /* AVATAR VIỀN XOAY ĐỎ - TRẮNG */
-    .avatar-wrapper {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 16px;
-    }
-
-    .avatar-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, #fe2c55, #ffffff);
-      z-index: 0;
-      animation: spin 3.5s linear infinite;
-      filter: blur(2px);
-    }
-
-    .avatar {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #0a0a0c;
-      z-index: 1;
-      background-color: #1a1a1a;
-    }
-
-    /* TÊN KÊNH */
-    .channel-name {
-      font-size: 1.65rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      background: linear-gradient(90deg, #fe2c55, #ffffff, #fe2c55);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: nameNeonFlowSlow 8s linear infinite;
-      filter: drop-shadow(0 0 10px rgba(254, 44, 85, 0.55)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.35));
-    }
-
-    @keyframes nameNeonFlowSlow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-
-    .bio {
-      font-size: 0.95rem;
-      color: #dedede;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .custom-heart {
-      display: inline-block;
-      vertical-align: middle;
-      font-style: normal;
-      filter: drop-shadow(0 0 6px rgba(254, 44, 85, 0.75));
-    }
-
-    /* KHUNG DONATE NEON */
-    .donate-neon-wrapper {
-      position: relative;
-      width: 100%;
-      border-radius: 22px;
-      padding: 2.5px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 18px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
-                  0 0 20px rgba(254, 44, 85, 0.4),
-                  0 0 12px rgba(255, 255, 255, 0.25);
-    }
-
-    .donate-neon-wrapper::before {
-      content: "";
-      position: absolute;
-      width: 180%;
-      height: 180%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 4s linear infinite;
-      z-index: 0;
-    }
-
-    .donate-box {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      background: rgba(12, 12, 16, 0.94);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 22px 16px;
-    }
-
-    .donate-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: #fe2c55;
-      text-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .donate-desc {
-      font-size: 0.88rem;
-      color: #cfd3e0;
-      margin-bottom: 16px;
-    }
-
-    .qr-box-donate {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 8px;
-      display: inline-block;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 16px rgba(254, 44, 85, 0.35);
-    }
-
-    .qr-img-donate {
-      width: 220px;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-    }
-
-    .bank-details {
-      margin-top: 14px;
-      font-size: 0.88rem;
-      color: #cfd3e0;
-      line-height: 1.6;
-    }
-
-    .bank-details strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .stk-copy-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 4px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(254, 44, 85, 0.3);
-      margin-top: 4px;
-    }
-
-    .btn-copy-stk {
-      background: rgba(254, 44, 85, 0.2);
-      border: 1px solid #fe2c55;
-      color: #fff;
-      padding: 3px 9px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-copy-stk:hover {
-      background: #fe2c55;
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
-    }
-
-    /* ============================================================
-       THANH MINI PLAYER NEON - TRÔI THEO TRANG VÀ THU GỌN THÀNH BONG BÓNG
-       ============================================================ */
-    .mini-player-dock {
-      position: relative;
-      width: 100%;
-      margin: 14px 0 20px;
-      z-index: 10;
-      transition: all 0.3s ease;
-    }
-
-    .player-border-glow {
-      position: relative;
-      width: 100%;
-      border-radius: 18px;
-      padding: 2px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
-                  0 0 16px rgba(254, 44, 85, 0.35);
-      transition: all 0.35s ease;
-    }
-
-    .player-border-glow::before {
-      content: "";
-      position: absolute;
-      width: 220%;
-      height: 220%;
-      top: -60%;
-      left: -60%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 5s linear infinite;
-      z-index: 0;
-    }
-
-    .player-glass-body {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      background: rgba(12, 12, 16, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 16px;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .btn-toggle-dock {
-      position: absolute;
-      top: -22px;
-      right: 12px;
-      background: rgba(14, 14, 18, 0.95);
-      border: 1px solid rgba(254, 44, 85, 0.5);
-      border-bottom: none;
-      color: #fe2c55;
-      font-size: 0.75rem;
-      padding: 2px 10px;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      z-index: 11;
-      box-shadow: 0 -2px 8px rgba(254, 44, 85, 0.3);
-      transition: all 0.2s ease;
-    }
-
-    .btn-toggle-dock:hover {
-      background: #fe2c55;
-      color: #fff;
-    }
-
-    .vinyl-disk-wrap {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: #000;
-      border: 1.5px solid rgba(254, 44, 85, 0.6);
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .vinyl-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .spinning {
-      animation: spin 4s linear infinite;
-    }
-
-    .song-details {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      gap: 2px;
-    }
-
-    .song-title-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .song-name {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #ffffff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .song-artist {
-      font-size: 0.72rem;
-      color: #9999aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .soundwave-bars {
-      display: inline-flex;
-      align-items: flex-end;
-      gap: 2.5px;
-      height: 12px;
-      flex-shrink: 0;
-    }
-
-    .soundwave-bar {
-      width: 2.5px;
-      height: 3px;
-      background: #fe2c55;
-      border-radius: 2px;
-      transition: height 0.15s ease;
-    }
-
-    .playing-active .soundwave-bar:nth-child(1) { animation: soundWave 0.7s ease-in-out infinite alternate; }
-    .playing-active .soundwave-bar:nth-child(2) { animation: soundWave 0.5s ease-in-out infinite alternate 0.2s; }
-    .playing-active .soundwave-bar:nth-child(3) { animation: soundWave 0.9s ease-in-out infinite alternate 0.1s; }
-    .playing-active .soundwave-bar:nth-child(4) { animation: soundWave 0.6s ease-in-out infinite alternate 0.3s; }
-
-    @keyframes soundWave {
-      0% { height: 3px; }
-      100% { height: 12px; }
-    }
-
-    .player-controls {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .player-ctrl-btn {
-      background: none;
-      border: none;
-      color: #cccccc;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: all 0.2s ease;
-    }
-
-    .player-ctrl-btn:hover {
-      color: #fe2c55;
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .player-ctrl-btn.play-btn {
-      background: linear-gradient(135deg, #fe2c55, #ff0033);
-      color: #ffffff;
-      width: 38px;
-      height: 38px;
-      box-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
-    }
-
-    .player-ctrl-btn.play-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 16px rgba(254, 44, 85, 0.95);
-      background: #fe2c55;
-    }
-
-    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
-    .floating-music-bubble {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: rgba(12, 12, 16, 0.96);
-      border: 2px solid #fe2c55;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
-      z-index: 10001;
-      display: none; /* Ban đầu ẩn đi */
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-      opacity: 1;
-      transition: opacity 0.4s ease, transform 0.2s ease;
-    }
-
-    .floating-music-bubble.fade-out {
-      opacity: 0.25 !important;
-    }
-
-    .floating-music-bubble:active {
-      cursor: grabbing;
-      transform: scale(1.1);
-    }
-
-    .bubble-vinyl-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-
-    /* POPUP ĐIỀU KHIỂN ÂM NHẠC */
-    .music-popup-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 10002;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-
-    .music-popup-modal.active {
-      display: flex;
-    }
-
-    .music-popup-content {
-      position: relative;
-      width: 100%;
-      max-width: 380px;
-      background: rgba(15, 15, 22, 0.95);
-      border: 1.5px solid #fe2c55;
-      border-radius: 24px;
-      padding: 24px 20px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
-      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes modalScaleUp {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .music-popup-close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: #aaa;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .music-popup-close:hover {
-      color: #fe2c55;
-    }
-
-    .popup-vinyl-wrap {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #000;
-      border: 2px solid #fe2c55;
-      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
-      margin: 0 auto 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .popup-vinyl-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .popup-song-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .popup-song-artist {
-      font-size: 0.8rem;
-      color: #9999aa;
-      margin-bottom: 18px;
-    }
-
-    .popup-controls-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .popup-ctrl-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .popup-ctrl-btn:hover {
-      background: rgba(254, 44, 85, 0.3);
-      border-color: #fe2c55;
-      transform: scale(1.08);
-    }
-
-    .popup-ctrl-btn.play-main-btn {
-      background: linear-gradient(135deg, #fe2c55, #ff0033);
-      border-color: #fe2c55;
-      width: 52px;
-      height: 52px;
-      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
-    }
-
-    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
-    .social-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .btn-link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 20px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      width: 100%;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      overflow: hidden;
-    }
-
-    .btn-link::after {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 40%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transform: rotate(25deg);
-      transition: none;
-      pointer-events: none;
-    }
-
-    .btn-link:hover::after {
-      left: 130%;
-      transition: left 0.75s ease-in-out;
-    }
-
-    .btn-link:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-tiktok {
-      background: rgba(254, 44, 85, 0.12);
-      color: #ff3366;
-      border: 1.5px solid #fe2c55;
-      box-shadow: 0 0 12px rgba(254, 44, 85, 0.35), inset 0 0 8px rgba(254, 44, 85, 0.2);
-    }
-    .btn-tiktok:hover {
-      background: rgba(254, 44, 85, 0.25);
-      color: #ffffff;
-      border-color: #ffffff;
-      box-shadow: 0 0 20px rgba(254, 44, 85, 0.8);
-    }
-
-    .btn-discord {
-      background: rgba(255, 255, 255, 0.06);
-      color: #f0f0f5;
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-    }
-    .btn-discord:hover {
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      border-color: #fe2c55;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-    }
-
-    .btn-youtube {
-      background: rgba(255, 0, 0, 0.12);
-      color: #ff4d4d;
-      border: 1.5px solid #ff1a1a;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.35);
-    }
-    .btn-youtube:hover {
-      background: rgba(255, 0, 0, 0.25);
-      color: #ffffff;
-      border-color: #ffffff;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-    }
-
-    .btn-zypage {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
-    }
-    .btn-zypage:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: #fe2c55;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-    }
-    .zypage-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    .btn-toggle-service {
-      background: rgba(18, 18, 24, 0.85);
-      color: #ffffff;
-      border: 1.5px solid #fe2c55;
-      box-shadow: 0 0 14px rgba(254, 44, 85, 0.35);
-    }
-    .btn-toggle-service:hover {
-      background: rgba(28, 28, 36, 0.95);
-      color: #ffffff;
-      border-color: #ffffff;
-      box-shadow: 0 0 22px rgba(254, 44, 85, 0.75);
-    }
-    .btn-toggle-service .arrow-icon {
-      position: absolute;
-      right: 18px;
-      color: #fe2c55;
-      transition: transform 0.35s ease;
-    }
-    .btn-toggle-service.active .arrow-icon {
-      transform: rotate(180deg);
-      color: #ffffff;
-    }
-
-    /* KHUNG DỊCH VỤ CÀY THUÊ */
-    #serviceContainerWrapper {
-      display: none;
-      width: 100%;
-      animation: fadeIn 0.35s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .banner-wrap {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      border: 1px solid rgba(254, 44, 85, 0.3);
-      cursor: zoom-in;
-    }
-    .banner-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-    .banner-wrap:hover img {
-      transform: scale(1.02);
-    }
-    .zoom-hint {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-size: 0.75rem;
-      padding: 5px 9px;
-      border-radius: 6px;
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      pointer-events: none;
-    }
-
-    .section-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fe2c55;
-      margin: 18px 0 10px 2px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid rgba(254, 44, 85, 0.4);
-      padding-bottom: 4px;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.4);
-    }
-
-    .map-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    @media (min-width: 480px) {
-      .map-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .map-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      user-select: none;
-    }
-
-    .map-item:hover {
-      border-color: rgba(254, 44, 85, 0.6);
-      background: rgba(254, 44, 85, 0.1);
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
-    }
-
-    .map-item:has(input:checked) {
-      border-color: #fe2c55 !important;
-      background: rgba(254, 44, 85, 0.18) !important;
-      box-shadow: 0 0 14px rgba(254, 44, 85, 0.55), inset 0 0 6px rgba(254, 44, 85, 0.25) !important;
-    }
-
-    .map-item:has(input:checked) .map-name {
-      color: #ffffff !important;
-      font-weight: 600;
-      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
-    }
-
-    .map-item:has(input:checked) .map-price {
-      color: #fe2c55 !important;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.8);
-    }
-
-    .map-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow: hidden;
-    }
-
-    .map-item input[type="checkbox"] {
-      display: none;
-    }
-
-    .neon-checkbox {
-      width: 18px;
-      height: 18px;
-      border-radius: 5px;
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
-    }
-
-    .neon-checkbox i {
-      font-size: 10px;
-      color: transparent;
-      transition: all 0.2s ease;
-    }
-
-    .map-item:has(input:checked) .neon-checkbox {
-      background: #fe2c55;
-      border-color: #fe2c55;
-      box-shadow: 0 0 8px #fe2c55;
-    }
-
-    .map-item:has(input:checked) .neon-checkbox i {
-      color: #ffffff;
-    }
-
-    .map-name {
-      font-size: 0.88rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #e6e6e6;
-      transition: color 0.2s ease;
-    }
-
-    .map-price {
-      font-weight: 700;
-      color: #ffffff;
-      font-size: 0.88rem;
-      flex-shrink: 0;
-      margin-left: 6px;
-      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-      transition: color 0.2s ease;
-    }
-
-    .total-box {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 14px 16px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 16px;
-      margin: 20px 0 10px;
-      border-left: 5px solid #fe2c55;
-      border: 1px solid rgba(254, 44, 85, 0.35);
-      box-shadow: 0 0 18px rgba(254, 44, 85, 0.2);
-    }
-
-    .total-row-main {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      width: 100%;
-    }
-
-    .total-label {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .total-amount {
-      color: #fe2c55;
-      font-size: 1.45rem;
-      font-weight: 800;
-      text-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
-      letter-spacing: -0.5px;
-    }
-
-    .total-row-sub {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding-top: 8px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-    }
-
-    .count-badge {
-      font-size: 0.8rem;
-      color: #b0b0b8;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-view-selected {
-      background: rgba(254, 44, 85, 0.15);
-      border: 1px solid rgba(254, 44, 85, 0.45);
-      color: #ffffff;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-view-selected:hover {
-      background: #fe2c55;
-      border-color: #fe2c55;
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.7);
-      color: #fff;
-    }
-
-    .btn-clear-all {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ddd;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      align-self: flex-end;
-      margin-bottom: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .btn-clear-all:hover {
-      background: rgba(254, 44, 85, 0.3);
-      border-color: #fe2c55;
-      color: #fff;
-    }
-
-    .qr-section {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px dashed rgba(254, 44, 85, 0.4);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .qr-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-    }
-    .qr-sub {
-      font-size: 0.85rem;
-      color: #b0b3c0;
-      margin-bottom: 12px;
-    }
-    .qr-box-auto {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 10px;
-      display: inline-block;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 15px rgba(254, 44, 85, 0.3);
-    }
-    .qr-img-auto {
-      width: 220px;
-      height: auto;
-      display: block;
-    }
-    .qr-memo-preview {
-      font-size: 0.85rem;
-      color: #ffffff;
-      margin-top: 6px;
-      font-weight: 600;
-      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
-    }
-    .qr-notice {
-      margin-top: 12px;
-      padding: 10px 14px;
-      background: rgba(254, 44, 85, 0.15);
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      border-radius: 10px;
-      font-size: 0.88rem;
-      color: #ffb8c6;
-      line-height: 1.4;
-      font-weight: 600;
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 6px;
-    }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .password-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .password-wrap input {
-      padding-right: 42px;
-    }
-    .toggle-pw-btn {
-      position: absolute;
-      right: 12px;
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, 0.6);
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: #fe2c55;
-      box-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #fe2c55, #111111);
-      border: 1.5px solid #fe2c55;
-      color: #ffffff;
-      border-radius: 14px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 16px rgba(254, 44, 85, 0.5);
-      margin-top: 16px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-    }
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
-    }
-
-    /* MODAL CHUNG */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .image-modal-content {
-      max-width: 95vw;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 10px;
-      border: 1px solid rgba(254, 44, 85, 0.4);
-      box-shadow: 0 0 30px rgba(0,0,0,0.9);
-    }
-    .image-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      color: #fff;
-      font-size: 32px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .image-modal-close:hover {
-      color: #fe2c55;
-    }
-
-    .selected-modal-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 28px;
-      padding: 3px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
-                  0 0 25px rgba(254, 44, 85, 0.4);
-      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes modalScaleUp {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .selected-modal-wrapper::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 4s linear infinite;
-      z-index: 0;
-    }
-
-    .selected-modal-box {
-      position: relative;
-      width: 100%;
-      background: linear-gradient(rgba(10, 10, 14, 0.92), rgba(10, 10, 14, 0.97)), url('bg-profile.jpg') center/cover no-repeat;
-      background-color: rgba(10, 10, 14, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 25px;
-      padding: 24px 20px;
-      text-align: center;
-      color: #ffffff;
-      z-index: 1;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .selected-modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 4px;
-      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
-    }
-
-    .selected-modal-desc {
-      font-size: 0.8rem;
-      color: #aaa;
-      margin-bottom: 14px;
-    }
-
-    .selected-items-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 48vh;
-      overflow-y: auto;
-      padding-right: 4px;
-      margin-bottom: 14px;
-      text-align: left;
-    }
-
-    .selected-items-list::-webkit-scrollbar {
-      width: 5px;
-    }
-    .selected-items-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 4px;
-    }
-    .selected-items-list::-webkit-scrollbar-thumb {
-      background: rgba(254, 44, 85, 0.5);
-      border-radius: 4px;
-    }
-
-    .selected-single-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 9px 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(254, 44, 85, 0.25);
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-
-    .selected-single-item .item-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
-    }
-
-    .selected-single-item .item-title {
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .selected-single-item .item-cost {
-      color: #fe2c55;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-left: 8px;
-    }
-
-    .btn-remove-item {
-      background: none;
-      border: none;
-      color: #777;
-      cursor: pointer;
-      font-size: 0.85rem;
-      margin-left: 8px;
-      transition: color 0.2s;
-    }
-
-    .btn-remove-item:hover {
-      color: #fe2c55;
-    }
-
-    .selected-summary-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background: rgba(254, 44, 85, 0.12);
-      border: 1px solid rgba(254, 44, 85, 0.35);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      font-size: 0.9rem;
-    }
-
-    .btn-close-selected {
-      width: 100%;
-      padding: 11px 0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ccc;
-      font-weight: 600;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .btn-close-selected:hover {
-      background: rgba(255, 255, 255, 0.14);
-      color: #fff;
-    }
-
-    /* ============================================================
-       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ
-       ============================================================ */
-    .floating-mascot {
-      position: fixed;
-      width: 80px;
-      height: 80px;
-      z-index: 10000;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-drag: none;
-      touch-action: none;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 10px rgba(254, 44, 85, 0.5));
-    }
-
-    .floating-mascot:active {
-      cursor: grabbing;
-    }
-
-    .mascot-img-wrap {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.25s ease;
-    }
-
-    .mascot-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      display: block;
-    }
-
-    .mascot-bubble {
-      position: absolute;
-      top: -32px;
-      left: 50%;
-      transform: translateX(-50%) !important;
-      background: rgba(14, 14, 18, 0.95);
-      border: 1px solid #fe2c55;
-      color: #ffffff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 12px;
-      white-space: nowrap;
-      pointer-events: none;
-      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      direction: ltr !important;
-      unicode-bidi: normal !important;
-    }
-
-    .mascot-bubble.show {
-      opacity: 1;
-    }
-
-    .mascot-trail {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(254, 44, 85, 0.65) 0%, rgba(254, 44, 85, 0.2) 60%, transparent 100%);
-      filter: blur(5px);
-      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
-      animation: fadeTrail 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-
-    @keyframes fadeTrail {
-      0% {
-        opacity: 0.75;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.25);
-      }
-    }
-
-    .footer {
-      margin-top: 18px;
-      font-size: 0.78rem;
-      color: #777777;
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>phalnnn Profile Bio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2224%22 font-size=%2224%22>💗</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* NỀN NGOÀI: ĐỎ - TRẮNG - ĐEN NEON CHUYỂN ĐỘNG */
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 14px 40px;
+      background: linear-gradient(-45deg, #050507, #fe2c55, #121216, #ffffff, #000000);
+      background-size: 400% 400%;
+      animation: redWhiteBlackGradient 10s ease infinite;
+      overflow-x: hidden;
+      color: #ffffff;
+      transition: filter 0.5s ease;
+    }
+
+    @keyframes redWhiteBlackGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
+    .card-border-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 30px;
+      padding: 3px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9),
+                  0 0 25px rgba(254, 44, 85, 0.3),
+                  0 0 15px rgba(255, 255, 255, 0.2);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .card-border-wrapper::before {
+      content: "";
+      position: absolute;
+      width: 160%;
+      height: 160%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 5s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* KHUNG NỘI DUNG CARD CHÍNH */
+    .card {
+      position: relative;
+      width: 100%;
+      background-color: rgba(10, 10, 14, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 30px 20px;
+      color: #ffffff;
+      z-index: 1;
+    }
+
+    .profile-card {
+      text-align: center;
+      background: linear-gradient(rgba(10, 10, 14, 0.72), rgba(10, 10, 14, 0.82)), 
+                  url('bg-profile.jpg') center/cover no-repeat !important;
+    }
+
+    #serviceContainer {
+      background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
+                  url('bg-profile.jpg') center/cover no-repeat !important;
+    }
+
+    /* AVATAR VIỀN XOAY ĐỎ - TRẮNG */
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 16px;
+    }
+
+    .avatar-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #fe2c55, #ffffff);
+      z-index: 0;
+      animation: spin 3.5s linear infinite;
+      filter: blur(2px);
+    }
+
+    .avatar {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0a0a0c;
+      z-index: 1;
+      background-color: #1a1a1a;
+    }
+
+    /* TÊN KÊNH */
+    .channel-name {
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(90deg, #fe2c55, #ffffff, #fe2c55);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: nameNeonFlowSlow 8s linear infinite;
+      filter: drop-shadow(0 0 10px rgba(254, 44, 85, 0.55)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.35));
+    }
+
+    @keyframes nameNeonFlowSlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .bio {
+      font-size: 0.95rem;
+      color: #dedede;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .custom-heart {
+      display: inline-block;
+      vertical-align: middle;
+      font-style: normal;
+      filter: drop-shadow(0 0 6px rgba(254, 44, 85, 0.75));
+    }
+
+    /* KHUNG DONATE NEON */
+    .donate-neon-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 22px;
+      padding: 2.5px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                  0 0 20px rgba(254, 44, 85, 0.4),
+                  0 0 12px rgba(255, 255, 255, 0.25);
+    }
+
+    .donate-neon-wrapper::before {
+      content: "";
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+
+    .donate-box {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      background: rgba(12, 12, 16, 0.94);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 22px 16px;
+    }
+
+    .donate-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fe2c55;
+      text-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .donate-desc {
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      margin-bottom: 16px;
+    }
+
+    .qr-box-donate {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 8px;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 16px rgba(254, 44, 85, 0.35);
+    }
+
+    .qr-img-donate {
+      width: 220px;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .bank-details {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: #cfd3e0;
+      line-height: 1.6;
+    }
+
+    .bank-details strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .stk-copy-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(254, 44, 85, 0.3);
+      margin-top: 4px;
+    }
+
+    .btn-copy-stk {
+      background: rgba(254, 44, 85, 0.2);
+      border: 1px solid #fe2c55;
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-stk:hover {
+      background: #fe2c55;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
+    }
+
+    /* ============================================================
+       THANH MINI PLAYER NEON - TRÔI THEO TRANG VÀ THU GỌN THÀNH BONG BÓNG
+       ============================================================ */
+    .mini-player-dock {
+      position: relative;
+      width: 100%;
+      margin: 14px 0 20px;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .player-border-glow {
+      position: relative;
+      width: 100%;
+      border-radius: 18px;
+      padding: 2px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
+                  0 0 16px rgba(254, 44, 85, 0.35);
+      transition: all 0.35s ease;
+    }
+
+    .player-border-glow::before {
+      content: "";
+      position: absolute;
+      width: 220%;
+      height: 220%;
+      top: -60%;
+      left: -60%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 5s linear infinite;
+      z-index: 0;
+    }
+
+    .player-glass-body {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      background: rgba(12, 12, 16, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 16px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .btn-toggle-dock {
+      position: absolute;
+      top: -22px;
+      right: 12px;
+      background: rgba(14, 14, 18, 0.95);
+      border: 1px solid rgba(254, 44, 85, 0.5);
+      border-bottom: none;
+      color: #fe2c55;
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      z-index: 11;
+      box-shadow: 0 -2px 8px rgba(254, 44, 85, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-toggle-dock:hover {
+      background: #fe2c55;
+      color: #fff;
+    }
+
+    .vinyl-disk-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #000;
+      border: 1.5px solid rgba(254, 44, 85, 0.6);
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .vinyl-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .spinning {
+      animation: spin 4s linear infinite;
+    }
+
+    .song-details {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      gap: 2px;
+    }
+
+    .song-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .song-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .song-artist {
+      font-size: 0.72rem;
+      color: #9999aa;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .soundwave-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .soundwave-bar {
+      width: 2.5px;
+      height: 3px;
+      background: #fe2c55;
+      border-radius: 2px;
+      transition: height 0.15s ease;
+    }
+
+    .playing-active .soundwave-bar:nth-child(1) { animation: soundWave 0.7s ease-in-out infinite alternate; }
+    .playing-active .soundwave-bar:nth-child(2) { animation: soundWave 0.5s ease-in-out infinite alternate 0.2s; }
+    .playing-active .soundwave-bar:nth-child(3) { animation: soundWave 0.9s ease-in-out infinite alternate 0.1s; }
+    .playing-active .soundwave-bar:nth-child(4) { animation: soundWave 0.6s ease-in-out infinite alternate 0.3s; }
+
+    @keyframes soundWave {
+      0% { height: 3px; }
+      100% { height: 12px; }
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .player-ctrl-btn {
+      background: none;
+      border: none;
+      color: #cccccc;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .player-ctrl-btn:hover {
+      color: #fe2c55;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .player-ctrl-btn.play-btn {
+      background: linear-gradient(135deg, #fe2c55, #ff0033);
+      color: #ffffff;
+      width: 38px;
+      height: 38px;
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
+    }
+
+    .player-ctrl-btn.play-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 16px rgba(254, 44, 85, 0.95);
+      background: #fe2c55;
+    }
+
+    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
+    .floating-music-bubble {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(12, 12, 16, 0.96);
+      border: 2px solid #fe2c55;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      opacity: 1;
+      transition: opacity 0.4s ease, transform 0.2s ease;
+    }
+
+    .floating-music-bubble.fade-out {
+      opacity: 0.25 !important;
+    }
+
+    .floating-music-bubble:active {
+      cursor: grabbing;
+      transform: scale(1.1);
+    }
+
+    .bubble-vinyl-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* POPUP ĐIỀU KHIỂN ÂM NHẠC */
+    .music-popup-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10002;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .music-popup-modal.active {
+      display: flex;
+    }
+
+    .music-popup-content {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 15, 22, 0.95);
+      border: 1.5px solid #fe2c55;
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .music-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .music-popup-close:hover {
+      color: #fe2c55;
+    }
+
+    .popup-vinyl-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #000;
+      border: 2px solid #fe2c55;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
+      margin: 0 auto 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-vinyl-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .popup-song-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-song-artist {
+      font-size: 0.8rem;
+      color: #9999aa;
+      margin-bottom: 18px;
+    }
+
+    .popup-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .popup-ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .popup-ctrl-btn:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      transform: scale(1.08);
+    }
+
+    .popup-ctrl-btn.play-main-btn {
+      background: linear-gradient(135deg, #fe2c55, #ff0033);
+      border-color: #fe2c55;
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
+    }
+
+    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .btn-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      width: 100%;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .btn-link::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(25deg);
+      transition: none;
+      pointer-events: none;
+    }
+
+    .btn-link:hover::after {
+      left: 130%;
+      transition: left 0.75s ease-in-out;
+    }
+
+    .btn-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-tiktok {
+      background: rgba(254, 44, 85, 0.12);
+      color: #ff3366;
+      border: 1.5px solid #fe2c55;
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.35), inset 0 0 8px rgba(254, 44, 85, 0.2);
+    }
+    .btn-tiktok:hover {
+      background: rgba(254, 44, 85, 0.25);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 20px rgba(254, 44, 85, 0.8);
+    }
+
+    .btn-discord {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f0f0f5;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+    .btn-discord:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border-color: #fe2c55;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+
+    .btn-youtube {
+      background: rgba(255, 0, 0, 0.12);
+      color: #ff4d4d;
+      border: 1.5px solid #ff1a1a;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.35);
+    }
+    .btn-youtube:hover {
+      background: rgba(255, 0, 0, 0.25);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    }
+
+    .btn-zypage {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+    }
+    .btn-zypage:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #fe2c55;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    }
+    .zypage-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .btn-toggle-service {
+      background: rgba(18, 18, 24, 0.85);
+      color: #ffffff;
+      border: 1.5px solid #fe2c55;
+      box-shadow: 0 0 14px rgba(254, 44, 85, 0.35);
+    }
+    .btn-toggle-service:hover {
+      background: rgba(28, 28, 36, 0.95);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 22px rgba(254, 44, 85, 0.75);
+    }
+    .btn-toggle-service .arrow-icon {
+      position: absolute;
+      right: 18px;
+      color: #fe2c55;
+      transition: transform 0.35s ease;
+    }
+    .btn-toggle-service.active .arrow-icon {
+      transform: rotate(180deg);
+      color: #ffffff;
+    }
+
+    /* KHUNG DỊCH VỤ CÀY THUÊ */
+    #serviceContainerWrapper {
+      display: none;
+      width: 100%;
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .banner-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid rgba(254, 44, 85, 0.3);
+      cursor: zoom-in;
+    }
+    .banner-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .banner-wrap:hover img {
+      transform: scale(1.02);
+    }
+    .zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 5px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      pointer-events: none;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fe2c55;
+      margin: 18px 0 10px 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(254, 44, 85, 0.4);
+      padding-bottom: 4px;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.4);
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 480px) {
+      .map-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .map-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .map-item:hover {
+      border-color: rgba(254, 44, 85, 0.6);
+      background: rgba(254, 44, 85, 0.1);
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.25);
+    }
+
+    .map-item:has(input:checked) {
+      border-color: #fe2c55 !important;
+      background: rgba(254, 44, 85, 0.18) !important;
+      box-shadow: 0 0 14px rgba(254, 44, 85, 0.55), inset 0 0 6px rgba(254, 44, 85, 0.25) !important;
+    }
+
+    .map-item:has(input:checked) .map-name {
+      color: #ffffff !important;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
+    }
+
+    .map-item:has(input:checked) .map-price {
+      color: #fe2c55 !important;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.8);
+    }
+
+    .map-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .map-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .neon-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .neon-checkbox i {
+      font-size: 10px;
+      color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .map-item:has(input:checked) .neon-checkbox {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      box-shadow: 0 0 8px #fe2c55;
+    }
+
+    .map-item:has(input:checked) .neon-checkbox i {
+      color: #ffffff;
+    }
+
+    .map-name {
+      font-size: 0.88rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #e6e6e6;
+      transition: color 0.2s ease;
+    }
+
+    .map-price {
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 0.88rem;
+      flex-shrink: 0;
+      margin-left: 6px;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+      transition: color 0.2s ease;
+    }
+
+    .total-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+      margin: 20px 0 10px;
+      border-left: 5px solid #fe2c55;
+      border: 1px solid rgba(254, 44, 85, 0.35);
+      box-shadow: 0 0 18px rgba(254, 44, 85, 0.2);
+    }
+
+    .total-row-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      width: 100%;
+    }
+
+    .total-label {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .total-amount {
+      color: #fe2c55;
+      font-size: 1.45rem;
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(254, 44, 85, 0.7);
+      letter-spacing: -0.5px;
+    }
+
+    .total-row-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+
+    .count-badge {
+      font-size: 0.8rem;
+      color: #b0b0b8;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-view-selected {
+      background: rgba(254, 44, 85, 0.15);
+      border: 1px solid rgba(254, 44, 85, 0.45);
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-selected:hover {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.7);
+      color: #fff;
+    }
+
+    .btn-clear-all {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ddd;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-end;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-clear-all:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      color: #fff;
+    }
+
+    .qr-section {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px dashed rgba(254, 44, 85, 0.4);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .qr-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    }
+    .qr-sub {
+      font-size: 0.85rem;
+      color: #b0b3c0;
+      margin-bottom: 12px;
+    }
+    .qr-box-auto {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px;
+      display: inline-block;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 15px rgba(254, 44, 85, 0.3);
+    }
+    .qr-img-auto {
+      width: 220px;
+      height: auto;
+      display: block;
+    }
+    .qr-memo-preview {
+      font-size: 0.85rem;
+      color: #ffffff;
+      margin-top: 6px;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(254, 44, 85, 0.6);
+    }
+    .qr-notice {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(254, 44, 85, 0.15);
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: #ffb8c6;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-wrap input {
+      padding-right: 42px;
+    }
+    .toggle-pw-btn {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #fe2c55;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #fe2c55, #111111);
+      border: 1.5px solid #fe2c55;
+      color: #ffffff;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 16px rgba(254, 44, 85, 0.5);
+      margin-top: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
+    }
+
+    /* MODAL CHUNG */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .image-modal-content {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      box-shadow: 0 0 30px rgba(0,0,0,0.9);
+    }
+    .image-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      color: #fff;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .image-modal-close:hover {
+      color: #fe2c55;
+    }
+
+    .selected-modal-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 28px;
+      padding: 3px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
+                  0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .selected-modal-wrapper::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+
+    .selected-modal-box {
+      position: relative;
+      width: 100%;
+      background: linear-gradient(rgba(10, 10, 14, 0.92), rgba(10, 10, 14, 0.97)), url('bg-profile.jpg') center/cover no-repeat;
+      background-color: rgba(10, 10, 14, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #ffffff;
+      z-index: 1;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .selected-modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.5);
+    }
+
+    .selected-modal-desc {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 14px;
+    }
+
+    .selected-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 48vh;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .selected-items-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .selected-items-list::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+    }
+    .selected-items-list::-webkit-scrollbar-thumb {
+      background: rgba(254, 44, 85, 0.5);
+      border-radius: 4px;
+    }
+
+    .selected-single-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(254, 44, 85, 0.25);
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .selected-single-item .item-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .selected-single-item .item-title {
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .selected-single-item .item-cost {
+      color: #fe2c55;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .btn-remove-item {
+      background: none;
+      border: none;
+      color: #777;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-left: 8px;
+      transition: color 0.2s;
+    }
+
+    .btn-remove-item:hover {
+      color: #fe2c55;
+    }
+
+    .selected-summary-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(254, 44, 85, 0.12);
+      border: 1px solid rgba(254, 44, 85, 0.35);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .btn-close-selected {
+      width: 100%;
+      padding: 11px 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ccc;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-close-selected:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+
+    /* ============================================================
+       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ
+       ============================================================ */
+    .floating-mascot {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-drag: none;
+      touch-action: none;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 10px rgba(254, 44, 85, 0.5));
+    }
+
+    .floating-mascot:active {
+      cursor: grabbing;
+    }
+
+    .mascot-img-wrap {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.25s ease;
+    }
+
+    .mascot-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      display: block;
+    }
+
+    .mascot-bubble {
+      position: absolute;
+      top: -32px;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      background: rgba(14, 14, 18, 0.95);
+      border: 1px solid #fe2c55;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      direction: ltr !important;
+      unicode-bidi: normal !important;
+    }
+
+    .mascot-bubble.show {
+      opacity: 1;
+    }
+
+    .mascot-trail {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 44, 85, 0.65) 0%, rgba(254, 44, 85, 0.2) 60%, transparent 100%);
+      filter: blur(5px);
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
+      animation: fadeTrail 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes fadeTrail {
+      0% {
+        opacity: 0.75;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.25);
+      }
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: #777777;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-
-    <!-- KHỐI 1: PROFILE & DONATE NEON TRÊN ĐẦU -->
-    <div class="card-border-wrapper">
-      <div class="card profile-card">
-        <div class="avatar-wrapper">
-          <img src="avatar.jpg" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-        </div>
-
-        <h1 class="channel-name">@phalnnn</h1>
-        <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
-
-        <!-- KHUNG DONATE VIỀN XOAY NEON NỔI BẬT NẰM TRÊN ĐẦU -->
-        <div class="donate-neon-wrapper">
-          <div class="donate-box">
-            <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
-            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
-            <div class="qr-box-donate">
-              <img src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
-            </div>
-            <div class="bank-details">
-              <div>Ngân hàng: <strong>Techcombank</strong></div>
-              <div class="stk-copy-box">
-                Số TK: <strong id="stkNumber">1907 4758 6200 12</strong>
-                <button type="button" class="btn-copy-stk" onclick="copySTK(this)">
-                  <i class="fa-regular fa-copy"></i> Copy
-                </button>
-              </div>
-              <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- THANH MINI PLAYER NEON DI CHUYỂN THEO THANH CUỘN -->
-        <div class="mini-player-dock" id="miniPlayerDock">
-          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Thu gọn thành bong bóng nhạc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </button>
-          <div class="player-border-glow">
-            <div class="player-glass-body">
-              <div class="vinyl-disk-wrap" id="vinylDisk">
-                <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-              </div>
-
-              <div class="song-details">
-                <div class="song-title-row">
-                  <span class="song-name" id="currentSongTitle">Styx Helix</span>
-                  <div class="soundwave-bars" id="soundwaveContainer">
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                  </div>
-                </div>
-                <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
-              </div>
-
-              <div class="player-controls">
-                <!-- NÚT MUTE / UNMUTE -->
-                <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
-                  <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                </button>
-                
-                <!-- BÀI TRƯỚC -->
-                <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
-                </button>
-
-                <!-- NÚT PLAY / PAUSE -->
-                <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
-                  <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                </button>
-
-                <!-- BÀI TIẾP -->
-                <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DANH SÁCH NÚT MẠNG XÃ HỘI -->
-        <div class="social-links">
-          <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
-            <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
-          </a>
-
-          <a href="https://discord.gg/tCgPMRaqek" target="_blank" rel="noopener noreferrer" class="btn-link btn-discord">
-            <i class="fa-brands fa-discord"></i> Tham Gia Server Discord
-          </a>
-
-          <a href="https://youtube.com/@phalnnn?si=4p5A05Y50ROdZH04" target="_blank" rel="noopener noreferrer" class="btn-link btn-youtube">
-            <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tui
-          </a>
-
-          <a href="https://zypage.com/phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-zypage">
-            <svg class="zypage-icon" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
-            </svg>
-            Donate Cho Chía Bel (ZyPage)
-          </a>
-
-          <!-- NÚT BẬT/TẮT DỊCH VỤ CÀY THUÊ -->
-          <button type="button" class="btn-link btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
-            <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
-            <i class="fa-solid fa-chevron-down arrow-icon"></i>
-          </button>
-        </div>
-
-        <div class="footer">
-          © @phalnnn • All rights reserved
-        </div>
-      </div>
-    </div>
-
-    <!-- KHỐI 2: BẢNG GIÁ & ĐẶT ĐƠN CÀY THUÊ -->
-    <div id="serviceContainerWrapper">
-      <div class="card-border-wrapper">
-        <div class="card" id="serviceContainer">
-          <div class="banner-wrap" onclick="openImageModal()">
-            <img id="bannerImg" src="banggia.jpg" alt="Bảng giá dịch vụ" onerror="this.src='https://placehold.co/1000x560/1a1c24/ffffff?text=Vui+long+upload+anh+banggia.jpg'">
-            <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm để phóng to</div>
-          </div>
-
-          <!-- NÚT HỦY CHỌN TẤT CẢ -->
-          <div style="text-align: right;">
-            <button type="button" class="btn-clear-all" onclick="clearAllSelections()">
-              <i class="fa-solid fa-rotate-left"></i> Xóa chọn tất cả
-            </button>
-          </div>
-
-          <!-- 1. JINZHOU -->
-          <div class="section-title"><i class="fa-solid fa-compass"></i> JINZHOU</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Gorges Of Spirits" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Gorges Of Spirits</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Jinzhou" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Jinzhou</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Central Plains" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Central Plains</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Desorock Highlands" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Desorock Highlands</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Port City Of Guixu" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Port City Of Guixu</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Dim Forest" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Dim Forest</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Wumming Bay" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Wumming Bay</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Norfall Barrens" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Norfall Barrens</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whining Aix's Mire" data-price="75000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whining Aix's Mire</span></div><span class="map-price">75k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tiger's Maw Mine" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tiger's Maw Mine</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="MT. Firmament" data-price="80000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">MT. Firmament</span></div><span class="map-price">80k</span></label>
-          </div>
-
-          <!-- 2. THE BLACK SHORES -->
-          <div class="section-title"><i class="fa-solid fa-water"></i> THE BLACK SHORES</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Black Shores" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Black Shores</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tethys Deep" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tethys Deep</span></div><span class="map-price">60k</span></label>
-          </div>
-
-          <!-- 3. RINASCITA -->
-          <div class="section-title"><i class="fa-solid fa-feather"></i> RINASCITA</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Ragunna City" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Ragunna City</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Averado Vault" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Averado Vault</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Penitent's End" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Penitent's End</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whisperwind Haven" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whisperwind Haven</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Nimbus Sanctum" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Nimbus Sanctum</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fagaceae Peninsula" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fagaceae Peninsula</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thessaleo Fells" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thessaleo Fells</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Riccioli Islands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Riccioli Islands</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Vault Underground" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Vault Underground</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Avinoleum" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Avinoleum</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Beohr Waters" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Beohr Waters</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Septimont" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Septimont</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fabricatorium of Deep" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fabricatorium of Deep</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Sanguis Plateaus" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Sanguis Plateaus</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Hallowed Reach" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Hallowed Reach</span></div><span class="map-price">50k</span></label>
-          </div>
-
-          <!-- 4. ROYA FROSTLANDS -->
-          <div class="section-title"><i class="fa-regular fa-snowflake"></i> ROYA FROSTLANDS</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Frostlands Transit Port" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Frostlands Transit Port</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mount Gjallar" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mount Gjallar</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starblind Crashsite" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starblind Crashsite</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Upphaf Forest Ruins" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Upphaf Forest Ruins</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tidelost Forest" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tidelost Forest</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Etching Plains" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Etching Plains</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Startorch Academy" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Startorch Academy</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starward Riseway" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starward Riseway</span></div><span class="map-price">15k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fangspire Chasm" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fangspire Chasm</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Bjartr Woods" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Bjartr Woods</span></div><span class="map-price">40k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Stagnant Run" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Stagnant Run</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Rebirth Uplands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Rebirth Uplands</span></div><span class="map-price">50k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mawburrow Desert" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mawburrow Desert</span></div><span class="map-price">20k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Giant's Gaze" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Giant's Gaze</span></div><span class="map-price">40k</span></label>
-          </div>
-
-          <!-- 5. MENGZHOU & DAILY -->
-          <div class="section-title"><i class="fa-solid fa-mountain-sun"></i> MENGZHOU & DAILY</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Xuanfang Hold" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Xuanfang Hold</span></div><span class="map-price">60k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Western Fang Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Western Fang Peaks</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Southern Yuan Hills" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Southern Yuan Hills</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Eastern Xuan Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Eastern Xuan Peaks</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Ngày" data-price="5000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Ngày</span></div><span class="map-price">5k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tuần" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tuần</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
-          </div>
-
-          <!-- 6. DỊCH VỤ CONTENT ENDGAME -->
-          <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
-          </div>
-
-          <!-- THANH TỔNG TIỀN VÀ BỘ ĐẾM SỐ DỊCH VỤ CÓ NÚT XEM CHI TIẾT -->
-          <div class="total-box">
-            <div class="total-row-main">
-              <span class="total-label">Tổng thanh toán:</span>
-              <span class="total-amount" id="totalDisplay">0đ</span>
-            </div>
-            <div class="total-row-sub">
-              <span class="count-badge" id="selectedCountDisplay">
-                <i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> 0 mục đã chọn
-              </span>
-              <button type="button" class="btn-view-selected" onclick="openSelectedModal()">
-                Xem chi tiết <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- FORM ĐIỀN THÔNG TIN CỦA KHÁCH -->
-          <div class="form-group" style="margin-top: 18px;">
-            <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
-            <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off" />
-          </div>
-
-          <div class="form-group">
-            <label for="gameAccount"><i class="fa-solid fa-user"></i> Tài khoản game (Kuro / Mail / Login):</label>
-            <input type="text" id="gameAccount" placeholder="Nhập tài khoản game để cày" autocomplete="off" />
-          </div>
-
-          <div class="form-group">
-            <label for="gamePassword"><i class="fa-solid fa-lock"></i> Mật khẩu game:</label>
-            <div class="password-wrap">
-              <input type="password" id="gamePassword" placeholder="Nhập mật khẩu game" autocomplete="off" />
-              <button type="button" class="toggle-pw-btn" onclick="togglePasswordVisibility()">
-                <i class="fa-solid fa-eye" id="pwIcon"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Yêu cầu đặc biệt:</label>
-            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, cày holo con nào ghi rõ tại đây..."></textarea>
-          </div>
-
-          <!-- KHUNG VIETQR TECHCOMBANK TỰ ĐỘNG CẬP NHẬT THEO ĐƠN -->
-          <div class="qr-section">
-            <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Quét Mã Techcombank VietQR</div>
-            <p class="qr-sub">Mã QR tự động cập nhật số tiền & lời nhắn là tên TikTok của bạn</p>
-            <div class="qr-box-auto">
-              <img id="autoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
-            </div>
-            <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
-
-            <div class="qr-notice">
-              ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào "GỬI YÊU CẦU QUA TIKTOK" bên dưới và dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn qua phần tin nhắn cho tui (nhớ chụp cả bill thanh toán gửi cho tui) <span class="custom-heart">💗</span>
-            </div>
-          </div>
-
-          <button class="btn-submit" onclick="sendOrderToTikTok()">
-            <i class="fa-brands fa-tiktok"></i> GỬI YÊU CẦU QUA TIKTOK
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- MODAL XEM CHI TIẾT CÁC MỤC ĐÃ CHỌN -->
-  <div id="selectedModal" class="modal-overlay" onclick="closeSelectedModal(event)">
-    <div class="selected-modal-wrapper" onclick="event.stopPropagation()">
-      <div class="selected-modal-box">
-        <h3 class="selected-modal-title"><i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> Các mục bạn đã chọn</h3>
-        <p class="selected-modal-desc">Kiểm tra lại danh sách trước khi gửi đơn nhé</p>
-
-        <div class="selected-items-list" id="selectedItemsList"></div>
-
-        <div class="selected-summary-box">
-          <span>Tổng số tiền:</span>
-          <strong id="modalTotalSum" style="color: #fe2c55; font-size: 1.05rem;">0đ</strong>
-        </div>
-
-        <button type="button" class="btn-close-selected" onclick="closeSelectedModal()">Đóng lại</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL BẢNG GIÁ PHÓNG TO -->
-  <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
-    <span class="image-modal-close">&times;</span>
-    <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
-  </div>
-
-  <!-- ============================================================
-       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (KÉO THẢ & BẤM MỞ MODAL)
-       ============================================================ -->
-  <div class="floating-music-bubble" id="musicBubble">
-    <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
-  </div>
-
-  <!-- POPUP ĐIỀU KHIỂN ÂM NHẠC -->
-  <div id="musicModal" class="music-popup-modal" onclick="closeMusicModal()">
-    <div class="music-popup-content" onclick="event.stopPropagation()">
-      <button type="button" class="music-popup-close" onclick="closeMusicModal()">&times;</button>
-      
-      <div class="popup-vinyl-wrap" id="popupVinyl">
-        <img src="avatar.jpg" class="popup-vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
-      </div>
-
-      <div class="popup-song-title" id="popupSongTitle">Styx Helix</div>
-      <div class="popup-song-artist" id="popupSongArtist">Re:Zero OST</div>
-
-      <div class="popup-controls-row">
-        <!-- Nút Tắt/Bật tiếng -->
-        <button type="button" class="popup-ctrl-btn" onclick="toggleMute(event)" title="Bật/Tắt tiếng">
-          <svg id="popupMuteSvg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          </svg>
-        </button>
-
-        <!-- Bài trước -->
-        <button type="button" class="popup-ctrl-btn" onclick="prevSong()" title="Bài trước">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
-        </button>
-
-        <!-- Play / Pause -->
-        <button type="button" class="popup-ctrl-btn play-main-btn" onclick="toggleAudio(event)" title="Phát/Dừng">
-          <svg id="popupPlayPauseSvg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        </button>
-
-        <!-- Bài tiếp -->
-        <button type="button" class="popup-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
-       ============================================================ -->
-  <div class="floating-mascot" id="mascot">
-    <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
-    <div class="mascot-img-wrap" id="mascotImgWrap">
-      <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
-    </div>
-  </div>
-
-  <!-- THẺ PHÁT NHẠC NỀN -->
-  <audio id="bgAudio" preload="auto"></audio>
-
-  <script>
-    // ==========================================
-    // CẤU HÌNH TÀI KHOẢN TECHCOMBANK (VIETQR):
-    // ==========================================
-    const myBankConfig = {
-      bankId: "TCB",
-      accountNo: "19074758620012",
-      accountName: "PHAM NGUYEN BAO LAN"
-    };
-
-    function copySTK(btn) {
-      const stkClean = "19074758620012";
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(stkClean);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = stkClean;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      const orig = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép!';
-      setTimeout(() => { btn.innerHTML = orig; }, 2000);
-    }
-
-    // ==========================================
-    // DANH SÁCH BÀI HÁT (PLAYLIST NỀN 6 BÀI)
-    // ==========================================
-    const playlist = [
-      { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
-      { title: "An Unfinished Song", artist: "Wuthering Waves OST", src: "music2.mp3" },
-      { title: "All Silent Souls Can Sing", artist: "Wuthering Waves OST", src: "music3.mp3" },
-      { title: "Dancing Through Fantasies", artist: "Wuthering Waves OST", src: "music4.mp3" },
-      { title: "With Glory I Shall Fall", artist: "Wuthering Waves OST", src: "music5.mp3" },
-      { title: "Against the Tide", artist: "Wuthering Waves OST", src: "music6.mp3" }
-    ];
-
-    let currentSongIndex = 0;
-    const bgAudio = document.getElementById('bgAudio');
-    const playPauseSvg = document.getElementById('playPauseSvg');
-    const popupPlayPauseSvg = document.getElementById('popupPlayPauseSvg');
-    const muteSvg = document.getElementById('muteSvg');
-    const popupMuteSvg = document.getElementById('popupMuteSvg');
-    const vinylDisk = document.getElementById('vinylDisk');
-    const bubbleVinyl = document.getElementById('bubbleVinyl');
-    const soundwaveContainer = document.getElementById('soundwaveContainer');
-    const songTitleElem = document.getElementById('currentSongTitle');
-    const songArtistElem = document.getElementById('currentSongArtist');
-    const popupSongTitle = document.getElementById('popupSongTitle');
-    const popupSongArtist = document.getElementById('popupSongArtist');
-
-    let isMusicPlaying = false;
-    let isMuted = false;
-
-    function loadSong(index) {
-      currentSongIndex = (index + playlist.length) % playlist.length;
-      const song = playlist[currentSongIndex];
-      bgAudio.src = song.src;
-      songTitleElem.textContent = song.title;
-      songArtistElem.textContent = song.artist;
-      popupSongTitle.textContent = song.title;
-      popupSongArtist.textContent = song.artist;
-    }
-    loadSong(0);
-
-    bgAudio.addEventListener('ended', () => {
-      nextSong();
-    });
-
-    function nextSong() {
-      loadSong(currentSongIndex + 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
-    }
-
-    function prevSong() {
-      loadSong(currentSongIndex - 1);
-      if (isMusicPlaying) {
-        bgAudio.play().catch(() => {});
-      }
-    }
-
-    function updatePlayPauseUI() {
-      if (isMusicPlaying) {
-        soundwaveContainer.classList.add('playing-active');
-        vinylDisk.classList.add('spinning');
-        bubbleVinyl.classList.add('spinning');
-        const pauseHtml = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
-        playPauseSvg.innerHTML = pauseHtml;
-        popupPlayPauseSvg.innerHTML = pauseHtml;
-      } else {
-        soundwaveContainer.classList.remove('playing-active');
-        vinylDisk.classList.remove('spinning');
-        bubbleVinyl.classList.remove('spinning');
-        const playHtml = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
-        playPauseSvg.innerHTML = playHtml;
-        popupPlayPauseSvg.innerHTML = playHtml;
-      }
-    }
-
-    function toggleAudio(event) {
-      if (event) event.stopPropagation();
-
-      if (isMusicPlaying) {
-        bgAudio.pause();
-        isMusicPlaying = false;
-        updatePlayPauseUI();
-      } else {
-        bgAudio.play().then(() => {
-          isMusicPlaying = true;
-          updatePlayPauseUI();
-        }).catch(e => console.log('Chặn autoplay:', e));
-      }
-    }
-
-    function updateMuteUI() {
-      const activeMuteHtml = isMuted 
-        ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>'
-        : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
-      muteSvg.innerHTML = activeMuteHtml;
-      popupMuteSvg.innerHTML = activeMuteHtml;
-    }
-
-    function toggleMute(event) {
-      if (event) event.stopPropagation();
-
-      if (isMuted) {
-        bgAudio.muted = false;
-        isMuted = false;
-      } else {
-        bgAudio.muted = true;
-        isMuted = true;
-      }
-      updateMuteUI();
-    }
-
-    function openMusicModal() {
-      document.getElementById('musicModal').classList.add('active');
-    }
-
-    function closeMusicModal() {
-      document.getElementById('musicModal').classList.remove('active');
-    }
-
-    function autoPlayOnce() {
-      if (!isMusicPlaying) {
-        bgAudio.play().then(() => {
-          isMusicPlaying = true;
-          updatePlayPauseUI();
-        }).catch(() => {});
-      }
-      document.removeEventListener('click', autoPlayOnce);
-      document.removeEventListener('touchstart', autoPlayOnce);
-    }
-    document.addEventListener('click', autoPlayOnce, { passive: true });
-    document.addEventListener('touchstart', autoPlayOnce, { passive: true });
-
-    // Thu gọn thành bong bóng
-    function toggleDockMinimize() {
-      const dock = document.getElementById('miniPlayerDock');
-      const musicBubble = document.getElementById('musicBubble');
-      
-      dock.style.display = 'none';
-      musicBubble.style.display = 'flex';
-      musicBubble.style.bottom = '25px';
-      musicBubble.style.right = '25px';
-      musicBubble.style.left = 'auto';
-      musicBubble.style.top = 'auto';
-    }
-
-    // ==========================================
-    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC
-    // ==========================================
-    const musicBubble = document.getElementById('musicBubble');
-    let isBubbleDragging = false;
-    let bubbleStartX = 0, bubbleStartY = 0;
-    let bubblePosX = 0, bubblePosY = 0;
-    let hasMoved = false;
-    let bubbleFadeTimer = null;
-
-    function resetBubbleFade() {
-      musicBubble.classList.remove('fade-out');
-      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
-      bubbleFadeTimer = setTimeout(() => {
-        if (!isBubbleDragging) {
-          musicBubble.classList.add('fade-out');
-        }
-      }, 3000); // Mờ đi sau 3 giây không chạm
-    }
-
-    function onBubbleDragStart(e) {
-      isBubbleDragging = true;
-      hasMoved = false;
-      resetBubbleFade();
-
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      bubbleStartX = clientX;
-      bubbleStartY = clientY;
-      
-      const rect = musicBubble.getBoundingClientRect();
-      bubblePosX = rect.left;
-      bubblePosY = rect.top;
-      
-      musicBubble.style.bottom = 'auto';
-      musicBubble.style.right = 'auto';
-      musicBubble.style.left = `${bubblePosX}px`;
-      musicBubble.style.top = `${bubblePosY}px`;
-    }
-
-    function onBubbleDragMove(e) {
-      if (!isBubbleDragging) return;
-      resetBubbleFade();
-
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      
-      if (Math.abs(clientX - bubbleStartX) > 5 || Math.abs(clientY - bubbleStartY) > 5) {
-        hasMoved = true;
-      }
-
-      const dx = clientX - bubbleStartX;
-      const dy = clientY - bubbleStartY;
-
-      let newX = Math.min(Math.max(10, bubblePosX + dx), window.innerWidth - musicBubble.offsetWidth - 10);
-      let newY = Math.min(Math.max(10, bubblePosY + dy), window.innerHeight - musicBubble.offsetHeight - 10);
-
-      musicBubble.style.left = `${newX}px`;
-      musicBubble.style.top = `${newY}px`;
-    }
-
-    function onBubbleDragEnd(e) {
-      if (isBubbleDragging) {
-        isBubbleDragging = false;
-        resetBubbleFade();
-        if (!hasMoved) {
-          openMusicModal();
-        }
-      }
-    }
-
-    musicBubble.addEventListener('mousedown', onBubbleDragStart);
-    window.addEventListener('mousemove', onBubbleDragMove);
-    window.addEventListener('mouseup', onBubbleDragEnd);
-
-    musicBubble.addEventListener('touchstart', onBubbleDragStart, { passive: false });
-    window.addEventListener('touchmove', onBubbleDragMove, { passive: false });
-    window.addEventListener('touchend', onBubbleDragEnd);
-
-    musicBubble.addEventListener('mouseenter', () => {
-      musicBubble.classList.remove('fade-out');
-      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
-    });
-    musicBubble.addEventListener('mouseleave', () => {
-      resetBubbleFade();
-    });
-
-
-    // ==========================================
-    // LOGIC MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
-    // ==========================================
-    const mascot = document.getElementById('mascot');
-    const mascotImgWrap = document.getElementById('mascotImgWrap');
-    const mascotBubble = document.getElementById('mascotBubble');
-
-    let posX = Math.random() * (window.innerWidth - 100) + 10;
-    let posY = Math.random() * (window.innerHeight - 200) + 50;
-    let targetX = posX;
-    let targetY = posY;
-    let speed = 1.2;
-    let isDragging = false;
-    let isPaused = false;
-    let pauseTimer = null;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let mascotStartX = 0;
-    let mascotStartY = 0;
-
-    let lastTrailTime = 0;
-
-    function initMascotMessages() {
-      setTimeout(() => {
-        if (!isPaused) mascotBubble.classList.remove('show');
-      }, 3000);
-
-      setInterval(() => {
-        if (!isPaused) {
-          mascotBubble.textContent = "Cảm ơn bạn đã ủng hộ 💗";
-          mascotBubble.classList.add('show');
-          setTimeout(() => {
-            if (!isPaused) mascotBubble.classList.remove('show');
-          }, 3000);
-        }
-      }, 10000);
-    }
-    initMascotMessages();
-
-    function createRedTrail(x, y) {
-      const now = performance.now();
-      if (now - lastTrailTime < 45) return;
-      lastTrailTime = now;
-
-      const trail = document.createElement('div');
-      trail.className = 'mascot-trail';
-      
-      const size = Math.random() * 18 + 20;
-      trail.style.width = `${size}px`;
-      trail.style.height = `${size}px`;
-      
-      const centerX = x + 40 - (size / 2);
-      const centerY = y + 45 - (size / 2);
-      trail.style.left = `${centerX}px`;
-      trail.style.top = `${centerY}px`;
-
-      document.body.appendChild(trail);
-
-      setTimeout(() => {
-        trail.remove();
-      }, 600);
-    }
-
-    function pickNewTarget() {
-      if (isPaused || isDragging) return;
-      const margin = 20;
-      const maxX = window.innerWidth - mascot.offsetWidth - margin;
-      const maxY = window.innerHeight - mascot.offsetHeight - 40;
-      targetX = Math.random() * (maxX - margin) + margin;
-      targetY = Math.random() * (maxY - margin) + margin;
-    }
-
-    function animateMascot() {
-      if (!isDragging && !isPaused) {
-        const dx = targetX - posX;
-        const dy = targetY - posY;
-        const dist = Math.hypot(dx, dy);
-
-        if (dist < 15) {
-          pickNewTarget();
-        } else {
-          posX += (dx / dist) * speed;
-          posY += (dy / dist) * speed;
-
-          createRedTrail(posX, posY);
-
-          const flip = dx < 0 ? -1 : 1;
-          mascotImgWrap.style.transform = `scaleX(${flip})`;
-        }
-        mascot.style.left = `${posX}px`;
-        mascot.style.top = `${posY}px`;
-      }
-      requestAnimationFrame(animateMascot);
-    }
-
-    function triggerStandstill() {
-      isPaused = true;
-      mascotBubble.textContent = "Nghỉ 1p nha~ 💤";
-      mascotBubble.classList.add('show');
-
-      if (pauseTimer) clearTimeout(pauseTimer);
-      pauseTimer = setTimeout(() => {
-        isPaused = false;
-        mascotBubble.classList.remove('show');
-        pickNewTarget();
-      }, 60000);
-    }
-
-    function onDragStart(e) {
-      isDragging = true;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      dragStartX = clientX;
-      dragStartY = clientY;
-      mascotStartX = posX;
-      mascotStartY = posY;
-      triggerStandstill();
-    }
-
-    function onDragMove(e) {
-      if (!isDragging) return;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const dx = clientX - dragStartX;
-      const dy = clientY - dragStartY;
-
-      posX = Math.min(Math.max(10, mascotStartX + dx), window.innerWidth - mascot.offsetWidth - 10);
-      posY = Math.min(Math.max(10, mascotStartY + dy), window.innerHeight - mascot.offsetHeight - 10);
-
-      createRedTrail(posX, posY);
-
-      mascot.style.left = `${posX}px`;
-      mascot.style.top = `${posY}px`;
-    }
-
-    function onDragEnd() {
-      if (isDragging) {
-        isDragging = false;
-        triggerStandstill();
-      }
-    }
-
-    mascot.addEventListener('mousedown', onDragStart);
-    window.addEventListener('mousemove', onDragMove);
-    window.addEventListener('mouseup', onDragEnd);
-
-    mascot.addEventListener('touchstart', onDragStart, { passive: false });
-    window.addEventListener('touchmove', onDragMove, { passive: false });
-    window.addEventListener('touchend', onDragEnd);
-
-    pickNewTarget();
-    requestAnimationFrame(animateMascot);
-
-    // ==========================================
-    // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
-    // ==========================================
-    const checkboxes = document.querySelectorAll('.map-cb');
-    const totalDisplay = document.getElementById('totalDisplay');
-    const selectedCountDisplay = document.getElementById('selectedCountDisplay');
-    const autoQrImg = document.getElementById('autoQrImg');
-    const clientNameInput = document.getElementById('clientName');
-    const gameAccountInput = document.getElementById('gameAccount');
-    const gamePasswordInput = document.getElementById('gamePassword');
-    const memoPreview = document.getElementById('memoPreview');
-
-    function toggleServiceMenu() {
-      const wrapper = document.getElementById("serviceContainerWrapper");
-      const btn = document.getElementById("toggleServiceBtn");
-      
-      if (wrapper.style.display === "block") {
-        wrapper.style.display = "none";
-        btn.classList.remove("active");
-      } else {
-        wrapper.style.display = "block";
-        btn.classList.add("active");
-        wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-    function togglePasswordVisibility() {
-      const pwInput = document.getElementById("gamePassword");
-      const pwIcon = document.getElementById("pwIcon");
-      if (pwInput.type === "password") {
-        pwInput.type = "text";
-        pwIcon.classList.remove("fa-eye");
-        pwIcon.classList.add("fa-eye-slash");
-      } else {
-        pwInput.type = "password";
-        pwIcon.classList.remove("fa-eye-slash");
-        pwIcon.classList.add("fa-eye");
-      }
-    }
-
-    function removeVietnameseTones(str) {
-      return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/đ/g, 'd').replace(/Đ/g, 'D')
-        .replace(/[^a-zA-Z0-9 ]/g, '')
-        .trim()
-        .toUpperCase();
-    }
-
-    function updateQR() {
-      let total = 0;
-      let count = 0;
-      checkboxes.forEach(item => {
-        if (item.checked) {
-          total += parseInt(item.getAttribute('data-price'));
-          count++;
-        }
-      });
-
-      const rawName = clientNameInput.value.trim();
-      const cleanName = removeVietnameseTones(rawName);
-
-      let memo = cleanName ? cleanName : "PHALNNN CAY THUE";
-      if (memo.length > 25) memo = memo.substring(0, 25);
-
-      totalDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
-      selectedCountDisplay.innerHTML = `<i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> ${count} mục đã chọn`;
-      memoPreview.textContent = `Lời nhắn chuyển khoản: ${memo}`;
-
-      const encodedMemo = encodeURIComponent(memo);
-      const encodedAccName = encodeURIComponent(myBankConfig.accountName);
-      const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${total}&addInfo=${encodedMemo}&accountName=${encodedAccName}`;
-      
-      autoQrImg.src = qrUrl;
-
-      if (document.getElementById('selectedModal').classList.contains('active')) {
-        renderSelectedList();
-      }
-    }
-
-    function clearAllSelections() {
-      checkboxes.forEach(cb => { cb.checked = false; });
-      updateQR();
-    }
-
-    checkboxes.forEach(cb => cb.addEventListener('change', updateQR));
-    clientNameInput.addEventListener('input', updateQR);
-    updateQR();
-
-    // ==========================================
-    // POPUP XEM DANH SÁCH MỤC ĐÃ CHỌN
-    // ==========================================
-    function renderSelectedList() {
-      const listContainer = document.getElementById('selectedItemsList');
-      listContainer.innerHTML = "";
-
-      let count = 0;
-      let total = 0;
-
-      checkboxes.forEach((cb, idx) => {
-        if (cb.checked) {
-          count++;
-          const name = cb.getAttribute('data-name');
-          const price = parseInt(cb.getAttribute('data-price'), 10);
-          total += price;
-
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'selected-single-item';
-          itemDiv.innerHTML = `
-            <div class="item-info">
-              <span style="color: #fe2c55; font-weight: bold;">${count}.</span>
-              <span class="item-title">${name}</span>
-            </div>
-            <div style="display: flex; align-items: center;">
-              <span class="item-cost">${price.toLocaleString('vi-VN')}đ</span>
-              <button type="button" class="btn-remove-item" title="Bỏ chọn" onclick="removeItemByCheckbox(${idx})">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </div>
-          `;
-          listContainer.appendChild(itemDiv);
-        }
-      });
-
-      if (count === 0) {
-        listContainer.innerHTML = `
-          <div style="text-align: center; color: #888; padding: 25px 0; font-size: 0.88rem;">
-            <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; display: block; color: #555;"></i>
-            Bạn chưa chọn mục nào cả!
-          </div>
-        `;
-      }
-
-      document.getElementById('modalTotalSum').textContent = total.toLocaleString('vi-VN') + 'đ';
-    }
-
-    function removeItemByCheckbox(checkboxIndex) {
-      if (checkboxes[checkboxIndex]) {
-        checkboxes[checkboxIndex].checked = false;
-        updateQR();
-      }
-    }
-
-    function openSelectedModal() {
-      renderSelectedList();
-      document.getElementById('selectedModal').classList.add('active');
-    }
-
-    function closeSelectedModal(event) {
-      document.getElementById('selectedModal').classList.remove('active');
-    }
-
-    // MODAL PHÓNG TO BẢNG GIÁ
-    function openImageModal() {
-      const modal = document.getElementById("imageModal");
-      const bannerImg = document.getElementById("bannerImg");
-      const modalImg = document.getElementById("modalImg");
-      modal.classList.add("active");
-      modalImg.src = bannerImg.src;
-    }
-
-    function closeImageModal() {
-      document.getElementById("imageModal").classList.remove("active");
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "Escape") {
-        closeImageModal();
-        closeSelectedModal();
-        closeMusicModal();
-      }
-    });
-
-    // GỬI ĐƠN QUA TIKTOK
-    function sendOrderToTikTok() {
-      const name = clientNameInput.value.trim();
-      const acc = gameAccountInput.value.trim();
-      const pw = gamePasswordInput.value.trim();
-      const note = document.getElementById('clientNote').value.trim();
-
-      const selectedMaps = [];
-      let total = 0;
-      checkboxes.forEach(cb => {
-        if (cb.checked) {
-          selectedMaps.push(cb.getAttribute('data-name') + ' (' + (parseInt(cb.getAttribute('data-price'))/1000) + 'k)');
-          total += parseInt(cb.getAttribute('data-price'));
-        }
-      });
-
-      if (selectedMaps.length === 0) {
-        alert('Hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!');
-        return;
-      }
-
-      const message = 
+  <div class="container">
+
+    <div class="card-border-wrapper">
+      <div class="card profile-card">
+        <div class="avatar-wrapper">
+          <img src="avatar.jpg" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+        </div>
+
+        <h1 class="channel-name">@phalnnn</h1>
+        <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
+
+        <div class="donate-neon-wrapper">
+          <div class="donate-box">
+            <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
+            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
+            <div class="qr-box-donate">
+              <img src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
+            </div>
+            <div class="bank-details">
+              <div>Ngân hàng: <strong>Techcombank</strong></div>
+              <div class="stk-copy-box">
+                Số TK: <strong id="stkNumber">1907 4758 6200 12</strong>
+                <button type="button" class="btn-copy-stk" onclick="copySTK(this)">
+                  <i class="fa-regular fa-copy"></i> Copy
+                </button>
+              </div>
+              <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-player-dock" id="miniPlayerDock">
+          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Thu gọn thành bong bóng nhạc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+          <div class="player-border-glow">
+            <div class="player-glass-body">
+              <div class="vinyl-disk-wrap" id="vinylDisk">
+                <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+              </div>
+
+              <div class="song-details">
+                <div class="song-title-row">
+                  <span class="song-name" id="currentSongTitle">Styx Helix</span>
+                  <div class="soundwave-bars" id="soundwaveContainer">
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                  </div>
+                </div>
+                <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
+              </div>
+
+              <div class="player-controls">
+                <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
+                  <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                </button>
+                
+                <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
+                </button>
+
+                <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
+                  <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </button>
+
+                <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
+            <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
+          </a>
+
+          <a href="https://discord.gg/tCgPMRaqek" target="_blank" rel="noopener noreferrer" class="btn-link btn-discord">
+            <i class="fa-brands fa-discord"></i> Tham Gia Server Discord
+          </a>
+
+          <a href="https://youtube.com/@phalnnn?si=4p5A05Y50ROdZH04" target="_blank" rel="noopener noreferrer" class="btn-link btn-youtube">
+            <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tui
+          </a>
+
+          <a href="https://zypage.com/phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-zypage">
+            <svg class="zypage-icon" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
+            </svg>
+            Donate Cho Chía Bel (ZyPage)
+          </a>
+
+          <button type="button" class="btn-link btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
+            <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
+            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+          </button>
+        </div>
+
+        <div class="footer">
+          © @phalnnn • All rights reserved
+        </div>
+      </div>
+    </div>
+
+    <div id="serviceContainerWrapper">
+      <div class="card-border-wrapper">
+        <div class="card" id="serviceContainer">
+          <div class="banner-wrap" onclick="openImageModal()">
+            <img id="bannerImg" src="banggia.jpg" alt="Bảng giá dịch vụ" onerror="this.src='https://placehold.co/1000x560/1a1c24/ffffff?text=Vui+long+upload+anh+banggia.jpg'">
+            <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm để phóng to</div>
+          </div>
+
+          <div style="text-align: right;">
+            <button type="button" class="btn-clear-all" onclick="clearAllSelections()">
+              <i class="fa-solid fa-rotate-left"></i> Xóa chọn tất cả
+            </button>
+          </div>
+
+          <div class="section-title"><i class="fa-solid fa-compass"></i> JINZHOU</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Gorges Of Spirits" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Gorges Of Spirits</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Jinzhou" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Jinzhou</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Central Plains" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Central Plains</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Desorock Highlands" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Desorock Highlands</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Port City Of Guixu" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Port City Of Guixu</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Dim Forest" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Dim Forest</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Wumming Bay" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Wumming Bay</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Norfall Barrens" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Norfall Barrens</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whining Aix's Mire" data-price="75000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whining Aix's Mire</span></div><span class="map-price">75k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tiger's Maw Mine" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tiger's Maw Mine</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="MT. Firmament" data-price="80000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">MT. Firmament</span></div><span class="map-price">80k</span></label>
+          </div>
+
+          <div class="section-title"><i class="fa-solid fa-water"></i> THE BLACK SHORES</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Black Shores" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Black Shores</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tethys Deep" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tethys Deep</span></div><span class="map-price">60k</span></label>
+          </div>
+
+          <div class="section-title"><i class="fa-solid fa-feather"></i> RINASCITA</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Ragunna City" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Ragunna City</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Averado Vault" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Averado Vault</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Penitent's End" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Penitent's End</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Whisperwind Haven" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Whisperwind Haven</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Nimbus Sanctum" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Nimbus Sanctum</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fagaceae Peninsula" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fagaceae Peninsula</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thessaleo Fells" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thessaleo Fells</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Riccioli Islands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Riccioli Islands</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Vault Underground" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Vault Underground</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Avinoleum" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Avinoleum</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Beohr Waters" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Beohr Waters</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Septimont" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Septimont</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fabricatorium of Deep" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fabricatorium of Deep</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Sanguis Plateaus" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Sanguis Plateaus</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Hallowed Reach" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Hallowed Reach</span></div><span class="map-price">50k</span></label>
+          </div>
+
+          <div class="section-title"><i class="fa-regular fa-snowflake"></i> ROYA FROSTLANDS</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Frostlands Transit Port" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Frostlands Transit Port</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mount Gjallar" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mount Gjallar</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starblind Crashsite" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starblind Crashsite</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Upphaf Forest Ruins" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Upphaf Forest Ruins</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tidelost Forest" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tidelost Forest</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Etching Plains" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Etching Plains</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Startorch Academy" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Startorch Academy</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Starward Riseway" data-price="15000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Starward Riseway</span></div><span class="map-price">15k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Fangspire Chasm" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Fangspire Chasm</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Bjartr Woods" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Bjartr Woods</span></div><span class="map-price">40k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Stagnant Run" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Stagnant Run</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Rebirth Uplands" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Rebirth Uplands</span></div><span class="map-price">50k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Mawburrow Desert" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Mawburrow Desert</span></div><span class="map-price">20k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Giant's Gaze" data-price="40000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Giant's Gaze</span></div><span class="map-price">40k</span></label>
+          </div>
+
+          <div class="section-title"><i class="fa-solid fa-mountain-sun"></i> MENGZHOU & DAILY</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Xuanfang Hold" data-price="60000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Xuanfang Hold</span></div><span class="map-price">60k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Western Fang Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Western Fang Peaks</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Southern Yuan Hills" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Southern Yuan Hills</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Eastern Xuan Peaks" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Eastern Xuan Peaks</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Ngày" data-price="5000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Ngày</span></div><span class="map-price">5k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tuần" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tuần</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
+          </div>
+
+          <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
+          <div class="map-grid">
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
+            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
+          </div>
+
+          <div class="total-box">
+            <div class="total-row-main">
+              <span class="total-label">Tổng thanh toán:</span>
+              <span class="total-amount" id="totalDisplay">0đ</span>
+            </div>
+            <div class="total-row-sub">
+              <span class="count-badge" id="selectedCountDisplay">
+                <i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> 0 mục đã chọn
+              </span>
+              <button type="button" class="btn-view-selected" onclick="openSelectedModal()">
+                Xem chi tiết <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 18px;">
+            <label for="clientName"><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn (*):</label>
+            <input type="text" id="clientName" placeholder="Ví dụ: @phalnnn hoặc phalnnn" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="gameAccount"><i class="fa-solid fa-user"></i> Tài khoản game (Kuro / Mail / Login):</label>
+            <input type="text" id="gameAccount" placeholder="Nhập tài khoản game để cày" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="gamePassword"><i class="fa-solid fa-lock"></i> Mật khẩu game:</label>
+            <div class="password-wrap">
+              <input type="password" id="gamePassword" placeholder="Nhập mật khẩu game" autocomplete="off" />
+              <button type="button" class="toggle-pw-btn" onclick="togglePasswordVisibility()">
+                <i class="fa-solid fa-eye" id="pwIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="clientNote"><i class="fa-solid fa-pen-to-square"></i> Yêu cầu đặc biệt:</label>
+            <textarea id="clientNote" rows="2" placeholder="Ví dụ: Cần xong trước 24h, cày holo con nào ghi rõ tại đây..."></textarea>
+          </div>
+
+          <div class="qr-section">
+            <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Quét Mã Techcombank VietQR</div>
+            <p class="qr-sub">Mã QR tự động cập nhật số tiền & lời nhắn là tên TikTok của bạn</p>
+            <div class="qr-box-auto">
+              <img id="autoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
+            </div>
+            <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
+
+            <div class="qr-notice">
+              ⚠️ Hệ thống sẽ tự copy việc của bạn là bấm vào "GỬI YÊU CẦU QUA TIKTOK" bên dưới và dán mã đơn hàng hệ thống đã sao chép sẵn cho bạn qua phần tin nhắn cho tui (nhớ chụp cả bill thanh toán gửi cho tui) <span class="custom-heart">💗</span>
+            </div>
+          </div>
+
+          <button class="btn-submit" onclick="sendOrderToTikTok()">
+            <i class="fa-brands fa-tiktok"></i> GỬI YÊU CẦU QUA TIKTOK
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="selectedModal" class="modal-overlay" onclick="closeSelectedModal(event)">
+    <div class="selected-modal-wrapper" onclick="event.stopPropagation()">
+      <div class="selected-modal-box">
+        <h3 class="selected-modal-title"><i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> Các mục bạn đã chọn</h3>
+        <p class="selected-modal-desc">Kiểm tra lại danh sách trước khi gửi đơn nhé</p>
+
+        <div class="selected-items-list" id="selectedItemsList"></div>
+
+        <div class="selected-summary-box">
+          <span>Tổng số tiền:</span>
+          <strong id="modalTotalSum" style="color: #fe2c55; font-size: 1.05rem;">0đ</strong>
+        </div>
+
+        <button type="button" class="btn-close-selected" onclick="closeSelectedModal()">Đóng lại</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
+    <span class="image-modal-close">&times;</span>
+    <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
+  </div>
+
+  <div class="floating-music-bubble" id="musicBubble">
+    <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
+  </div>
+
+  <div id="musicModal" class="music-popup-modal" onclick="closeMusicModal()">
+    <div class="music-popup-content" onclick="event.stopPropagation()">
+      <button type="button" class="music-popup-close" onclick="closeMusicModal()">&times;</button>
+      
+      <div class="popup-vinyl-wrap" id="popupVinyl">
+        <img src="avatar.jpg" class="popup-vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
+      </div>
+
+      <div class="popup-song-title" id="popupSongTitle">Styx Helix</div>
+      <div class="popup-song-artist" id="popupSongArtist">Re:Zero OST</div>
+
+      <div class="popup-controls-row">
+        <button type="button" class="popup-ctrl-btn" onclick="toggleMute(event)" title="Bật/Tắt tiếng">
+          <svg id="popupMuteSvg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+
+        <button type="button" class="popup-ctrl-btn" onclick="prevSong()" title="Bài trước">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
+        </button>
+
+        <button type="button" class="popup-ctrl-btn play-main-btn" onclick="toggleAudio(event)" title="Phát/Dừng">
+          <svg id="popupPlayPauseSvg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+
+        <button type="button" class="popup-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-mascot" id="mascot">
+    <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
+    <div class="mascot-img-wrap" id="mascotImgWrap">
+      <img src="mascot.png" alt="Mascot Chibi" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=mascotChibi'">
+    </div>
+  </div>
+
+  <audio id="bgAudio" preload="auto"></audio>
+
+  <script>
+    // ==========================================
+    // CẤU HÌNH TÀI KHOẢN TECHCOMBANK (VIETQR):
+    // ==========================================
+    const myBankConfig = {
+      bankId: "TCB",
+      accountNo: "19074758620012",
+      accountName: "PHAM NGUYEN BAO LAN"
+    };
+
+    function copySTK(btn) {
+      const stkClean = "19074758620012";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(stkClean);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = stkClean;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép!';
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
+
+    // ==========================================
+    // DANH SÁCH BÀI HÁT (PLAYLIST NỀN 6 BÀI)
+    // ==========================================
+    const playlist = [
+      { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
+      { title: "An Unfinished Song", artist: "Wuthering Waves OST", src: "music2.mp3" },
+      { title: "All Silent Souls Can Sing", artist: "Wuthering Waves OST", src: "music3.mp3" },
+      { title: "Dancing Through Fantasies", artist: "Wuthering Waves OST", src: "music4.mp3" },
+      { title: "With Glory I Shall Fall", artist: "Wuthering Waves OST", src: "music5.mp3" },
+      { title: "Against the Tide", artist: "Wuthering Waves OST", src: "music6.mp3" }
+    ];
+
+    let currentSongIndex = 0;
+    const bgAudio = document.getElementById('bgAudio');
+    const playPauseSvg = document.getElementById('playPauseSvg');
+    const popupPlayPauseSvg = document.getElementById('popupPlayPauseSvg');
+    const muteSvg = document.getElementById('muteSvg');
+    const popupMuteSvg = document.getElementById('popupMuteSvg');
+    const vinylDisk = document.getElementById('vinylDisk');
+    const bubbleVinyl = document.getElementById('bubbleVinyl');
+    const soundwaveContainer = document.getElementById('soundwaveContainer');
+    const songTitleElem = document.getElementById('currentSongTitle');
+    const songArtistElem = document.getElementById('currentSongArtist');
+    const popupSongTitle = document.getElementById('popupSongTitle');
+    const popupSongArtist = document.getElementById('popupSongArtist');
+
+    let isMusicPlaying = false;
+    let isMuted = false;
+
+    function loadSong(index) {
+      currentSongIndex = (index + playlist.length) % playlist.length;
+      const song = playlist[currentSongIndex];
+      bgAudio.src = song.src;
+      songTitleElem.textContent = song.title;
+      songArtistElem.textContent = song.artist;
+      popupSongTitle.textContent = song.title;
+      popupSongArtist.textContent = song.artist;
+    }
+    loadSong(0);
+
+    bgAudio.addEventListener('ended', () => {
+      nextSong();
+    });
+
+    function nextSong() {
+      loadSong(currentSongIndex + 1);
+      if (isMusicPlaying) {
+        bgAudio.play().catch(() => {});
+      }
+    }
+
+    function prevSong() {
+      loadSong(currentSongIndex - 1);
+      if (isMusicPlaying) {
+        bgAudio.play().catch(() => {});
+      }
+    }
+
+    function updatePlayPauseUI() {
+      if (isMusicPlaying) {
+        soundwaveContainer.classList.add('playing-active');
+        vinylDisk.classList.add('spinning');
+        bubbleVinyl.classList.add('spinning');
+        const pauseHtml = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+        playPauseSvg.innerHTML = pauseHtml;
+        popupPlayPauseSvg.innerHTML = pauseHtml;
+      } else {
+        soundwaveContainer.classList.remove('playing-active');
+        vinylDisk.classList.remove('spinning');
+        bubbleVinyl.classList.remove('spinning');
+        const playHtml = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+        playPauseSvg.innerHTML = playHtml;
+        popupPlayPauseSvg.innerHTML = playHtml;
+      }
+    }
+
+    function toggleAudio(event) {
+      if (event) event.stopPropagation();
+
+      if (isMusicPlaying) {
+        bgAudio.pause();
+        isMusicPlaying = false;
+        updatePlayPauseUI();
+      } else {
+        bgAudio.play().then(() => {
+          isMusicPlaying = true;
+          updatePlayPauseUI();
+        }).catch(e => console.log('Chặn autoplay:', e));
+      }
+    }
+
+    function updateMuteUI() {
+      const activeMuteHtml = isMuted 
+        ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>'
+        : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+      muteSvg.innerHTML = activeMuteHtml;
+      popupMuteSvg.innerHTML = activeMuteHtml;
+    }
+
+    function toggleMute(event) {
+      if (event) event.stopPropagation();
+
+      if (isMuted) {
+        bgAudio.muted = false;
+        isMuted = false;
+      } else {
+        bgAudio.muted = true;
+        isMuted = true;
+      }
+      updateMuteUI();
+    }
+
+    function openMusicModal() {
+      document.getElementById('musicModal').classList.add('active');
+    }
+
+    function closeMusicModal() {
+      document.getElementById('musicModal').classList.remove('active');
+    }
+
+    function autoPlayOnce() {
+      if (!isMusicPlaying) {
+        bgAudio.play().then(() => {
+          isMusicPlaying = true;
+          updatePlayPauseUI();
+        }).catch(() => {});
+      }
+      document.removeEventListener('click', autoPlayOnce);
+      document.removeEventListener('touchstart', autoPlayOnce);
+    }
+    document.addEventListener('click', autoPlayOnce, { passive: true });
+    document.addEventListener('touchstart', autoPlayOnce, { passive: true });
+
+    // Thu gọn thành bong bóng
+    function toggleDockMinimize() {
+      const dock = document.getElementById('miniPlayerDock');
+      const musicBubble = document.getElementById('musicBubble');
+      
+      dock.style.display = 'none';
+      musicBubble.style.display = 'flex';
+      musicBubble.style.bottom = '25px';
+      musicBubble.style.right = '25px';
+      musicBubble.style.left = 'auto';
+      musicBubble.style.top = 'auto';
+
+      resetBubbleFade();
+    }
+
+    // ==========================================
+    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC (SAU 3S)
+    // ==========================================
+    const musicBubble = document.getElementById('musicBubble');
+    let isBubbleDragging = false;
+    let bubbleStartX = 0, bubbleStartY = 0;
+    let bubblePosX = 0, bubblePosY = 0;
+    let hasMoved = false;
+    let bubbleFadeTimer = null;
+
+    function resetBubbleFade() {
+      musicBubble.classList.remove('fade-out');
+      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
+      bubbleFadeTimer = setTimeout(() => {
+        if (!isBubbleDragging) {
+          musicBubble.classList.add('fade-out');
+        }
+      }, 3000); // Tự mờ đi sau 3 giây không chạm
+    }
+
+    function onBubbleDragStart(e) {
+      isBubbleDragging = true;
+      hasMoved = false;
+      resetBubbleFade();
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      bubbleStartX = clientX;
+      bubbleStartY = clientY;
+      
+      const rect = musicBubble.getBoundingClientRect();
+      bubblePosX = rect.left;
+      bubblePosY = rect.top;
+      
+      musicBubble.style.bottom = 'auto';
+      musicBubble.style.right = 'auto';
+      musicBubble.style.left = `${bubblePosX}px`;
+      musicBubble.style.top = `${bubblePosY}px`;
+    }
+
+    function onBubbleDragMove(e) {
+      if (!isBubbleDragging) return;
+      resetBubbleFade();
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      
+      if (Math.abs(clientX - bubbleStartX) > 5 || Math.abs(clientY - bubbleStartY) > 5) {
+        hasMoved = true;
+      }
+
+      const dx = clientX - bubbleStartX;
+      const dy = clientY - bubbleStartY;
+
+      let newX = Math.min(Math.max(10, bubblePosX + dx), window.innerWidth - musicBubble.offsetWidth - 10);
+      let newY = Math.min(Math.max(10, bubblePosY + dy), window.innerHeight - musicBubble.offsetHeight - 10);
+
+      musicBubble.style.left = `${newX}px`;
+      musicBubble.style.top = `${newY}px`;
+    }
+
+    function onBubbleDragEnd(e) {
+      if (isBubbleDragging) {
+        isBubbleDragging = false;
+        resetBubbleFade();
+        if (!hasMoved) {
+          openMusicModal();
+        }
+      }
+    }
+
+    musicBubble.addEventListener('mousedown', onBubbleDragStart);
+    window.addEventListener('mousemove', onBubbleDragMove);
+    window.addEventListener('mouseup', onBubbleDragEnd);
+
+    musicBubble.addEventListener('touchstart', onBubbleDragStart, { passive: false });
+    window.addEventListener('touchmove', onBubbleDragMove, { passive: false });
+    window.addEventListener('touchend', onBubbleDragEnd);
+
+    musicBubble.addEventListener('mouseenter', () => {
+      musicBubble.classList.remove('fade-out');
+      if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
+    });
+    musicBubble.addEventListener('mouseleave', () => {
+      resetBubbleFade();
+    });
+
+
+    // ==========================================
+    // LOGIC MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
+    // ==========================================
+    const mascot = document.getElementById('mascot');
+    const mascotImgWrap = document.getElementById('mascotImgWrap');
+    const mascotBubble = document.getElementById('mascotBubble');
+
+    let posX = Math.random() * (window.innerWidth - 100) + 10;
+    let posY = Math.random() * (window.innerHeight - 200) + 50;
+    let targetX = posX;
+    let targetY = posY;
+    let speed = 1.2;
+    let isDragging = false;
+    let isPaused = false;
+    let pauseTimer = null;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let mascotStartX = 0;
+    let mascotStartY = 0;
+
+    let lastTrailTime = 0;
+
+    function initMascotMessages() {
+      setTimeout(() => {
+        if (!isPaused) mascotBubble.classList.remove('show');
+      }, 3000);
+
+      setInterval(() => {
+        if (!isPaused) {
+          mascotBubble.textContent = "Cảm ơn bạn đã ủng hộ 💗";
+          mascotBubble.classList.add('show');
+          setTimeout(() => {
+            if (!isPaused) mascotBubble.classList.remove('show');
+          }, 3000);
+        }
+      }, 10000);
+    }
+    initMascotMessages();
+
+    function createRedTrail(x, y) {
+      const now = performance.now();
+      if (now - lastTrailTime < 45) return;
+      lastTrailTime = now;
+
+      const trail = document.createElement('div');
+      trail.className = 'mascot-trail';
+      
+      const size = Math.random() * 18 + 20;
+      trail.style.width = `${size}px`;
+      trail.style.height = `${size}px`;
+      
+      const centerX = x + 40 - (size / 2);
+      const centerY = y + 45 - (size / 2);
+      trail.style.left = `${centerX}px`;
+      trail.style.top = `${centerY}px`;
+
+      document.body.appendChild(trail);
+
+      setTimeout(() => {
+        trail.remove();
+      }, 600);
+    }
+
+    function pickNewTarget() {
+      if (isPaused || isDragging) return;
+      const margin = 20;
+      const maxX = window.innerWidth - mascot.offsetWidth - margin;
+      const maxY = window.innerHeight - mascot.offsetHeight - 40;
+      targetX = Math.random() * (maxX - margin) + margin;
+      targetY = Math.random() * (maxY - margin) + margin;
+    }
+
+    function animateMascot() {
+      if (!isDragging && !isPaused) {
+        const dx = targetX - posX;
+        const dy = targetY - posY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < 15) {
+          pickNewTarget();
+        } else {
+          posX += (dx / dist) * speed;
+          posY += (dy / dist) * speed;
+
+          createRedTrail(posX, posY);
+
+          const flip = dx < 0 ? -1 : 1;
+          mascotImgWrap.style.transform = `scaleX(${flip})`;
+        }
+        mascot.style.left = `${posX}px`;
+        mascot.style.top = `${posY}px`;
+      }
+      requestAnimationFrame(animateMascot);
+    }
+
+    function triggerStandstill() {
+      isPaused = true;
+      mascotBubble.textContent = "Nghỉ 1p nha~ 💤";
+      mascotBubble.classList.add('show');
+
+      if (pauseTimer) clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        isPaused = false;
+        mascotBubble.classList.remove('show');
+        pickNewTarget();
+      }, 60000);
+    }
+
+    function onDragStart(e) {
+      isDragging = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      dragStartX = clientX;
+      dragStartY = clientY;
+      mascotStartX = posX;
+      mascotStartY = posY;
+      triggerStandstill();
+    }
+
+    function onDragMove(e) {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const dx = clientX - dragStartX;
+      const dy = clientY - dragStartY;
+
+      posX = Math.min(Math.max(10, mascotStartX + dx), window.innerWidth - mascot.offsetWidth - 10);
+      posY = Math.min(Math.max(10, mascotStartY + dy), window.innerHeight - mascot.offsetHeight - 10);
+
+      createRedTrail(posX, posY);
+
+      mascot.style.left = `${posX}px`;
+      mascot.style.top = `${posY}px`;
+    }
+
+    function onDragEnd() {
+      if (isDragging) {
+        isDragging = false;
+        triggerStandstill();
+      }
+    }
+
+    mascot.addEventListener('mousedown', onDragStart);
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', onDragEnd);
+
+    mascot.addEventListener('touchstart', onDragStart, { passive: false });
+    window.addEventListener('touchmove', onDragMove, { passive: false });
+    window.addEventListener('touchend', onDragEnd);
+
+    pickNewTarget();
+    requestAnimationFrame(animateMascot);
+
+    // ==========================================
+    // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
+    // ==========================================
+    const checkboxes = document.querySelectorAll('.map-cb');
+    const totalDisplay = document.getElementById('totalDisplay');
+    const selectedCountDisplay = document.getElementById('selectedCountDisplay');
+    const autoQrImg = document.getElementById('autoQrImg');
+    const clientNameInput = document.getElementById('clientName');
+    const gameAccountInput = document.getElementById('gameAccount');
+    const gamePasswordInput = document.getElementById('gamePassword');
+    const memoPreview = document.getElementById('memoPreview');
+
+    function toggleServiceMenu() {
+      const wrapper = document.getElementById("serviceContainerWrapper");
+      const btn = document.getElementById("toggleServiceBtn");
+      
+      if (wrapper.style.display === "block") {
+        wrapper.style.display = "none";
+        btn.classList.remove("active");
+      } else {
+        wrapper.style.display = "block";
+        btn.classList.add("active");
+        wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const pwInput = document.getElementById("gamePassword");
+      const pwIcon = document.getElementById("pwIcon");
+      if (pwInput.type === "password") {
+        pwInput.type = "text";
+        pwIcon.classList.remove("fa-eye");
+        pwIcon.classList.add("fa-eye-slash");
+      } else {
+        pwInput.type = "password";
+        pwIcon.classList.remove("fa-eye-slash");
+        pwIcon.classList.add("fa-eye");
+      }
+    }
+
+    function removeVietnameseTones(str) {
+      return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+        .replace(/[^a-zA-Z0-9 ]/g, '')
+        .trim()
+        .toUpperCase();
+    }
+
+    function updateQR() {
+      let total = 0;
+      let count = 0;
+      checkboxes.forEach(item => {
+        if (item.checked) {
+          total += parseInt(item.getAttribute('data-price'));
+          count++;
+        }
+      });
+
+      const rawName = clientNameInput.value.trim();
+      const cleanName = removeVietnameseTones(rawName);
+
+      let memo = cleanName ? cleanName : "PHALNNN CAY THUE";
+      if (memo.length > 25) memo = memo.substring(0, 25);
+
+      totalDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
+      selectedCountDisplay.innerHTML = `<i class="fa-solid fa-list-check" style="color: #fe2c55;"></i> ${count} mục đã chọn`;
+      memoPreview.textContent = `Lời nhắn chuyển khoản: ${memo}`;
+
+      const encodedMemo = encodeURIComponent(memo);
+      const encodedAccName = encodeURIComponent(myBankConfig.accountName);
+      const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${total}&addInfo=${encodedMemo}&accountName=${encodedAccName}`;
+      
+      autoQrImg.src = qrUrl;
+
+      if (document.getElementById('selectedModal').classList.contains('active')) {
+        renderSelectedList();
+      }
+    }
+
+    function clearAllSelections() {
+      checkboxes.forEach(cb => { cb.checked = false; });
+      updateQR();
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener('change', updateQR));
+    clientNameInput.addEventListener('input', updateQR);
+    updateQR();
+
+    // ==========================================
+    // POPUP XEM DANH SÁCH MỤC ĐÃ CHỌN
+    // ==========================================
+    function renderSelectedList() {
+      const listContainer = document.getElementById('selectedItemsList');
+      listContainer.innerHTML = "";
+
+      let count = 0;
+      let total = 0;
+
+      checkboxes.forEach((cb, idx) => {
+        if (cb.checked) {
+          count++;
+          const name = cb.getAttribute('data-name');
+          const price = parseInt(cb.getAttribute('data-price'), 10);
+          total += price;
+
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'selected-single-item';
+          itemDiv.innerHTML = `
+            <div class="item-info">
+              <span style="color: #fe2c55; font-weight: bold;">${count}.</span>
+              <span class="item-title">${name}</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+              <span class="item-cost">${price.toLocaleString('vi-VN')}đ</span>
+              <button type="button" class="btn-remove-item" title="Bỏ chọn" onclick="removeItemByCheckbox(${idx})">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          `;
+          listContainer.appendChild(itemDiv);
+        }
+      });
+
+      if (count === 0) {
+        listContainer.innerHTML = `
+          <div style="text-align: center; color: #888; padding: 25px 0; font-size: 0.88rem;">
+            <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; display: block; color: #555;"></i>
+            Bạn chưa chọn mục nào cả!
+          </div>
+        `;
+      }
+
+      document.getElementById('modalTotalSum').textContent = total.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function removeItemByCheckbox(checkboxIndex) {
+      if (checkboxes[checkboxIndex]) {
+        checkboxes[checkboxIndex].checked = false;
+        updateQR();
+      }
+    }
+
+    function openSelectedModal() {
+      renderSelectedList();
+      document.getElementById('selectedModal').classList.add('active');
+    }
+
+    function closeSelectedModal(event) {
+      document.getElementById('selectedModal').classList.remove('active');
+    }
+
+    // MODAL PHÓNG TO BẢNG GIÁ
+    function openImageModal() {
+      const modal = document.getElementById("imageModal");
+      const bannerImg = document.getElementById("bannerImg");
+      const modalImg = document.getElementById("modalImg");
+      modal.classList.add("active");
+      modalImg.src = bannerImg.src;
+    }
+
+    function closeImageModal() {
+      document.getElementById("imageModal").classList.remove("active");
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        closeImageModal();
+        closeSelectedModal();
+        closeMusicModal();
+      }
+    });
+
+    // GỬI ĐƠN QUA TIKTOK
+    function sendOrderToTikTok() {
+      const name = clientNameInput.value.trim();
+      const acc = gameAccountInput.value.trim();
+      const pw = gamePasswordInput.value.trim();
+      const note = document.getElementById('clientNote').value.trim();
+
+      const selectedMaps = [];
+      let total = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          selectedMaps.push(cb.getAttribute('data-name') + ' (' + (parseInt(cb.getAttribute('data-price'))/1000) + 'k)');
+          total += parseInt(cb.getAttribute('data-price'));
+        }
+      });
+
+      if (selectedMaps.length === 0) {
+        alert('Hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!');
+        return;
+      }
+
+      const message = 
 `🌸 ĐƠN CÀY THUÊ WUTHERING WAVES 🌸
 - Khách hàng (TikTok): ${name || 'Chưa nhập'}
 - Lời nhắn CK: ${removeVietnameseTones(name) || 'PHALNNN CAY THUE'}
 - Tài khoản game: ${acc || 'Chưa cung cấp'}
 - Mật khẩu: ${pw || 'Chưa cung cấp'}
 - Dịch vụ / Map đã chọn:
-  + ${selectedMaps.join('\n  + ')}
+  + ${selectedMaps.join('\n  + ')}
 ---------------------------
 👉 TỔNG TIỀN: ${total.toLocaleString('vi-VN')}đ
 - Yêu cầu đặc biệt: ${note || 'Không có'}`;
 
-      navigator.clipboard.writeText(message).then(() => {
-        alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗");
-        window.open('https://www.tiktok.com/@phalnnn', '_blank');
-      }).catch(() => {
-        prompt("Hãy sao chép nội dung đơn này:", message);
-        window.open('https://www.tiktok.com/@phalnnn', '_blank');
-      });
-    }
-  </script>
+      navigator.clipboard.writeText(message).then(() => {
+        alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗");
+        window.open('https://www.tiktok.com/@phalnnn', '_blank');
+      }).catch(() => {
+        prompt("Hãy sao chép nội dung đơn này:", message);
+        window.open('https://www.tiktok.com/@phalnnn', '_blank');
+      });
+    }
+  </script>
 </body>
 </html>
-từ giờ lưu đoạn code này
