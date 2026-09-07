@@ -46,7 +46,7 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
+    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN (TĂNG TỐC PHẦN CỨNG GPU) */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -60,6 +60,8 @@
                   0 0 25px rgba(254, 44, 85, 0.3),
                   0 0 15px rgba(255, 255, 255, 0.2);
       transition: box-shadow 0.4s ease;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .card-border-wrapper::before {
@@ -70,6 +72,8 @@
       background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
       animation: spin 5s linear infinite;
       z-index: 0;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     @keyframes spin {
@@ -106,6 +110,8 @@
       width: 110px;
       height: 110px;
       margin: 0 auto 16px;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .avatar-wrapper::before {
@@ -117,6 +123,8 @@
       z-index: 0;
       animation: spin 3.5s linear infinite;
       filter: blur(2px);
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .avatar {
@@ -181,6 +189,8 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
                   0 0 20px rgba(254, 44, 85, 0.4),
                   0 0 12px rgba(255, 255, 255, 0.25);
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .donate-neon-wrapper::before {
@@ -191,6 +201,8 @@
       background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
       animation: spin 4s linear infinite;
       z-index: 0;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .donate-box {
@@ -300,6 +312,8 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7),
                   0 0 16px rgba(254, 44, 85, 0.35);
       transition: all 0.35s ease;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .player-border-glow::before {
@@ -312,6 +326,8 @@
       background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
       animation: spin 5s linear infinite;
       z-index: 0;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .player-glass-body {
@@ -365,6 +381,8 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .vinyl-img {
@@ -477,7 +495,7 @@
       background: #fe2c55;
     }
 
-    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
+    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM, TĂNG TỐC PHẦN CỨNG GPU) */
     .floating-music-bubble {
       position: fixed;
       bottom: 25px;
@@ -489,7 +507,7 @@
       border: 2px solid #fe2c55;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
       z-index: 10001;
-      display: none; /* Ban đầu ẩn đi */
+      display: none;
       align-items: center;
       justify-content: center;
       cursor: grab;
@@ -497,6 +515,8 @@
       touch-action: none;
       opacity: 1;
       transition: opacity 0.4s ease, transform 0.2s ease;
+      transform: translateZ(0);
+      will-change: transform, opacity;
     }
 
     .floating-music-bubble.fade-out {
@@ -514,6 +534,8 @@
       border-radius: 50%;
       object-fit: cover;
       pointer-events: none;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     /* POPUP ĐIỀU KHIỂN ÂM NHẠC */
@@ -1342,7 +1364,7 @@
     }
 
     /* ============================================================
-       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ
+       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ (TĂNG TỐC PHẦN CỨNG GPU)
        ============================================================ */
     .floating-mascot {
       position: fixed;
@@ -1354,6 +1376,8 @@
       -webkit-user-drag: none;
       touch-action: none;
       filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 10px rgba(254, 44, 85, 0.5));
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .floating-mascot:active {
@@ -1364,6 +1388,8 @@
       width: 100%;
       height: 100%;
       transition: transform 0.25s ease;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .mascot-img-wrap img {
@@ -1408,6 +1434,7 @@
       filter: blur(5px);
       box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
       animation: fadeTrail 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      transform: translateZ(0);
     }
 
     @keyframes fadeTrail {
@@ -1745,7 +1772,7 @@
   </div>
 
   <!-- ============================================================
-       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (KÉO THẢ & BẤM MỞ MODAL)
+       BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S)
        ============================================================ -->
   <div class="floating-music-bubble" id="musicBubble">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
@@ -1976,10 +2003,12 @@
       musicBubble.style.right = '25px';
       musicBubble.style.left = 'auto';
       musicBubble.style.top = 'auto';
+
+      resetBubbleFade();
     }
 
     // ==========================================
-    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC
+    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC (SAU 3S)
     // ==========================================
     const musicBubble = document.getElementById('musicBubble');
     let isBubbleDragging = false;
@@ -2218,6 +2247,32 @@
 
     pickNewTarget();
     requestAnimationFrame(animateMascot);
+
+    // ==========================================
+    // CHẶN HOÀN TOÀN NHẠC CHẠY NGẨM TRÊN ĐIỆN THOẠI VÀ MÁY TÍNH
+    // ==========================================
+    function stopMusicCompletely() {
+      if (bgAudio) {
+        bgAudio.pause();
+        bgAudio.currentTime = 0;
+      }
+      isMusicPlaying = false;
+      updatePlayPauseUI();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopMusicCompletely();
+      }
+    });
+
+    window.addEventListener("pagehide", () => {
+      stopMusicCompletely();
+    });
+
+    window.addEventListener("blur", () => {
+      stopMusicCompletely();
+    });
 
     // ==========================================
     // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
