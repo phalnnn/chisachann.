@@ -1887,6 +1887,7 @@
 
     let isMusicPlaying = false;
     let isMuted = false;
+    let isLeavingWeb = false;
 
     function loadSong(index) {
       currentSongIndex = (index + playlist.length) % playlist.length;
@@ -1943,6 +1944,10 @@
         isMusicPlaying = false;
         updatePlayPauseUI();
       } else {
+        if (isLeavingWeb || !bgAudio.src || bgAudio.src === "") {
+          loadSong(currentSongIndex);
+          isLeavingWeb = false;
+        }
         bgAudio.play().then(() => {
           isMusicPlaying = true;
           updatePlayPauseUI();
@@ -2265,6 +2270,7 @@
         bgAudio.src = "";
       }
       isMusicPlaying = false;
+      isLeavingWeb = true;
       updatePlayPauseUI();
       clearMediaSession();
     }
@@ -2462,9 +2468,8 @@
       const name = clientNameInput.value.trim();
       const acc = gameAccountInput.value.trim();
       const pw = gamePasswordInput.value.trim();
-      const note = document.getElementById('serviceContainerWrapper'); // fixed reference
+      const note = document.getElementById('clientNote').value.trim();
 
-      // ... giữ nguyên logic gửi đơn hàng cũ ...
       const selectedMaps = [];
       let total = 0;
       checkboxes.forEach(cb => {
@@ -2489,7 +2494,7 @@
   + ${selectedMaps.join('\n  + ')}
 ---------------------------
 👉 TỔNG TIỀN: ${total.toLocaleString('vi-VN')}đ
-- Yêu cầu đặc biệt: ${document.getElementById('clientNote').value.trim() || 'Không có'}`;
+- Yêu cầu đặc biệt: ${note || 'Không có'}`;
 
       navigator.clipboard.writeText(message).then(() => {
         alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗");
