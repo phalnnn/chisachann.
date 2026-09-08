@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>phalnnn Profile Bio</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>💗</text></svg>">
+  <link rel="icon" href="avatar.jpg" type="image/jpeg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     * {
@@ -229,7 +229,6 @@
       border-radius: 12px;
     }
 
-    /* NÚT TẢI QR CHUNG */
     .btn-download-qr {
       margin-top: 12px;
       background: rgba(254, 44, 85, 0.15);
@@ -1805,7 +1804,6 @@
       setTimeout(() => { btn.innerHTML = orig; }, 2000);
     }
 
-    // Hàm tải ảnh mã QR về máy (hỗ trợ cả ảnh tĩnh và ảnh link API VietQR động)
     function downloadQRCode(imgId, filename) {
       const imgElement = document.getElementById(imgId);
       if (!imgElement || !imgElement.src) {
@@ -1813,7 +1811,6 @@
         return;
       }
 
-      // Tạo canvas để tải ảnh (tránh lỗi CORS khi tải ảnh từ domain ngoài như VietQR)
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const imageObj = new Image();
@@ -1833,17 +1830,14 @@
           link.click();
           document.body.removeChild(link);
         } catch (err) {
-          // Fallback nếu dính bảo mật CORS của trình duyệt
           window.open(imgElement.src, '_blank');
         }
       };
 
       imageObj.onerror = function() {
-        // Fallback mở trực tiếp link ảnh nếu load qua canvas thất bại
         window.open(imgElement.src, '_blank');
       };
 
-      // Thêm tham số chống cache nếu là link API VietQR
       let srcToFetch = imgElement.src;
       if (srcToFetch.includes('vietqr.io') && !srcToFetch.includes('t=')) {
         srcToFetch += (srcToFetch.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
