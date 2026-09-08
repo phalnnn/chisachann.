@@ -14,7 +14,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* NỀN NGOÀI: ĐỎ - TRẮNG - ĐEN NEON CHUYỂN ĐỘNG */
     body {
       min-height: 100vh;
       display: flex;
@@ -44,7 +43,6 @@
       align-items: center;
     }
 
-    /* KHUNG BỌC VIỀN XOAY NEON ĐỎ - TRẮNG - ĐEN */
     .card-border-wrapper {
       position: relative;
       width: 100%;
@@ -74,7 +72,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* KHUNG NỘI DUNG CARD CHÍNH */
     .card {
       position: relative;
       width: 100%;
@@ -98,7 +95,6 @@
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
-    /* AVATAR VIỀN XOAY ĐỎ - TRẮNG */
     .avatar-wrapper {
       position: relative;
       width: 110px;
@@ -128,7 +124,6 @@
       background-color: #1a1a1a;
     }
 
-    /* TÊN KÊNH */
     .channel-name {
       font-size: 1.65rem;
       font-weight: 800;
@@ -165,7 +160,6 @@
       filter: drop-shadow(0 0 6px rgba(254, 44, 85, 0.75));
     }
 
-    /* KHUNG DONATE NEON */
     .donate-neon-wrapper {
       position: relative;
       width: 100%;
@@ -235,6 +229,30 @@
       border-radius: 12px;
     }
 
+    /* NÚT TẢI QR CHUNG */
+    .btn-download-qr {
+      margin-top: 12px;
+      background: rgba(254, 44, 85, 0.15);
+      border: 1px solid #fe2c55;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.3);
+    }
+
+    .btn-download-qr:hover {
+      background: #fe2c55;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.8);
+      transform: translateY(-1px);
+    }
+
     .bank-details {
       margin-top: 14px;
       font-size: 0.88rem;
@@ -278,9 +296,6 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.6);
     }
 
-    /* ============================================================
-       THANH MINI PLAYER NEON - TRÔI THEO TRANG VÀ THU GỌN THÀNH BONG BÓNG
-       ============================================================ */
     .mini-player-dock {
       position: relative;
       width: 100%;
@@ -475,7 +490,6 @@
       background: #fe2c55;
     }
 
-    /* BONG BÓNG CHAT ÂM NHẠC TRÔI TỰ DO (TỰ ĐỘNG MỜ SAU 3S KHÔNG CHẠM) */
     .floating-music-bubble {
       position: fixed;
       bottom: 25px;
@@ -514,7 +528,6 @@
       pointer-events: none;
     }
 
-    /* POPUP ĐIỀU KHIỂN ÂM NHẠC */
     .music-popup-modal {
       display: none;
       position: fixed;
@@ -639,7 +652,6 @@
       box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
     }
 
-    /* NÚT MẠNG XÃ HỘI NEON GLASSMORPHISM */
     .social-links {
       display: flex;
       flex-direction: column;
@@ -767,7 +779,6 @@
       color: #ffffff;
     }
 
-    /* KHUNG DỊCH VỤ CÀY THUÊ */
     #serviceContainerWrapper {
       display: none;
       width: 100%;
@@ -1048,7 +1059,7 @@
       border-radius: 14px;
       padding: 10px;
       display: inline-block;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 15px rgba(254, 44, 85, 0.3);
     }
     .qr-img-auto {
@@ -1141,7 +1152,6 @@
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
     }
 
-    /* MODAL CHUNG */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -1192,11 +1202,6 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
                   0 0 25px rgba(254, 44, 85, 0.4);
       animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes modalScaleUp {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .selected-modal-wrapper::before {
@@ -1339,9 +1344,6 @@
       color: #fff;
     }
 
-    /* ============================================================
-       MASCOT BAY LƯỢN, KÉO THẢ & VỆT TÀN ẢNH ĐỎ MỜ
-       ============================================================ */
     .floating-mascot {
       position: fixed;
       width: 80px;
@@ -1445,7 +1447,12 @@
             <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
             <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
             <div class="qr-box-donate">
-              <img src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
+              <img id="donateQrImg" src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
+            </div>
+            <div>
+              <button type="button" class="btn-download-qr" onclick="downloadQRCode('donateQrImg', 'QR_Donate_Techcombank.png')">
+                <i class="fa-solid fa-download"></i> Tải ảnh mã QR
+              </button>
             </div>
             <div class="bank-details">
               <div>Ngân hàng: <strong>Techcombank</strong></div>
@@ -1681,6 +1688,11 @@
             <div class="qr-box-auto">
               <img id="autoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
             </div>
+            <div>
+              <button type="button" class="btn-download-qr" onclick="downloadQRCode('autoQrImg', 'QR_ThanhToan_CayThue.png')">
+                <i class="fa-solid fa-download"></i> Tải ảnh mã QR
+              </button>
+            </div>
             <p class="qr-memo-preview" id="memoPreview">Lời nhắn chuyển khoản: PHALNNN CAY THUE</p>
 
             <div class="qr-notice">
@@ -1770,9 +1782,6 @@
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
-    // ==========================================
-    // CẤU HÌNH TÀI KHOẢN TECHCOMBANK (VIETQR):
-    // ==========================================
     const myBankConfig = {
       bankId: "TCB",
       accountNo: "19074758620012",
@@ -1796,9 +1805,52 @@
       setTimeout(() => { btn.innerHTML = orig; }, 2000);
     }
 
-    // ==========================================
-    // DANH SÁCH BÀI HÁT (PLAYLIST NỀN 6 BÀI)
-    // ==========================================
+    // Hàm tải ảnh mã QR về máy (hỗ trợ cả ảnh tĩnh và ảnh link API VietQR động)
+    function downloadQRCode(imgId, filename) {
+      const imgElement = document.getElementById(imgId);
+      if (!imgElement || !imgElement.src) {
+        alert("Không tìm thấy ảnh mã QR để tải!");
+        return;
+      }
+
+      // Tạo canvas để tải ảnh (tránh lỗi CORS khi tải ảnh từ domain ngoài như VietQR)
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const imageObj = new Image();
+      imageObj.crossOrigin = "anonymous";
+
+      imageObj.onload = function() {
+        canvas.width = imageObj.naturalWidth || imageObj.width;
+        canvas.height = imageObj.naturalHeight || imageObj.height;
+        ctx.drawImage(imageObj, 0, 0);
+        
+        try {
+          const dataURL = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = dataURL;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } catch (err) {
+          // Fallback nếu dính bảo mật CORS của trình duyệt
+          window.open(imgElement.src, '_blank');
+        }
+      };
+
+      imageObj.onerror = function() {
+        // Fallback mở trực tiếp link ảnh nếu load qua canvas thất bại
+        window.open(imgElement.src, '_blank');
+      };
+
+      // Thêm tham số chống cache nếu là link API VietQR
+      let srcToFetch = imgElement.src;
+      if (srcToFetch.includes('vietqr.io') && !srcToFetch.includes('t=')) {
+        srcToFetch += (srcToFetch.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+      }
+      imageObj.src = srcToFetch;
+    }
+
     const playlist = [
       { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
       { title: "An Unfinished Song", artist: "Wuthering Waves OST", src: "music2.mp3" },
@@ -1809,7 +1861,7 @@
     ];
 
     let currentSongIndex = 0;
-    let savedCurrentTime = 0; // Biến lưu thời gian bài hát đang phát dở
+    let savedCurrentTime = 0;
     const bgAudio = document.getElementById('bgAudio');
     const playPauseSvg = document.getElementById('playPauseSvg');
     const popupPlayPauseSvg = document.getElementById('popupPlayPauseSvg');
@@ -1952,7 +2004,6 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
-    // Khi ẩn trang: Lưu lại thời điểm đang chạy, pause và xóa src để mất thông báo hệ thống
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         if (isMusicPlaying) {
@@ -1965,7 +2016,6 @@
       }
     });
 
-    // Thu gọn thành bong bóng
     function toggleDockMinimize() {
       const dock = document.getElementById('miniPlayerDock');
       const musicBubble = document.getElementById('musicBubble');
@@ -1980,9 +2030,6 @@
       resetBubbleFade();
     }
 
-    // ==========================================
-    // LOGIC KÉO THẢ & TỰ ĐỘNG MỜ BONG BÓNG ÂM NHẠC (SAU 3S)
-    // ==========================================
     const musicBubble = document.getElementById('musicBubble');
     let isBubbleDragging = false;
     let bubbleStartX = 0, bubbleStartY = 0;
@@ -2067,10 +2114,6 @@
       resetBubbleFade();
     });
 
-
-    // ==========================================
-    // LOGIC MASCOT BAY LƯỢN & KÉO THẢ TỰ DO
-    // ==========================================
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
     const mascotBubble = document.getElementById('mascotBubble');
@@ -2221,9 +2264,6 @@
     pickNewTarget();
     requestAnimationFrame(animateMascot);
 
-    // ==========================================
-    // QUẢN LÝ DỊCH VỤ CÀY THUÊ & TÍNH TIỀN
-    // ==========================================
     const checkboxes = document.querySelectorAll('.map-cb');
     const totalDisplay = document.getElementById('totalDisplay');
     const selectedCountDisplay = document.getElementById('selectedCountDisplay');
@@ -2311,9 +2351,6 @@
     clientNameInput.addEventListener('input', updateQR);
     updateQR();
 
-    // ==========================================
-    // POPUP XEM DANH SÁCH MỤC ĐÃ CHỌN
-    // ==========================================
     function renderSelectedList() {
       const listContainer = document.getElementById('selectedItemsList');
       listContainer.innerHTML = "";
@@ -2374,7 +2411,6 @@
       document.getElementById('selectedModal').classList.remove('active');
     }
 
-    // MODAL PHÓNG TO BẢNG GIÁ
     function openImageModal() {
       const modal = document.getElementById("imageModal");
       const bannerImg = document.getElementById("bannerImg");
@@ -2395,7 +2431,6 @@
       }
     });
 
-    // GỬI ĐƠN QUA TIKTOK
     function sendOrderToTikTok() {
       const name = clientNameInput.value.trim();
       const acc = gameAccountInput.value.trim();
