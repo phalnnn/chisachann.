@@ -39,8 +39,24 @@
       max-width: 540px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
       align-items: center;
+    }
+
+    /* Page View Controller */
+    .page-view {
+      width: 100%;
+      display: none;
+      animation: pageFadeIn 0.3s ease;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .card-border-wrapper {
@@ -55,7 +71,6 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9),
                   0 0 25px rgba(254, 44, 85, 0.3),
                   0 0 15px rgba(255, 255, 255, 0.2);
-      transition: box-shadow 0.4s ease;
     }
 
     .card-border-wrapper::before {
@@ -93,6 +108,36 @@
     #serviceContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
+    }
+
+    .nav-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      background: rgba(16, 16, 22, 0.85);
+      border: 1px solid rgba(254, 44, 85, 0.5);
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+
+    .btn-back-home:hover {
+      background: #fe2c55;
+      box-shadow: 0 0 12px rgba(254, 44, 85, 0.6);
+      transform: translateX(-2px);
     }
 
     .avatar-wrapper {
@@ -755,38 +800,27 @@
       fill: currentColor;
     }
 
-    .btn-toggle-service {
+    .btn-open-service {
       background: rgba(18, 18, 24, 0.85);
       color: #ffffff;
       border: 1.5px solid #fe2c55;
       box-shadow: 0 0 14px rgba(254, 44, 85, 0.35);
     }
-    .btn-toggle-service:hover {
+    .btn-open-service:hover {
       background: rgba(28, 28, 36, 0.95);
       color: #ffffff;
       border-color: #ffffff;
       box-shadow: 0 0 22px rgba(254, 44, 85, 0.75);
     }
-    .btn-toggle-service .arrow-icon {
+    .btn-open-service .arrow-icon {
       position: absolute;
       right: 18px;
       color: #fe2c55;
-      transition: transform 0.35s ease;
+      transition: transform 0.25s ease;
     }
-    .btn-toggle-service.active .arrow-icon {
-      transform: rotate(180deg);
+    .btn-open-service:hover .arrow-icon {
+      transform: translateX(4px);
       color: #ffffff;
-    }
-
-    #serviceContainerWrapper {
-      display: none;
-      width: 100%;
-      animation: fadeIn 0.35s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .banner-wrap {
@@ -1432,122 +1466,133 @@
 
   <div class="container">
 
-    <div class="card-border-wrapper">
-      <div class="card profile-card">
-        <div class="avatar-wrapper">
-          <img src="avatar.jpg" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-        </div>
+    <!-- VIEW 1: PROFILE BIO -->
+    <div id="viewProfile" class="page-view active">
+      <div class="card-border-wrapper">
+        <div class="card profile-card">
+          <div class="avatar-wrapper">
+            <img src="avatar.jpg" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+          </div>
 
-        <h1 class="channel-name">@phalnnn</h1>
-        <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
+          <h1 class="channel-name">@phalnnn</h1>
+          <p class="bio">kênh của mình <span class="custom-heart">💗</span></p>
 
-        <div class="donate-neon-wrapper">
-          <div class="donate-box">
-            <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
-            <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
-            <div class="qr-box-donate">
-              <img id="donateQrImg" src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
-            </div>
-            <div>
-              <button type="button" class="btn-download-qr" onclick="downloadQRCode('donateQrImg', 'QR_Donate_Techcombank.png')">
-                <i class="fa-solid fa-download"></i> Tải ảnh mã QR
-              </button>
-            </div>
-            <div class="bank-details">
-              <div>Ngân hàng: <strong>Techcombank</strong></div>
-              <div class="stk-copy-box">
-                Số TK: <strong id="stkNumber">1907 4758 6200 12</strong>
-                <button type="button" class="btn-copy-stk" onclick="copySTK(this)">
-                  <i class="fa-regular fa-copy"></i> Copy
+          <div class="donate-neon-wrapper">
+            <div class="donate-box">
+              <div class="donate-title">Donate Tà Tữa <span class="custom-heart">💗</span></div>
+              <p class="donate-desc">Quét mã QR để ủng hộ mình ly tà tữa <span class="custom-heart">💗</span></p>
+              <div class="qr-box-donate">
+                <img id="donateQrImg" src="donate.jpg" alt="QR Donate Techcombank" class="qr-img-donate" onerror="this.src='https://img.vietqr.io/image/TCB-19074758620012-compact2.png?accountName=PHAM%20NGUYEN%20BAO%20LAN&addInfo=DONATE%20TA%20TUA'">
+              </div>
+              <div>
+                <button type="button" class="btn-download-qr" onclick="downloadQRCode('donateQrImg', 'QR_Donate_Techcombank.png')">
+                  <i class="fa-solid fa-download"></i> Tải ảnh mã QR
                 </button>
               </div>
-              <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mini-player-dock" id="miniPlayerDock">
-          <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Thu gọn thành bong bóng nhạc">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </button>
-          <div class="player-border-glow">
-            <div class="player-glass-body">
-              <div class="vinyl-disk-wrap" id="vinylDisk">
-                <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
-              </div>
-
-              <div class="song-details">
-                <div class="song-title-row">
-                  <span class="song-name" id="currentSongTitle">Styx Helix</span>
-                  <div class="soundwave-bars" id="soundwaveContainer">
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                    <span class="soundwave-bar"></span>
-                  </div>
+              <div class="bank-details">
+                <div>Ngân hàng: <strong>Techcombank</strong></div>
+                <div class="stk-copy-box">
+                  Số TK: <strong id="stkNumber">1907 4758 6200 12</strong>
+                  <button type="button" class="btn-copy-stk" onclick="copySTK(this)">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
                 </div>
-                <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
-              </div>
-
-              <div class="player-controls">
-                <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
-                  <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                </button>
-                
-                <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
-                </button>
-
-                <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
-                  <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                </button>
-
-                <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
-                </button>
+                <div style="margin-top: 4px;">Tên tài khoản: <strong>PHAM NGUYEN BAO LAN</strong></div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="social-links">
-          <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
-            <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
-          </a>
+          <div class="mini-player-dock" id="miniPlayerDock">
+            <button type="button" class="btn-toggle-dock" onclick="toggleDockMinimize()" title="Thu gọn thành bong bóng nhạc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            </button>
+            <div class="player-border-glow">
+              <div class="player-glass-body">
+                <div class="vinyl-disk-wrap" id="vinylDisk">
+                  <img src="avatar.jpg" class="vinyl-img" alt="Track Cover" onerror="this.src='https://ui-avatars.com/api/?name=phalnnn&background=fe2c55&color=fff'">
+                </div>
 
-          <a href="https://discord.gg/tCgPMRaqek" target="_blank" rel="noopener noreferrer" class="btn-link btn-discord">
-            <i class="fa-brands fa-discord"></i> Tham Gia Server Discord
-          </a>
+                <div class="song-details">
+                  <div class="song-title-row">
+                    <span class="song-name" id="currentSongTitle">Styx Helix</span>
+                    <div class="soundwave-bars" id="soundwaveContainer">
+                      <span class="soundwave-bar"></span>
+                      <span class="soundwave-bar"></span>
+                      <span class="soundwave-bar"></span>
+                      <span class="soundwave-bar"></span>
+                    </div>
+                  </div>
+                  <span class="song-artist" id="currentSongArtist">Re:Zero OST</span>
+                </div>
 
-          <a href="https://youtube.com/@phalnnn?si=4p5A05Y50ROdZH04" target="_blank" rel="noopener noreferrer" class="btn-link btn-youtube">
-            <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tui
-          </a>
+                <div class="player-controls">
+                  <button type="button" class="player-ctrl-btn" id="muteToggleBtn" onclick="toggleMute(event)" title="Bật/Tắt âm thanh">
+                    <svg id="muteSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                  </button>
+                  
+                  <button type="button" class="player-ctrl-btn" onclick="prevSong()" title="Bài trước">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="4" x2="5" y2="20"></line></svg>
+                  </button>
 
-          <a href="https://zypage.com/phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-zypage">
-            <svg class="zypage-icon" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
-            </svg>
-            Donate Cho Chía Bel (ZyPage)
-          </a>
+                  <button type="button" class="player-ctrl-btn play-btn" id="dockPlayBtn" onclick="toggleAudio(event)" title="Phát/Dừng">
+                    <svg id="playPauseSvg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </button>
 
-          <button type="button" class="btn-link btn-toggle-service" id="toggleServiceBtn" onclick="toggleServiceMenu()">
-            <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
-            <i class="fa-solid fa-chevron-down arrow-icon"></i>
-          </button>
-        </div>
+                  <button type="button" class="player-ctrl-btn" onclick="nextSong()" title="Bài tiếp">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="4" x2="19" y2="20"></line></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="footer">
-          © @phalnnn • All rights reserved
+          <div class="social-links">
+            <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
+              <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
+            </a>
+
+            <a href="https://discord.gg/tCgPMRaqek" target="_blank" rel="noopener noreferrer" class="btn-link btn-discord">
+              <i class="fa-brands fa-discord"></i> Tham Gia Server Discord
+            </a>
+
+            <a href="https://youtube.com/@phalnnn?si=4p5A05Y50ROdZH04" target="_blank" rel="noopener noreferrer" class="btn-link btn-youtube">
+              <i class="fa-brands fa-youtube"></i> Kênh YouTube Của Tui
+            </a>
+
+            <a href="https://zypage.com/phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-zypage">
+              <svg class="zypage-icon" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2H16C17.6569 2 19 3.34315 19 5V8H21C22.1046 8 23 8.89543 23 10V19C23 20.6569 21.6569 22 20 22H11C9.34315 22 8 20.6569 8 19V16H5C3.89543 16 3 15.1046 3 14V5C3 3.34315 4.34315 2 6 2H7ZM8 8V5C8 4.44772 7.55228 4 7 4H6C5.44772 4 5 4.44772 5 5V14C5 14.5523 5.44772 15 6 15H8V11C8 9.34315 9.34315 8 11 8H16V5C16 4.44772 15.5523 4 15 4H8ZM11 10C10.4477 10 10 10.4477 10 11V19C10 19.5523 10.4477 20 11 20H20C20.5523 20 21 19.5523 21 19V10C21 9.44772 20.5523 9 20 9H12C11.4477 9 11 9.44772 11 10ZM13 12H18V17H13V12Z" />
+              </svg>
+              Donate Cho Chía Bel (ZyPage)
+            </a>
+
+            <button type="button" class="btn-link btn-open-service" onclick="switchView('service')">
+              <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
+              <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </button>
+          </div>
+
+          <div class="footer">
+            © @phalnnn • All rights reserved
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="serviceContainerWrapper">
+    <!-- VIEW 2: DỊCH VỤ CÀY THUÊ (TRANG PHỤ CÙNG FILE) -->
+    <div id="viewService" class="page-view">
+      <div class="nav-bar">
+        <button type="button" class="btn-back-home" onclick="switchView('profile')">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại Profile
+        </button>
+        <span style="font-size: 0.82rem; color: #bbb;">Dịch vụ cày thuê</span>
+      </div>
+
       <div class="card-border-wrapper">
         <div class="card" id="serviceContainer">
           <div class="banner-wrap" onclick="openImageModal()">
@@ -1781,6 +1826,23 @@
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
+    /* SPA View Switching */
+    function switchView(viewName) {
+      const viewProfile = document.getElementById('viewProfile');
+      const viewService = document.getElementById('viewService');
+      
+      if (viewName === 'service') {
+        viewProfile.classList.remove('active');
+        viewService.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateQR();
+      } else {
+        viewService.classList.remove('active');
+        viewProfile.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
     const myBankConfig = {
       bankId: "TCB",
       accountNo: "19074758620012",
@@ -2267,20 +2329,6 @@
     const gamePasswordInput = document.getElementById('gamePassword');
     const memoPreview = document.getElementById('memoPreview');
 
-    function toggleServiceMenu() {
-      const wrapper = document.getElementById("serviceContainerWrapper");
-      const btn = document.getElementById("toggleServiceBtn");
-      
-      if (wrapper.style.display === "block") {
-        wrapper.style.display = "none";
-        btn.classList.remove("active");
-      } else {
-        wrapper.style.display = "block";
-        btn.classList.add("active");
-        wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
     function togglePasswordVisibility() {
       const pwInput = document.getElementById("gamePassword");
       const pwIcon = document.getElementById("pwIcon");
@@ -2343,7 +2391,6 @@
 
     checkboxes.forEach(cb => cb.addEventListener('change', updateQR));
     clientNameInput.addEventListener('input', updateQR);
-    updateQR();
 
     function renderSelectedList() {
       const listContainer = document.getElementById('selectedItemsList');
