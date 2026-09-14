@@ -43,7 +43,7 @@
       align-items: center;
     }
 
-    /* Page View Controller */
+    /* Page View Controller (SPA) */
     .page-view {
       width: 100%;
       display: none;
@@ -1584,7 +1584,7 @@
       </div>
     </div>
 
-    <!-- VIEW 2: DỊCH VỤ CÀY THUÊ (TRANG PHỤ CÙNG FILE) -->
+    <!-- VIEW 2: DỊCH VỤ CÀY THUÊ -->
     <div id="viewService" class="page-view">
       <div class="nav-bar">
         <button type="button" class="btn-back-home" onclick="switchView('profile')">
@@ -1753,6 +1753,7 @@
 
   </div>
 
+  <!-- MODAL XEM CÁC MỤC ĐÃ CHỌN -->
   <div id="selectedModal" class="modal-overlay" onclick="closeSelectedModal(event)">
     <div class="selected-modal-wrapper" onclick="event.stopPropagation()">
       <div class="selected-modal-box">
@@ -1771,15 +1772,18 @@
     </div>
   </div>
 
+  <!-- MODAL PHÓNG TO ẢNH BẢNG GIÁ -->
   <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="image-modal-close">&times;</span>
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
   </div>
 
+  <!-- BONG BÓNG NHẠC FLOATING BUBBLE -->
   <div class="floating-music-bubble" id="musicBubble">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
   </div>
 
+  <!-- MODAL ĐIỀU KHIỂN NHẠC POPUP -->
   <div id="musicModal" class="music-popup-modal" onclick="closeMusicModal()">
     <div class="music-popup-content" onclick="event.stopPropagation()">
       <button type="button" class="music-popup-close" onclick="closeMusicModal()">&times;</button>
@@ -1816,6 +1820,7 @@
     </div>
   </div>
 
+  <!-- MASCOT BAY LƠ LỬNG -->
   <div class="floating-mascot" id="mascot">
     <div class="mascot-bubble show" id="mascotBubble">Cảm ơn bạn đã ủng hộ 💗</div>
     <div class="mascot-img-wrap" id="mascotImgWrap">
@@ -1826,7 +1831,7 @@
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
-    /* SPA View Switching */
+    /* CHUYỂN ĐỔI VIEW (SPA) */
     function switchView(viewName) {
       const viewProfile = document.getElementById('viewProfile');
       const viewService = document.getElementById('viewService');
@@ -1907,6 +1912,7 @@
       imageObj.src = srcToFetch;
     }
 
+    /* TRÌNH PHÁT NHẠC */
     const playlist = [
       { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
       { title: "An Unfinished Song", artist: "Wuthering Waves OST", src: "music2.mp3" },
@@ -2086,12 +2092,14 @@
       resetBubbleFade();
     }
 
+    /* BONG BÓNG NHẠC TỐI ƯU CLICK & DRAG */
     const musicBubble = document.getElementById('musicBubble');
     let isBubbleDragging = false;
     let bubbleStartX = 0, bubbleStartY = 0;
     let bubblePosX = 0, bubblePosY = 0;
     let hasMoved = false;
     let bubbleFadeTimer = null;
+    let bubbleTouchStartTime = 0;
 
     function resetBubbleFade() {
       musicBubble.classList.remove('fade-out');
@@ -2106,6 +2114,7 @@
     function onBubbleDragStart(e) {
       isBubbleDragging = true;
       hasMoved = false;
+      bubbleTouchStartTime = Date.now();
       resetBubbleFade();
 
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -2130,27 +2139,31 @@
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       
-      if (Math.abs(clientX - bubbleStartX) > 5 || Math.abs(clientY - bubbleStartY) > 5) {
+      if (Math.hypot(clientX - bubbleStartX, clientY - bubbleStartY) > 10) {
         hasMoved = true;
       }
 
-      const dx = clientX - bubbleStartX;
-      const dy = clientY - bubbleStartY;
+      if (hasMoved) {
+        const dx = clientX - bubbleStartX;
+        const dy = clientY - bubbleStartY;
 
-      let newX = Math.min(Math.max(10, bubblePosX + dx), window.innerWidth - musicBubble.offsetWidth - 10);
-      let newY = Math.min(Math.max(10, bubblePosY + dy), window.innerHeight - musicBubble.offsetHeight - 10);
+        let newX = Math.min(Math.max(10, bubblePosX + dx), window.innerWidth - musicBubble.offsetWidth - 10);
+        let newY = Math.min(Math.max(10, bubblePosY + dy), window.innerHeight - musicBubble.offsetHeight - 10);
 
-      musicBubble.style.left = `${newX}px`;
-      musicBubble.style.top = `${newY}px`;
+        musicBubble.style.left = `${newX}px`;
+        musicBubble.style.top = `${newY}px`;
+      }
     }
 
-    function onBubbleDragEnd(e) {
-      if (isBubbleDragging) {
-        isBubbleDragging = false;
-        resetBubbleFade();
-        if (!hasMoved) {
-          openMusicModal();
-        }
+    function onBubbleDragEnd() {
+      if (!isBubbleDragging) return;
+      isBubbleDragging = false;
+      resetBubbleFade();
+
+      const touchDuration = Date.now() - bubbleTouchStartTime;
+
+      if (!hasMoved || touchDuration < 250) {
+        openMusicModal();
       }
     }
 
@@ -2166,10 +2179,9 @@
       musicBubble.classList.remove('fade-out');
       if (bubbleFadeTimer) clearTimeout(bubbleFadeTimer);
     });
-    musicBubble.addEventListener('mouseleave', () => {
-      resetBubbleFade();
-    });
+    musicBubble.addEventListener('mouseleave', resetBubbleFade);
 
+    /* MASCOT BAY LƠ LỬNG */
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
     const mascotBubble = document.getElementById('mascotBubble');
@@ -2320,6 +2332,7 @@
     pickNewTarget();
     requestAnimationFrame(animateMascot);
 
+    /* XỬ LÝ CHỌN MAP & TÍNH TIỀN DỊCH VỤ */
     const checkboxes = document.querySelectorAll('.map-cb');
     const totalDisplay = document.getElementById('totalDisplay');
     const selectedCountDisplay = document.getElementById('selectedCountDisplay');
@@ -2515,3 +2528,4 @@
   </script>
 </body>
 </html>
+
