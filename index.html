@@ -1212,7 +1212,7 @@
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
     }
 
-    /* VIEW 3: KHO ACC CỦA CHÍA */
+    /* VIEW 3: KHO ACC CỦA CHÍA CÓ THÊM GIÁ TIỀN */
     .vault-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -1273,6 +1273,20 @@
       border-radius: 6px;
     }
 
+    .vault-price-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #fcee0a;
+      color: #fcee0a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(252, 238, 10, 0.4);
+    }
+
     .vault-card-body {
       padding: 12px 14px;
       display: flex;
@@ -1295,6 +1309,13 @@
       color: #fe2c55;
       letter-spacing: 0.5px;
       text-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
+    }
+
+    .vault-price-display {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fcee0a;
+      text-shadow: 0 0 8px rgba(252, 238, 10, 0.5);
     }
 
     .btn-buy-acc {
@@ -1975,7 +1996,7 @@
       </div>
     </div>
 
-    <!-- VIEW 3: KHO ACC CỦA CHÍA -->
+    <!-- VIEW 3: KHO ACC CỦA CHÍA CÓ THÊM GIÁ TIỀN -->
     <div id="viewVault" class="page-view">
       <div class="nav-bar">
         <button type="button" class="btn-back-home" onclick="switchView('profile')">
@@ -2132,7 +2153,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* TẢI KHO ACC TỪ SUPABASE (CHỈ LẤY TITLE & IMAGE CỦA ACC CHƯA BÁN) */
+    /* TẢI KHO ACC TỪ SUPABASE (CÓ THÊM TRƯỜNG PRICE) */
     async function fetchVaultAccountsFromSupabase() {
       const loadingEl = document.getElementById('vaultLoading');
       const gridEl = document.getElementById('vaultGrid');
@@ -2145,7 +2166,7 @@
       try {
         const { data, error } = await _supabase
           .from('accounts')
-          .select('id, title, image, is_sold')
+          .select('id, title, image, price, is_sold')
           .eq('is_sold', false)
           .order('created_at', { ascending: false });
 
@@ -2154,7 +2175,8 @@
         vaultAccounts = (data || []).map(row => ({
           id: row.id,
           title: row.title,
-          image: row.image
+          image: row.image,
+          price: row.price || 0
         }));
 
         loadingEl.style.display = 'none';
@@ -2183,14 +2205,19 @@
         const card = document.createElement('div');
         card.className = 'vault-card';
 
+        const priceNum = parseFloat(acc.price) || 0;
+        const priceFormatted = priceNum > 0 ? priceNum.toLocaleString('vi-VN') + 'đ' : 'Liên hệ';
+
         const imgHtml = acc.image 
           ? `<div class="vault-img-wrap" onclick="openZoomImage('${acc.image}')">
                <img src="${acc.image}" alt="${acc.title}" class="vault-img" loading="lazy">
                <span class="vault-tag">VERIFIED</span>
+               <span class="vault-price-badge">${priceFormatted}</span>
              </div>`
           : `<div class="vault-img-wrap" style="display:flex;align-items:center;justify-content:center;color:#666;font-size:0.8rem;">
                <i class="fa-solid fa-image" style="font-size:2rem;margin-bottom:4px;"></i>
                <span style="display:block;">Không có ảnh</span>
+               <span class="vault-price-badge">${priceFormatted}</span>
              </div>`;
 
         card.innerHTML = `
@@ -2198,13 +2225,16 @@
           <div class="vault-card-body">
             <div class="vault-card-row">
               <span class="vault-code">${acc.title}</span>
+              <span class="vault-price-display">${priceFormatted}</span>
+            </div>
+            <div class="vault-card-row">
               <button type="button" class="btn-copy-code" onclick="copyAccCode('${acc.title}', this)">
                 <i class="fa-regular fa-copy"></i> Copy mã
               </button>
+              <button type="button" class="btn-buy-acc" style="width: auto; padding: 6px 14px;" onclick="selectAndOrderAccount('${acc.title}', '${priceFormatted}')">
+                <i class="fa-brands fa-tiktok"></i> MUA ACC NÀY
+              </button>
             </div>
-            <button type="button" class="btn-buy-acc" onclick="selectAndOrderAccount('${acc.title}')">
-              <i class="fa-brands fa-tiktok"></i> MUA ACC NÀY
-            </button>
           </div>
         `;
         gridEl.appendChild(card);
@@ -2233,18 +2263,19 @@
       setTimeout(() => { btn.innerHTML = orig; }, 2000);
     }
 
-    /* KHI CHỌN ACC: TỰ ĐỘNG CHÉP MÃ, BÁO THÔNG BÁO VÀ NHẢY SANG TIKTOK */
-    function selectAndOrderAccount(accCode) {
+    /* KHI CHỌN ACC: TỰ ĐỘNG CHÉP MÃ KÈM GIÁ VÀ NHẢY SANG TIKTOK */
+    function selectAndOrderAccount(accCode, accPrice) {
       const message = 
 `🌸 YÊU CẦU MUA TÀI KHOẢN 🌸
 - Mã tài khoản: ${accCode}
+- Giá niêm yết: ${accPrice}
 - Kênh liên hệ: Kho acc của Chía (@phalnnn)
 ---------------------------
-👉 Mình muốn mua tài khoản có mã ${accCode} này, bạn kiểm tra và báo giá cho mình nhé 💗`;
+👉 Mình muốn mua tài khoản ${accCode} giá ${accPrice} này, bạn kiểm tra và giao dịch giúp mình nhé 💗`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(message).then(() => {
-          alert(`✨ Đã tự động sao chép mã tài khoản: ${accCode}\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) tin nhắn gửi cho mình nhé 💗`);
+          alert(`✨ Đã tự động sao chép mã tài khoản: ${accCode} (${accPrice})\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) tin nhắn gửi cho mình nhé 💗`);
           window.open('https://www.tiktok.com/@phalnnn', '_blank');
         }).catch(() => {
           prompt(`Hãy sao chép nội dung đơn mua tài khoản này:`, message);
