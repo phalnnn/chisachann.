@@ -6,6 +6,10 @@
   <title>phalnnn Profile Bio</title>
   <link rel="icon" href="avatar.jpg" type="image/jpeg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Supabase Client JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -105,7 +109,7 @@
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
-    #serviceContainer {
+    #serviceContainer, #vaultContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
@@ -823,6 +827,29 @@
       color: #ffffff;
     }
 
+    /* NÚT MỞ KHO ACC CỦA CHÍA */
+    .btn-open-vault {
+      background: linear-gradient(135deg, rgba(254, 44, 85, 0.2), rgba(0, 240, 255, 0.15));
+      color: #ffffff;
+      border: 1.5px solid #00f0ff;
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+    }
+    .btn-open-vault:hover {
+      background: linear-gradient(135deg, rgba(254, 44, 85, 0.35), rgba(0, 240, 255, 0.3));
+      border-color: #fe2c55;
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.65), 0 0 12px rgba(254, 44, 85, 0.6);
+    }
+    .btn-open-vault .vault-arrow {
+      position: absolute;
+      right: 18px;
+      color: #00f0ff;
+      transition: transform 0.25s ease;
+    }
+    .btn-open-vault:hover .vault-arrow {
+      transform: translateX(4px);
+      color: #ffffff;
+    }
+
     .banner-wrap {
       position: relative;
       width: 100%;
@@ -1185,6 +1212,181 @@
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
     }
 
+    /* VIEW 3: KHO ACC CỦA CHÍA */
+    .vault-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    @media (min-width: 480px) {
+      .vault-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .vault-card {
+      background: rgba(14, 14, 20, 0.92);
+      border: 1.5px solid rgba(254, 44, 85, 0.35);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vault-card:hover {
+      border-color: #00f0ff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 240, 255, 0.3), 0 0 15px rgba(254, 44, 85, 0.4);
+    }
+
+    .vault-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 175px;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .vault-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .vault-card:hover .vault-img {
+      transform: scale(1.05);
+    }
+
+    .vault-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.6);
+      color: #00f0ff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .vault-card-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .vault-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .vault-code {
+      font-family: 'Orbitron', monospace, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fe2c55;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
+    }
+
+    .btn-buy-acc {
+      width: 100%;
+      padding: 9px 12px;
+      background: linear-gradient(135deg, #fe2c55, #ff0055);
+      border: 1px solid #fe2c55;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(254, 44, 85, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .btn-buy-acc:hover {
+      background: #fe2c55;
+      box-shadow: 0 6px 20px rgba(254, 44, 85, 0.8), 0 0 10px #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy-code {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #eee;
+      font-size: 0.74rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-code:hover {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      color: #fff;
+    }
+
+    .vault-search-box {
+      width: 100%;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .vault-search-box input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(254, 44, 85, 0.4);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .vault-search-box input:focus {
+      border-color: #00f0ff;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+    }
+
+    .vault-search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fe2c55;
+    }
+
+    .vault-loading {
+      text-align: center;
+      padding: 40px 10px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .vault-empty {
+      text-align: center;
+      padding: 35px 10px;
+      color: #777;
+      font-size: 0.88rem;
+    }
+
+    /* MODAL OVERLAY */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -1552,6 +1754,17 @@
           </div>
 
           <div class="social-links">
+            <!-- NÚT MỞ KHO ACC CỦA CHÍA -->
+            <button type="button" class="btn-link btn-open-vault" onclick="switchView('vault')">
+              <i class="fa-solid fa-gem" style="color: #00f0ff;"></i> Kho Acc Của Chía
+              <i class="fa-solid fa-arrow-right vault-arrow"></i>
+            </button>
+
+            <button type="button" class="btn-link btn-open-service" onclick="switchView('service')">
+              <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
+              <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </button>
+
             <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
               <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
             </a>
@@ -1570,11 +1783,6 @@
               </svg>
               Donate Cho Chía Bel (ZyPage)
             </a>
-
-            <button type="button" class="btn-link btn-open-service" onclick="switchView('service')">
-              <i class="fa-solid fa-gamepad"></i> Dịch Vụ Cày Thuê Wuthering Waves
-              <i class="fa-solid fa-arrow-right arrow-icon"></i>
-            </button>
           </div>
 
           <div class="footer">
@@ -1767,6 +1975,52 @@
       </div>
     </div>
 
+    <!-- VIEW 3: KHO ACC CỦA CHÍA -->
+    <div id="viewVault" class="page-view">
+      <div class="nav-bar">
+        <button type="button" class="btn-back-home" onclick="switchView('profile')">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại Profile
+        </button>
+        <span style="font-size: 0.82rem; color: #00f0ff; font-weight: 700;">
+          <i class="fa-solid fa-gem"></i> Kho Acc Của Chía
+        </span>
+      </div>
+
+      <div class="card-border-wrapper">
+        <div class="card" id="vaultContainer">
+          <div style="text-align: center; margin-bottom: 16px;">
+            <h2 style="font-size: 1.3rem; font-weight: 800; color: #00f0ff; text-shadow: 0 0 10px rgba(0,240,255,0.5);">
+              <i class="fa-solid fa-shield-halved"></i> DANH SÁCH ACC CÓ SẴN
+            </h2>
+            <p style="font-size: 0.82rem; color: #bbb; margin-top: 4px;">
+              Nhấn <strong>"MUA ACC NÀY"</strong> để sao chép mã và tự động chuyển sang TikTok nhắn cho tui nhé <span class="custom-heart">💗</span>
+            </p>
+          </div>
+
+          <!-- Tìm kiếm mã acc -->
+          <div class="vault-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="vaultSearchInput" oninput="handleVaultSearch()" placeholder="Tìm kiếm theo mã tài khoản (#xxxxx)...">
+          </div>
+
+          <!-- Trạng thái tải -->
+          <div id="vaultLoading" class="vault-loading">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.6rem; color: #fe2c55; margin-bottom: 8px;"></i>
+            <p>Đang tải dữ liệu từ kho Supabase...</p>
+          </div>
+
+          <!-- Danh sách thẻ acc -->
+          <div id="vaultGrid" class="vault-grid" style="display: none;"></div>
+
+          <!-- Trạng thái trống -->
+          <div id="vaultEmpty" class="vault-empty" style="display: none;">
+            <i class="fa-solid fa-box-open" style="font-size: 2rem; margin-bottom: 8px; color: #555;"></i>
+            <p>Hiện chưa có tài khoản nào có sẵn trong kho!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- MODAL XEM CÁC MỤC ĐÃ CHỌN -->
@@ -1788,7 +2042,7 @@
     </div>
   </div>
 
-  <!-- MODAL PHÓNG TO ẢNH BẢNG GIÁ -->
+  <!-- MODAL PHÓNG TO ẢNH (BẢNG GIÁ & ẢNH ACC) -->
   <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="image-modal-close">&times;</span>
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
@@ -1847,21 +2101,166 @@
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
+    /* SUPABASE CONFIG */
+    const SUPABASE_URL = 'https://llijmkoztqthovvklamm.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsaWpta296dHF0aG92dmtsYW1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4NDQ1NzksImV4cCI6MjEwNjQyMDU3OX0.6ZyBSLuXhQNC-nm1nCBTEZMs5Y3FDE83xD8lvL0HRUk';
+    
+    const { createClient } = supabase;
+    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let vaultAccounts = [];
+
     /* CHUYỂN ĐỔI VIEW (SPA) */
     function switchView(viewName) {
       const viewProfile = document.getElementById('viewProfile');
       const viewService = document.getElementById('viewService');
+      const viewVault = document.getElementById('viewVault');
       
+      viewProfile.classList.remove('active');
+      viewService.classList.remove('active');
+      viewVault.classList.remove('active');
+
       if (viewName === 'service') {
-        viewProfile.classList.remove('active');
         viewService.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         updateQR();
+      } else if (viewName === 'vault') {
+        viewVault.classList.add('active');
+        fetchVaultAccountsFromSupabase();
       } else {
-        viewService.classList.remove('active');
         viewProfile.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* TẢI KHO ACC TỪ SUPABASE (CHỈ LẤY TITLE & IMAGE CỦA ACC CHƯA BÁN) */
+    async function fetchVaultAccountsFromSupabase() {
+      const loadingEl = document.getElementById('vaultLoading');
+      const gridEl = document.getElementById('vaultGrid');
+      const emptyEl = document.getElementById('vaultEmpty');
+
+      loadingEl.style.display = 'block';
+      gridEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+
+      try {
+        const { data, error } = await _supabase
+          .from('accounts')
+          .select('id, title, image, is_sold')
+          .eq('is_sold', false)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        vaultAccounts = (data || []).map(row => ({
+          id: row.id,
+          title: row.title,
+          image: row.image
+        }));
+
+        loadingEl.style.display = 'none';
+        renderVaultAccounts(vaultAccounts);
+      } catch (err) {
+        console.error("Lỗi tải kho acc Supabase:", err);
+        loadingEl.innerHTML = `<p style="color:#fe2c55;">Không thể kết nối đến cơ sở dữ liệu Supabase!</p>`;
+      }
+    }
+
+    function renderVaultAccounts(list) {
+      const gridEl = document.getElementById('vaultGrid');
+      const emptyEl = document.getElementById('vaultEmpty');
+      gridEl.innerHTML = '';
+
+      if (list.length === 0) {
+        gridEl.style.display = 'none';
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+      gridEl.style.display = 'grid';
+
+      list.forEach(acc => {
+        const card = document.createElement('div');
+        card.className = 'vault-card';
+
+        const imgHtml = acc.image 
+          ? `<div class="vault-img-wrap" onclick="openZoomImage('${acc.image}')">
+               <img src="${acc.image}" alt="${acc.title}" class="vault-img" loading="lazy">
+               <span class="vault-tag">VERIFIED</span>
+             </div>`
+          : `<div class="vault-img-wrap" style="display:flex;align-items:center;justify-content:center;color:#666;font-size:0.8rem;">
+               <i class="fa-solid fa-image" style="font-size:2rem;margin-bottom:4px;"></i>
+               <span style="display:block;">Không có ảnh</span>
+             </div>`;
+
+        card.innerHTML = `
+          ${imgHtml}
+          <div class="vault-card-body">
+            <div class="vault-card-row">
+              <span class="vault-code">${acc.title}</span>
+              <button type="button" class="btn-copy-code" onclick="copyAccCode('${acc.title}', this)">
+                <i class="fa-regular fa-copy"></i> Copy mã
+              </button>
+            </div>
+            <button type="button" class="btn-buy-acc" onclick="selectAndOrderAccount('${acc.title}')">
+              <i class="fa-brands fa-tiktok"></i> MUA ACC NÀY
+            </button>
+          </div>
+        `;
+        gridEl.appendChild(card);
+      });
+    }
+
+    function handleVaultSearch() {
+      const q = (document.getElementById('vaultSearchInput').value || '').trim().toLowerCase();
+      const filtered = vaultAccounts.filter(acc => (acc.title || '').toLowerCase().includes(q));
+      renderVaultAccounts(filtered);
+    }
+
+    function copyAccCode(code, btn) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      const orig = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-check"></i> Đã chép!`;
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
+
+    /* KHI CHỌN ACC: TỰ ĐỘNG CHÉP MÃ, BÁO THÔNG BÁO VÀ NHẢY SANG TIKTOK */
+    function selectAndOrderAccount(accCode) {
+      const message = 
+`🌸 YÊU CẦU MUA TÀI KHOẢN 🌸
+- Mã tài khoản: ${accCode}
+- Kênh liên hệ: Kho acc của Chía (@phalnnn)
+---------------------------
+👉 Mình muốn mua tài khoản có mã ${accCode} này, bạn kiểm tra và báo giá cho mình nhé 💗`;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(message).then(() => {
+          alert(`✨ Đã tự động sao chép mã tài khoản: ${accCode}\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) tin nhắn gửi cho mình nhé 💗`);
+          window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        }).catch(() => {
+          prompt(`Hãy sao chép nội dung đơn mua tài khoản này:`, message);
+          window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        });
+      } else {
+        prompt(`Hãy sao chép nội dung đơn mua tài khoản này:`, message);
+        window.open('https://www.tiktok.com/@phalnnn', '_blank');
+      }
+    }
+
+    function openZoomImage(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      modal.classList.add('active');
+      modalImg.src = src;
     }
 
     const myBankConfig = {
