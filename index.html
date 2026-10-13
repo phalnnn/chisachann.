@@ -969,6 +969,44 @@
       font-weight: 600;
     }
 
+    /* Thêm style cho phần Upload Bill */
+    .bill-upload-wrap {
+      margin-top: 14px;
+      text-align: left;
+    }
+    .bill-upload-wrap label {
+      display: block;
+      font-size: 0.85rem;
+      color: #ffb8c6;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .bill-upload-wrap input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px dashed rgba(254, 44, 85, 0.5);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .bill-upload-wrap input[type="file"]::file-selector-button {
+      background: #fe2c55;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .bill-upload-wrap input[type="file"]::file-selector-button:hover {
+      background: #ff1493;
+    }
+
     .form-group {
       margin-bottom: 12px;
     }
@@ -1752,18 +1790,6 @@
             <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Daily 1 Tháng" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Daily: 1 Tháng</span></div><span class="map-price">100k</span></label>
           </div>
 
-          <!-- DỊCH VỤ CONTENT ENDGAME -->
-          <div class="section-title"><i class="fa-solid fa-skull"></i> DỊCH VỤ CONTENT ENDGAME</div>
-          <div class="map-grid">
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Tháp" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Tháp</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Thuyền" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Thuyền</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix Full Đá" data-price="30000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix Full Đá</span></div><span class="map-price">30k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 58k Điểm" data-price="70000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 58k Điểm</span></div><span class="map-price">70k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Matrix 100k Điểm" data-price="100000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Matrix 100k Điểm</span></div><span class="map-price">100k</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Task Matrix (1 Task)" data-price="50000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Task Matrix</span></div><span class="map-price">50k/task</span></label>
-            <label class="map-item"><div class="map-info"><input type="checkbox" class="map-cb" data-name="Holo (1 Con)" data-price="20000"><div class="neon-checkbox"><i class="fa-solid fa-check"></i></div><span class="map-name">Holo</span></div><span class="map-price">20k/con</span></label>
-          </div>
-
           <div class="total-box">
             <div class="total-row-main">
               <span class="total-label">Tổng thanh toán:</span>
@@ -1862,13 +1888,18 @@
       <button type="button" class="music-popup-close" onclick="closeCiuAccModal()">&times;</button>
       
       <h3 style="color: #ff69b4; text-align: center; margin-bottom: 12px; font-size: 1.3rem;">
-        <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc
+        <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc & Endgame
       </h3>
       
       <div style="background: rgba(254, 44, 85, 0.15); border: 1px solid #fe2c55; padding: 12px; border-radius: 12px; font-size: 0.88rem; margin-bottom: 18px; color: #ffb8c6; line-height: 1.5; font-weight: 500;">
-        ⚠️ <strong>Lưu ý:</strong> Chỉ cứu free 2 tầng tháp giữa, Thuyền 12, Holo Diff6 💗
+        ⚠️ <strong>Lưu ý:</strong> Chỉ cứu free 2 tầng tháp giữa, Thuyền 12, Holo Diff6 💗. Các mục Endgame khác tính phí như bình thường nhé!
       </div>
       
+      <div class="form-group">
+        <label><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn:</label>
+        <input type="text" id="ciuTikTok" placeholder="Ví dụ: @phalnnn..." autocomplete="off" />
+      </div>
+
       <div class="form-group">
         <label><i class="fa-solid fa-user"></i> Tài khoản (Account):</label>
         <input type="text" id="ciuAccount" placeholder="Nhập tài khoản game..." autocomplete="off" />
@@ -1891,26 +1922,82 @@
       </div>
       
       <div class="form-group" style="margin-top: 16px;">
-        <label style="margin-bottom: 10px;"><i class="fa-solid fa-list-check"></i> Chọn Content cần cứu (Tối đa 3):</label>
+        <label style="margin-bottom: 10px; color: #ff69b4; font-weight: bold;"><i class="fa-solid fa-gift"></i> Content Cứu Free (Tối đa 3):</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb" value="2 Tầng Tháp Giữa"> 
+              <span>Tháp Giữa</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb" value="Thuyền 12"> 
+              <span>Thuyền 12</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb" value="Holo Diff6"> 
+              <span>Holo Diff6</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 16px; border-top: 1px dashed rgba(254, 44, 85, 0.4); padding-top: 16px;">
+        <label style="margin-bottom: 10px; color: #fe2c55; font-weight: bold;"><i class="fa-solid fa-skull"></i> Content Endgame (Tính Phí):</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Tháp (30k)" data-price="30000"> 
+              <span>Tháp (30k)</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Thuyền (30k)" data-price="30000"> 
+              <span>Thuyền (30k)</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix Full Đá (30k)" data-price="30000"> 
+              <span>Matrix Đá (30k)</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 58k Điểm (70k)" data-price="70000"> 
+              <span>Matrix 58k (70k)</span>
+            </label>
+            <label class="ciu-checkbox-wrap" style="grid-column: span 2;">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 100k Điểm (100k)" data-price="100000"> 
+              <span>Matrix 100k Điểm (100k)</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Task Matrix (50k/task)" data-price="50000"> 
+              <span>Task (50k/1)</span>
+            </label>
+            <label class="ciu-checkbox-wrap">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Holo (20k/con)" data-price="20000"> 
+              <span>Holo (20k/1)</span>
+            </label>
+        </div>
+      </div>
+
+      <div id="ciuQrSection" class="qr-section" style="display: none; margin-top: 16px;">
+        <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Thanh Toán Dịch Vụ</div>
+        <p class="qr-sub">Quét mã để thanh toán cho các mục tính phí đã chọn</p>
+        <div class="qr-box-auto">
+          <img id="ciuAutoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
+        </div>
+        <div>
+          <button type="button" class="btn-download-qr" onclick="downloadQRCode('ciuAutoQrImg', 'QR_ThanhToan_Endgame.png')">
+            <i class="fa-solid fa-download"></i> Tải ảnh mã QR
+          </button>
+        </div>
+        <p class="qr-memo-preview" id="ciuMemoPreview">Lời nhắn chuyển khoản: PHALNNN CAY ENDGAME</p>
+        <div class="qr-notice" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.2); color: #fff;">
+          Tổng tiền: <strong id="ciuTotalPrice" style="color: #fe2c55; font-size: 1.1rem;">0đ</strong>
+        </div>
         
-        <label class="ciu-checkbox-wrap">
-          <input type="checkbox" class="ciu-content-cb" value="2 Tầng Tháp Giữa"> 
-          <span>2 Tầng Tháp Giữa</span>
-        </label>
-        
-        <label class="ciu-checkbox-wrap">
-          <input type="checkbox" class="ciu-content-cb" value="Thuyền 12"> 
-          <span>Thuyền 12</span>
-        </label>
-        
-        <label class="ciu-checkbox-wrap">
-          <input type="checkbox" class="ciu-content-cb" value="Holo Diff6"> 
-          <span>Holo Diff6</span>
-        </label>
+        <!-- Nút tải ảnh Bill thanh toán -->
+        <div class="bill-upload-wrap">
+          <label for="ciuBillUpload"><i class="fa-solid fa-image"></i> Tải lên ảnh Bill thanh toán (* Bắt buộc):</label>
+          <input type="file" id="ciuBillUpload" accept="image/png, image/jpeg, image/jpg" />
+        </div>
       </div>
 
       <button class="btn-submit" onclick="submitCiuAcc()" style="background: linear-gradient(135deg, #ff1493, #111111); border-color: #ff1493; width: 100%;">
-        <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu Cứu Acc
+        <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu
       </button>
     </div>
   </div>
@@ -2689,13 +2776,51 @@
     }
 
     function clearCiuAccForm() {
+      document.getElementById('ciuTikTok').value = '';
       document.getElementById('ciuAccount').value = '';
       document.getElementById('ciuPassword').value = '';
       document.getElementById('ciuServer').value = 'Asia';
       document.querySelectorAll('.ciu-content-cb').forEach(cb => cb.checked = false);
+      document.getElementById('ciuBillUpload').value = '';
+      updateCiuQR();
     }
 
+    function updateCiuQR() {
+      const paidCbs = document.querySelectorAll('.ciu-content-cb.paid-cb:checked');
+      let total = 0;
+      paidCbs.forEach(cb => {
+        total += parseInt(cb.getAttribute('data-price') || 0);
+      });
+
+      const qrSection = document.getElementById('ciuQrSection');
+      if (total > 0) {
+        qrSection.style.display = 'block';
+        
+        const rawName = document.getElementById('ciuTikTok').value.trim();
+        const cleanName = removeVietnameseTones(rawName);
+        let memo = cleanName ? cleanName : "PHALNNN CAY ENDGAME";
+        if (memo.length > 25) memo = memo.substring(0, 25);
+
+        document.getElementById('ciuTotalPrice').textContent = total.toLocaleString('vi-VN') + 'đ';
+        document.getElementById('ciuMemoPreview').textContent = `Lời nhắn chuyển khoản: ${memo}`;
+
+        const encodedMemo = encodeURIComponent(memo);
+        const encodedAccName = encodeURIComponent(myBankConfig.accountName);
+        const qrUrl = `https://img.vietqr.io/image/${myBankConfig.bankId}-${myBankConfig.accountNo}-compact2.png?amount=${total}&addInfo=${encodedMemo}&accountName=${encodedAccName}`;
+        
+        document.getElementById('ciuAutoQrImg').src = qrUrl;
+      } else {
+        qrSection.style.display = 'none';
+      }
+    }
+
+    document.querySelectorAll('.ciu-content-cb.paid-cb').forEach(cb => {
+      cb.addEventListener('change', updateCiuQR);
+    });
+    document.getElementById('ciuTikTok').addEventListener('input', updateCiuQR);
+
     function submitCiuAcc() {
+      const tiktok = document.getElementById('ciuTikTok').value.trim();
       const acc = document.getElementById('ciuAccount').value.trim();
       const pw = document.getElementById('ciuPassword').value.trim();
       const server = document.getElementById('ciuServer').value;
@@ -2703,13 +2828,30 @@
       const contentCbs = document.querySelectorAll('.ciu-content-cb:checked');
       const contents = Array.from(contentCbs).map(cb => cb.value);
 
-      if (!acc || !pw) {
-        alert("Vui lòng nhập đầy đủ tài khoản và mật khẩu!");
+      if (!tiktok || !acc || !pw) {
+        alert("Vui lòng nhập đầy đủ Tên TikTok, Tài khoản và Mật khẩu!");
         return;
       }
       if (contents.length === 0) {
-        alert("Vui lòng chọn ít nhất 1 content để cứu!");
+        alert("Vui lòng chọn ít nhất 1 content để cứu/cày!");
         return;
+      }
+
+      let totalPrice = 0;
+      document.querySelectorAll('.ciu-content-cb.paid-cb:checked').forEach(cb => {
+          totalPrice += parseInt(cb.getAttribute('data-price') || 0);
+      });
+      let priceText = totalPrice > 0 ? `\n\n👉 **Tổng Tiền:** \`${totalPrice.toLocaleString('vi-VN')}đ\`` : "";
+
+      // Kiểm tra xem đã upload bill chưa nếu có tính phí
+      const billInput = document.getElementById('ciuBillUpload');
+      let billFile = null;
+      if (totalPrice > 0) {
+        if (billInput.files.length === 0) {
+          alert("⚠️ Vui lòng đính kèm ảnh chụp màn hình Bill thanh toán để xác nhận nhé!");
+          return;
+        }
+        billFile = billInput.files[0];
       }
 
       // Nút gửi đang loading (Tránh bấm 2 lần)
@@ -2722,29 +2864,56 @@
       const webhookUrl = "https://discord.com/api/webhooks/1559507581582712862/oS5k8eq3R6Q3q_vrxfZxzegRpnhRBQwZIbbtyrabCjWgneXs9wzOnqx6D6D8a9CnlNgj";
 
       const payload = {
-        content: "🚨 **CÓ YÊU CẦU CỨU ACC MỚI** 🚨",
+        content: "🚨 **CÓ YÊU CẦU CỨU ACC / ENDGAME MỚI** 🚨" + (billFile ? "\n*(Kèm Bill thanh toán đính kèm bên dưới)*" : ""),
         embeds: [{
-          title: "🌸 Thông Tin Đăng Kí Cứu Acc 🌸",
-          description: "Thông tin tài khoản đã được định dạng để dễ copy.",
+          title: "🌸 Thông Tin Đăng Kí 🌸",
           color: 16722517, // #ff2c55 in decimal
           fields: [
+            { name: "📱 TikTok", value: `\`${tiktok}\``, inline: false },
             { name: "👤 Tài khoản", value: `\`${acc}\``, inline: false },
             { name: "🔑 Mật khẩu", value: `\`${pw}\``, inline: false },
             { name: "🌐 Server", value: `**${server}**`, inline: false },
-            { name: "🎯 Content Cần Cứu", value: contents.map(c => `- ${c}`).join('\n'), inline: false }
+            { name: "🎯 Content Cần Cày/Cứu", value: contents.map(c => `- ${c}`).join('\n') + priceText, inline: false }
           ],
           timestamp: new Date().toISOString(),
           footer: {
             text: "Hệ thống Cứu Acc @phalnnn"
           }
-        }]
+        }],
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                type: 2,
+                label: "Đã xong",
+                style: 3, // Nút màu Xanh
+                custom_id: "btn_done"
+              },
+              {
+                type: 2,
+                label: "Xóa acc",
+                style: 4, // Nút màu Đỏ
+                custom_id: "btn_delete"
+              }
+            ]
+          }
+        ]
       };
+
+      // Đóng gói dữ liệu thành FormData để có thể gửi kèm File ảnh
+      const formData = new FormData();
+      formData.append('payload_json', JSON.stringify(payload));
+      
+      if (billFile) {
+        formData.append('file', billFile, billFile.name);
+      }
 
       fetch(webhookUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }).then(response => {
+        // Không truyền Content-Type header để trình duyệt tự động thiết lập boundary cho FormData
+        body: formData
+      }).then(async response => {
         if(response.ok) {
           alert("Gửi yêu cầu cứu acc thành công! Vui lòng chờ mình xử lý nhé 💗");
           closeCiuAccModal();
@@ -2752,7 +2921,13 @@
           // Reset fields
           clearCiuAccForm();
         } else {
-          alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+          const err = await response.json().catch(() => ({}));
+          // Bắt lỗi khi dùng Webhook thường (không được phép gửi nút bấm)
+          if (err.code === 50039) {
+            alert("⚠️ Lỗi Discord: Webhook kênh thường không hỗ trợ nút bấm! Để hiển thị nút 'Đã cứu' và 'Xóa acc', bạn cần tạo Webhook thông qua 1 Ứng dụng Bot trên Discord Developer Portal nhé.");
+          } else {
+            alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+          }
         }
       }).catch(err => {
         console.error(err);
