@@ -43,7 +43,6 @@
       align-items: center;
     }
 
-    /* Page View Controller (SPA) */
     .page-view {
       width: 100%;
       display: none;
@@ -534,168 +533,6 @@
       background: #fe2c55;
     }
 
-    .floating-music-bubble {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: rgba(12, 12, 16, 0.96);
-      border: 2px solid #fe2c55;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
-      z-index: 10001;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-      opacity: 1;
-      transition: opacity 0.4s ease, transform 0.2s ease;
-    }
-
-    .floating-music-bubble.fade-out {
-      opacity: 0.25 !important;
-    }
-
-    .floating-music-bubble:active {
-      cursor: grabbing;
-      transform: scale(1.1);
-    }
-
-    .bubble-vinyl-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-
-    .music-popup-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 10002;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-
-    .music-popup-modal.active {
-      display: flex;
-    }
-
-    .music-popup-content {
-      position: relative;
-      width: 100%;
-      max-width: 380px;
-      background: rgba(15, 15, 22, 0.95);
-      border: 1.5px solid #fe2c55;
-      border-radius: 24px;
-      padding: 24px 20px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
-      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes modalScaleUp {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .music-popup-close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: #aaa;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .music-popup-close:hover {
-      color: #fe2c55;
-    }
-
-    .popup-vinyl-wrap {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #000;
-      border: 2px solid #fe2c55;
-      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
-      margin: 0 auto 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .popup-vinyl-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .popup-song-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .popup-song-artist {
-      font-size: 0.8rem;
-      color: #9999aa;
-      margin-bottom: 18px;
-    }
-
-    .popup-controls-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .popup-ctrl-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .popup-ctrl-btn:hover {
-      background: rgba(254, 44, 85, 0.3);
-      border-color: #fe2c55;
-      transform: scale(1.08);
-    }
-
-    .popup-ctrl-btn.play-main-btn {
-      background: linear-gradient(135deg, #fe2c55, #ff0033);
-      border-color: #fe2c55;
-      width: 52px;
-      height: 52px;
-      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
-    }
-
     .social-links {
       display: flex;
       flex-direction: column;
@@ -798,6 +635,19 @@
       width: 20px;
       height: 20px;
       fill: currentColor;
+    }
+
+    .btn-ciu-acc {
+      background: rgba(255, 105, 180, 0.12);
+      color: #ff69b4;
+      border: 1.5px solid #ff1493;
+      box-shadow: 0 0 12px rgba(255, 20, 147, 0.35);
+    }
+    .btn-ciu-acc:hover {
+      background: rgba(255, 20, 147, 0.25);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
     }
 
     .btn-open-service {
@@ -1128,7 +978,7 @@
       color: rgba(255, 255, 255, 0.85);
       margin-bottom: 6px;
     }
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
       padding: 12px;
       border-radius: 10px;
@@ -1138,6 +988,10 @@
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-group select option {
+      background: #121216;
+      color: #ffffff;
     }
     .password-wrap {
       position: relative;
@@ -1156,9 +1010,50 @@
       cursor: pointer;
       font-size: 1rem;
     }
-    .form-group input:focus, .form-group textarea:focus {
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       border-color: #fe2c55;
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
+    }
+
+    /* Custom Checkbox for Cíu Acc form */
+    .ciu-checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    .ciu-checkbox-wrap input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.5);
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .ciu-checkbox-wrap input[type="checkbox"]:checked {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      box-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
+    }
+    .ciu-checkbox-wrap input[type="checkbox"]:checked::after {
+      content: '\f00c';
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 11px;
+      color: white;
     }
 
     .btn-submit {
@@ -1377,6 +1272,168 @@
       color: #fff;
     }
 
+    .floating-music-bubble {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(12, 12, 16, 0.96);
+      border: 2px solid #fe2c55;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 20px rgba(254, 44, 85, 0.8);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      opacity: 1;
+      transition: opacity 0.4s ease, transform 0.2s ease;
+    }
+
+    .floating-music-bubble.fade-out {
+      opacity: 0.25 !important;
+    }
+
+    .floating-music-bubble:active {
+      cursor: grabbing;
+      transform: scale(1.1);
+    }
+
+    .bubble-vinyl-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .music-popup-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10002;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .music-popup-modal.active {
+      display: flex;
+    }
+
+    .music-popup-content {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 15, 22, 0.95);
+      border: 1.5px solid #fe2c55;
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(254, 44, 85, 0.4);
+      animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .music-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .music-popup-close:hover {
+      color: #fe2c55;
+    }
+
+    .popup-vinyl-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #000;
+      border: 2px solid #fe2c55;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.6);
+      margin: 0 auto 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-vinyl-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .popup-song-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-song-artist {
+      font-size: 0.8rem;
+      color: #9999aa;
+      margin-bottom: 18px;
+    }
+
+    .popup-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .popup-ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .popup-ctrl-btn:hover {
+      background: rgba(254, 44, 85, 0.3);
+      border-color: #fe2c55;
+      transform: scale(1.08);
+    }
+
+    .popup-ctrl-btn.play-main-btn {
+      background: linear-gradient(135deg, #fe2c55, #ff0033);
+      border-color: #fe2c55;
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 0 15px rgba(254, 44, 85, 0.7);
+    }
+
     .floating-mascot {
       position: fixed;
       width: 80px;
@@ -1552,6 +1609,11 @@
           </div>
 
           <div class="social-links">
+            <!-- Nút Đăng Kí Cíu Acc Mới Thêm -->
+            <button type="button" class="btn-link btn-ciu-acc" onclick="openCiuAccModal()">
+              <i class="fa-solid fa-life-ring"></i> Đăng Kí Cíu Acc <span class="custom-heart">💗</span>
+            </button>
+
             <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
               <i class="fa-brands fa-tiktok"></i> Đến Kênh TikTok Của Tui
             </a>
@@ -1794,6 +1856,65 @@
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
   </div>
 
+  <!-- MODAL ĐĂNG KÍ CÍU ACC -->
+  <div id="ciuAccModal" class="modal-overlay" onclick="closeCiuAccModal(event)">
+    <div class="music-popup-content" style="max-width: 400px; text-align: left;" onclick="event.stopPropagation()">
+      <button type="button" class="music-popup-close" onclick="closeCiuAccModal()">&times;</button>
+      
+      <h3 style="color: #ff69b4; text-align: center; margin-bottom: 12px; font-size: 1.3rem;">
+        <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc
+      </h3>
+      
+      <div style="background: rgba(254, 44, 85, 0.15); border: 1px solid #fe2c55; padding: 12px; border-radius: 12px; font-size: 0.88rem; margin-bottom: 18px; color: #ffb8c6; line-height: 1.5; font-weight: 500;">
+        ⚠️ <strong>Lưu ý:</strong> Chỉ cứu free 2 tầng tháp giữa, Thuyền 12, Holo Diff6 💗
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fa-solid fa-user"></i> Tài khoản (Account):</label>
+        <input type="text" id="ciuAccount" placeholder="Nhập tài khoản game..." autocomplete="off" />
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fa-solid fa-lock"></i> Mật khẩu (Password):</label>
+        <input type="text" id="ciuPassword" placeholder="Nhập mật khẩu game..." autocomplete="off" />
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fa-solid fa-server"></i> Server:</label>
+        <select id="ciuServer">
+          <option value="Asia">Asia</option>
+          <option value="SEA">SEA</option>
+          <option value="America">America</option>
+          <option value="Europe">Europe</option>
+          <option value="TW/HK/MO">TW/HK/MO</option>
+        </select>
+      </div>
+      
+      <div class="form-group" style="margin-top: 16px;">
+        <label style="margin-bottom: 10px;"><i class="fa-solid fa-list-check"></i> Chọn Content cần cứu (Tối đa 3):</label>
+        
+        <label class="ciu-checkbox-wrap">
+          <input type="checkbox" class="ciu-content-cb" value="2 Tầng Tháp Giữa"> 
+          <span>2 Tầng Tháp Giữa</span>
+        </label>
+        
+        <label class="ciu-checkbox-wrap">
+          <input type="checkbox" class="ciu-content-cb" value="Thuyền 12"> 
+          <span>Thuyền 12</span>
+        </label>
+        
+        <label class="ciu-checkbox-wrap">
+          <input type="checkbox" class="ciu-content-cb" value="Holo Diff6"> 
+          <span>Holo Diff6</span>
+        </label>
+      </div>
+
+      <button class="btn-submit" onclick="submitCiuAcc()" style="background: linear-gradient(135deg, #ff1493, #111111); border-color: #ff1493; width: 100%;">
+        <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu Cứu Acc
+      </button>
+    </div>
+  </div>
+
   <!-- BONG BÓNG NHẠC FLOATING BUBBLE -->
   <div class="floating-music-bubble" id="musicBubble">
     <img src="avatar.jpg" class="bubble-vinyl-img" id="bubbleVinyl" alt="Music Bubble" onerror="this.src='https://ui-avatars.com/api/?name=Music&background=fe2c55&color=fff'">
@@ -1847,7 +1968,6 @@
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
-    /* CHUYỂN ĐỔI VIEW (SPA) */
     function switchView(viewName) {
       const viewProfile = document.getElementById('viewProfile');
       const viewService = document.getElementById('viewService');
@@ -1928,7 +2048,6 @@
       imageObj.src = srcToFetch;
     }
 
-    /* TRÌNH PHÁT NHẠC */
     const playlist = [
       { title: "Styx Helix", artist: "Re:Zero OST", src: "music1.mp3" },
       { title: "An Unfinished Song", artist: "Wuthering Waves OST", src: "music2.mp3" },
@@ -1940,6 +2059,8 @@
 
     let currentSongIndex = 0;
     let savedCurrentTime = 0;
+    let isCiuAccMusicMode = false; // Cờ kiểm tra đang phát nhạc Cứu Acc đặc biệt
+
     const bgAudio = document.getElementById('bgAudio');
     const playPauseSvg = document.getElementById('playPauseSvg');
     const popupPlayPauseSvg = document.getElementById('popupPlayPauseSvg');
@@ -1957,13 +2078,11 @@
     let isMuted = false;
 
     function loadSong(index, shouldPlay = false, resumeTime = 0) {
+      isCiuAccMusicMode = false; // Reset chế độ nhạc cứu acc
       currentSongIndex = (index + playlist.length) % playlist.length;
       const song = playlist[currentSongIndex];
       bgAudio.src = song.src;
-      songTitleElem.textContent = song.title;
-      songArtistElem.textContent = song.artist;
-      popupSongTitle.textContent = song.title;
-      popupSongArtist.textContent = song.artist;
+      updateSongInfo(song.title, song.artist);
       
       if (resumeTime > 0) {
         bgAudio.currentTime = resumeTime;
@@ -1977,15 +2096,25 @@
       }
     }
 
-    const firstSong = playlist[0];
-    songTitleElem.textContent = firstSong.title;
-    songArtistElem.textContent = firstSong.artist;
-    popupSongTitle.textContent = firstSong.title;
-    popupSongArtist.textContent = firstSong.artist;
+    function updateSongInfo(title, artist) {
+      songTitleElem.textContent = title;
+      songArtistElem.textContent = artist;
+      popupSongTitle.textContent = title;
+      popupSongArtist.textContent = artist;
+    }
+
+    // Init first song info
+    updateSongInfo(playlist[0].title, playlist[0].artist);
 
     bgAudio.addEventListener('ended', () => {
       savedCurrentTime = 0;
-      nextSong();
+      if(isCiuAccMusicMode) {
+        // Nếu vừa phát xong nhạc cứu acc, thì trở lại nhạc bình thường
+        isCiuAccMusicMode = false;
+        loadSong(currentSongIndex, true, 0);
+      } else {
+        nextSong();
+      }
     });
 
     function nextSong() {
@@ -2026,7 +2155,7 @@
         updatePlayPauseUI();
       } else {
         if (!bgAudio.src || bgAudio.src === window.location.href) {
-          bgAudio.src = playlist[currentSongIndex].src;
+          bgAudio.src = isCiuAccMusicMode ? 'BG.mp3' : playlist[currentSongIndex].src;
         }
         if (savedCurrentTime > 0) {
           bgAudio.currentTime = savedCurrentTime;
@@ -2108,7 +2237,6 @@
       resetBubbleFade();
     }
 
-    /* BONG BÓNG NHẠC TỐI ƯU CLICK & DRAG */
     const musicBubble = document.getElementById('musicBubble');
     let isBubbleDragging = false;
     let bubbleStartX = 0, bubbleStartY = 0;
@@ -2197,7 +2325,6 @@
     });
     musicBubble.addEventListener('mouseleave', resetBubbleFade);
 
-    /* MASCOT BAY LƠ LỬNG */
     const mascot = document.getElementById('mascot');
     const mascotImgWrap = document.getElementById('mascotImgWrap');
     const mascotBubble = document.getElementById('mascotBubble');
@@ -2348,7 +2475,6 @@
     pickNewTarget();
     requestAnimationFrame(animateMascot);
 
-    /* XỬ LÝ CHỌN MAP & TÍNH TIỀN DỊCH VỤ */
     const checkboxes = document.querySelectorAll('.map-cb');
     const totalDisplay = document.getElementById('totalDisplay');
     const selectedCountDisplay = document.getElementById('selectedCountDisplay');
@@ -2498,6 +2624,7 @@
         closeImageModal();
         closeSelectedModal();
         closeMusicModal();
+        closeCiuAccModal();
       }
     });
 
@@ -2539,6 +2666,100 @@
       }).catch(() => {
         prompt("Hãy sao chép nội dung đơn này:", message);
         window.open('https://www.tiktok.com/@phalnnn', '_blank');
+      });
+    }
+
+    function openCiuAccModal() {
+      // Bật nhạc file BG.mp3
+      isCiuAccMusicMode = true;
+      bgAudio.src = 'BG.mp3';
+      updateSongInfo("Nhạc Nền Cứu Acc", "Special Event");
+      bgAudio.play().then(() => {
+        isMusicPlaying = true;
+        updatePlayPauseUI();
+      }).catch(e => console.log('Chặn autoplay:', e));
+
+      // Hiển thị Popup
+      document.getElementById('ciuAccModal').classList.add('active');
+    }
+
+    function closeCiuAccModal(event) {
+      if(event && event.target !== event.currentTarget) return; // Prevent close when click inside
+      document.getElementById('ciuAccModal').classList.remove('active');
+    }
+
+    function clearCiuAccForm() {
+      document.getElementById('ciuAccount').value = '';
+      document.getElementById('ciuPassword').value = '';
+      document.getElementById('ciuServer').value = 'Asia';
+      document.querySelectorAll('.ciu-content-cb').forEach(cb => cb.checked = false);
+    }
+
+    function submitCiuAcc() {
+      const acc = document.getElementById('ciuAccount').value.trim();
+      const pw = document.getElementById('ciuPassword').value.trim();
+      const server = document.getElementById('ciuServer').value;
+      
+      const contentCbs = document.querySelectorAll('.ciu-content-cb:checked');
+      const contents = Array.from(contentCbs).map(cb => cb.value);
+
+      if (!acc || !pw) {
+        alert("Vui lòng nhập đầy đủ tài khoản và mật khẩu!");
+        return;
+      }
+      if (contents.length === 0) {
+        alert("Vui lòng chọn ít nhất 1 content để cứu!");
+        return;
+      }
+
+      // Nút gửi đang loading (Tránh bấm 2 lần)
+      const btnSubmit = document.querySelector('#ciuAccModal .btn-submit');
+      const originalText = btnSubmit.innerHTML;
+      btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Gửi...';
+      btnSubmit.disabled = true;
+
+      // Webhook Discord URL
+      const webhookUrl = "https://discord.com/api/webhooks/1559507581582712862/oS5k8eq3R6Q3q_vrxfZxzegRpnhRBQwZIbbtyrabCjWgneXs9wzOnqx6D6D8a9CnlNgj";
+
+      const payload = {
+        content: "🚨 **CÓ YÊU CẦU CỨU ACC MỚI** 🚨",
+        embeds: [{
+          title: "🌸 Thông Tin Đăng Kí Cứu Acc 🌸",
+          description: "Thông tin tài khoản đã được định dạng để dễ copy.",
+          color: 16722517, // #ff2c55 in decimal
+          fields: [
+            { name: "👤 Tài khoản", value: `\`${acc}\``, inline: false },
+            { name: "🔑 Mật khẩu", value: `\`${pw}\``, inline: false },
+            { name: "🌐 Server", value: `**${server}**`, inline: false },
+            { name: "🎯 Content Cần Cứu", value: contents.map(c => `- ${c}`).join('\n'), inline: false }
+          ],
+          timestamp: new Date().toISOString(),
+          footer: {
+            text: "Hệ thống Cứu Acc @phalnnn"
+          }
+        }]
+      };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(response => {
+        if(response.ok) {
+          alert("Gửi yêu cầu cứu acc thành công! Vui lòng chờ mình xử lý nhé 💗");
+          closeCiuAccModal();
+          
+          // Reset fields
+          clearCiuAccForm();
+        } else {
+          alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("Không thể kết nối đến máy chủ Discord!");
+      }).finally(() => {
+        btnSubmit.innerHTML = originalText;
+        btnSubmit.disabled = false;
       });
     }
   </script>
