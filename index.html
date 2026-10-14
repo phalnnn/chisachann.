@@ -208,34 +208,45 @@
       position: relative;
       width: 100%;
       border-radius: 22px;
-      padding: 2.5px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 2px;
       margin-bottom: 18px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
                   0 0 20px rgba(254, 44, 85, 0.4),
                   0 0 12px rgba(255, 255, 255, 0.25);
     }
 
+    /* Viền Neon Gradient chuyển động, rỗng ruột bên trong để không che ảnh nền */
     .donate-neon-wrapper::before {
       content: "";
       position: absolute;
-      width: 180%;
-      height: 180%;
-      background: conic-gradient(#fe2c55, #ffffff, #111111, #fe2c55);
-      animation: spin 4s linear infinite;
-      z-index: 0;
+      inset: 0;
+      border-radius: 22px;
+      padding: 2px;
+      background: linear-gradient(90deg, #fe2c55, #ffffff, #fe2c55, #ff0055);
+      background-size: 300% 300%;
+      animation: neonBorderFlow 4s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes neonBorderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .donate-box {
       position: relative;
       z-index: 1;
       width: 100%;
-      background: rgba(12, 12, 16, 0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      /* Nền kính mỏng nhẹ nhìn xuyên thấu ảnh bg-profile.jpg phía sau */
+      background: rgba(10, 10, 14, 0.18);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
       border-radius: 20px;
       padding: 22px 16px;
     }
