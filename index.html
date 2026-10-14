@@ -104,7 +104,7 @@
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
 
-    #serviceContainer {
+    #serviceContainer, #ciuAccContainer {
       background: linear-gradient(rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.90)), 
                   url('bg-profile.jpg') center/cover no-repeat !important;
     }
@@ -969,7 +969,6 @@
       font-weight: 600;
     }
 
-    /* Thêm style cho phần Upload Bill */
     .bill-upload-wrap {
       margin-top: 14px;
       text-align: left;
@@ -1053,47 +1052,6 @@
       box-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
     }
 
-    /* Custom Checkbox for Cíu Acc form */
-    .ciu-checkbox-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-    .ciu-checkbox-wrap input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      padding: 0;
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      border-radius: 5px;
-      background: rgba(0, 0, 0, 0.5);
-      position: relative;
-      cursor: pointer;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .ciu-checkbox-wrap input[type="checkbox"]:checked {
-      background: #fe2c55;
-      border-color: #fe2c55;
-      box-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
-    }
-    .ciu-checkbox-wrap input[type="checkbox"]:checked::after {
-      content: '\f00c';
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 11px;
-      color: white;
-    }
-
     .btn-submit {
       width: 100%;
       padding: 15px;
@@ -1116,6 +1074,180 @@
     .btn-submit:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(254, 44, 85, 0.8), 0 0 15px #ffffff;
+    }
+    
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* === GIAO DIỆN MỚI CHO CÍU ACC (CARDS UI) === */
+    .ciu-section-header {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 24px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid;
+    }
+
+    .ciu-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .ciu-card {
+      position: relative;
+      background: rgba(20, 20, 25, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      user-select: none;
+      min-height: 85px;
+    }
+
+    /* Gradient overlay lúc bình thường */
+    .ciu-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+
+    .ciu-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ciu-card-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e2e2e2;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .ciu-card-price {
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .ciu-card input[type="checkbox"] {
+      display: none;
+    }
+
+    /* Checkbox Indicator ở góc */
+    .ciu-card-check-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    .ciu-card-check-indicator i {
+      font-size: 10px;
+      color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    /* Hover effect chung */
+    .ciu-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* STYLE CHO THẺ CỨU FREE (MÀU HỒNG) */
+    .card-free {
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.05);
+    }
+    .card-free .ciu-card-price {
+      color: #ffb8c6;
+    }
+    .card-free:hover {
+      border-color: rgba(255, 105, 180, 0.5);
+      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.15);
+    }
+    .card-free:has(input:checked) {
+      background: rgba(255, 105, 180, 0.12);
+      border-color: #ff69b4;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 105, 180, 0.1);
+    }
+    .card-free:has(input:checked) .ciu-card-name {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
+    }
+    .card-free:has(input:checked) .ciu-card-price {
+      background: #ff69b4;
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .card-free:has(input:checked) .ciu-card-check-indicator {
+      background: #ff69b4;
+      border-color: #ff69b4;
+      box-shadow: 0 0 10px #ff69b4;
+    }
+
+    /* STYLE CHO THẺ TÍNH PHÍ (MÀU ĐỎ) */
+    .card-paid {
+      box-shadow: 0 4px 15px rgba(254, 44, 85, 0.05);
+    }
+    .card-paid .ciu-card-price {
+      color: #ff6b87;
+    }
+    .card-paid:hover {
+      border-color: rgba(254, 44, 85, 0.5);
+      box-shadow: 0 8px 25px rgba(254, 44, 85, 0.15);
+    }
+    .card-paid:has(input:checked) {
+      background: rgba(254, 44, 85, 0.12);
+      border-color: #fe2c55;
+      box-shadow: 0 0 20px rgba(254, 44, 85, 0.4), inset 0 0 15px rgba(254, 44, 85, 0.1);
+    }
+    .card-paid:has(input:checked) .ciu-card-name {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(254, 44, 85, 0.6);
+    }
+    .card-paid:has(input:checked) .ciu-card-price {
+      background: #fe2c55;
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .card-paid:has(input:checked) .ciu-card-check-indicator {
+      background: #fe2c55;
+      border-color: #fe2c55;
+      box-shadow: 0 0 10px #fe2c55;
+    }
+
+    /* Dấu tick chung khi được chọn */
+    .ciu-card:has(input:checked) .ciu-card-check-indicator i {
+      color: #ffffff;
     }
 
     .modal-overlay {
@@ -1379,24 +1511,6 @@
       animation: modalScaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .scrollable-modal {
-      max-height: 85vh;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-    }
-    
-    .scrollable-modal::-webkit-scrollbar {
-      width: 5px;
-    }
-    .scrollable-modal::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 4px;
-    }
-    .scrollable-modal::-webkit-scrollbar-thumb {
-      background: rgba(254, 44, 85, 0.5);
-      border-radius: 4px;
-    }
-
     @keyframes modalScaleUp {
       from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -1567,6 +1681,80 @@
       }
     }
 
+    /* Hiệu ứng hạt nền Canvas */
+    .bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Trái tim bay khi click */
+    .click-heart-anim {
+      position: fixed;
+      color: #fe2c55;
+      font-size: 1.2rem;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: heartFloat 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      z-index: 99999;
+      filter: drop-shadow(0 0 8px rgba(254, 44, 85, 0.8));
+    }
+
+    @keyframes heartFloat {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+      50% { transform: translate(-50%, -100%) scale(1.3); }
+      100% { opacity: 0; transform: translate(-50%, -150%) scale(1); }
+    }
+
+    /* Hệ thống Toast Thông báo (Thay cho Alert) */
+    .toast-container {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      z-index: 10005;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .custom-toast {
+      background: rgba(15, 15, 20, 0.95);
+      backdrop-filter: blur(10px);
+      border-left: 4px solid #fe2c55;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 15px rgba(254, 44, 85, 0.2);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateX(120%);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      max-width: 320px;
+      line-height: 1.4;
+    }
+
+    .custom-toast.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .custom-toast.success { border-left-color: #00e676; box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 15px rgba(0, 230, 118, 0.2); }
+    .custom-toast.error { border-left-color: #ff1744; box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 15px rgba(255, 23, 68, 0.2); }
+    .custom-toast.warning { border-left-color: #ffea00; box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 15px rgba(255, 234, 0, 0.2); }
+    .custom-toast i { font-size: 1.2rem; }
+    .custom-toast.success i { color: #00e676; }
+    .custom-toast.error i { color: #ff1744; }
+    .custom-toast.warning i { color: #ffea00; }
+    .custom-toast.info i { color: #fe2c55; }
+
     .footer {
       margin-top: 18px;
       font-size: 0.78rem;
@@ -1576,6 +1764,9 @@
   </style>
 </head>
 <body>
+
+  <!-- CANVAS BACKGROUND PARTICLES -->
+  <canvas id="particlesCanvas" class="bg-canvas"></canvas>
 
   <div class="container">
 
@@ -1665,9 +1856,8 @@
           </div>
 
           <div class="social-links">
-            <!-- Nút Đăng Kí Cíu Acc Mới Thêm -->
-            <button type="button" class="btn-link btn-ciu-acc" onclick="openCiuAccModal()">
-              <i class="fa-solid fa-life-ring"></i> Đăng Kí Cíu Acc <span class="custom-heart">💗</span>
+            <button type="button" class="btn-link btn-ciu-acc" onclick="switchView('ciuAcc')">
+              <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc <span class="custom-heart">💗</span>
             </button>
 
             <a href="https://www.tiktok.com/@phalnnn" target="_blank" rel="noopener noreferrer" class="btn-link btn-tiktok">
@@ -1873,6 +2063,174 @@
       </div>
     </div>
 
+    <!-- VIEW 3: ĐĂNG KÍ CÍU ACC -->
+    <div id="viewCiuAcc" class="page-view">
+      <div class="nav-bar">
+        <button type="button" class="btn-back-home" onclick="switchView('profile')">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại Profile
+        </button>
+        <span style="font-size: 0.82rem; color: #bbb;">Đăng kí Cíu Acc</span>
+      </div>
+
+      <div class="card-border-wrapper">
+        <div class="card" id="ciuAccContainer" style="text-align: left;">
+          
+          <h3 style="color: #ff69b4; text-align: center; margin-bottom: 12px; font-size: 1.3rem;">
+            <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc & Endgame
+          </h3>
+          
+          <div style="background: rgba(254, 44, 85, 0.15); border: 1px solid #fe2c55; padding: 12px; border-radius: 12px; font-size: 0.88rem; margin-bottom: 18px; color: #ffb8c6; line-height: 1.5; font-weight: 500;">
+            ⚠️ <strong>Lưu ý:</strong> Chỉ cứu free 2 tầng cuối tháp giữa, Thuyền 12, Holo Diff6 💗. Các mục Endgame khác tính phí như bình thường nhé!
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn:</label>
+            <input type="text" id="ciuTikTok" placeholder="Ví dụ: @phalnnn..." autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-user"></i> Tài khoản (Account):</label>
+            <input type="text" id="ciuAccount" placeholder="Nhập tài khoản game..." autocomplete="off" />
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fa-solid fa-lock"></i> Mật khẩu (Password):</label>
+            <input type="text" id="ciuPassword" placeholder="Nhập mật khẩu game..." autocomplete="off" />
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fa-solid fa-server"></i> Server:</label>
+            <select id="ciuServer">
+              <option value="Asia">Asia</option>
+              <option value="SEA">SEA</option>
+              <option value="America">America</option>
+              <option value="Europe">Europe</option>
+              <option value="TW/HK/MO">TW/HK/MO</option>
+            </select>
+          </div>
+          
+          <!-- SECTION CỨU FREE (CARDS UI) -->
+          <div class="ciu-section-header" style="color: #ff69b4; border-color: rgba(255, 105, 180, 0.3);">
+            <i class="fa-solid fa-gift"></i> Content Cứu Free (Chọn 1)
+          </div>
+          
+          <div class="ciu-cards-grid">
+            <label class="ciu-card card-free">
+              <input type="checkbox" class="ciu-content-cb free-cb" value="2 Tầng Cuối Tháp Giữa"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">2 Tầng Cuối Tháp Giữa</div>
+              <div class="ciu-card-price">Free</div>
+            </label>
+
+            <label class="ciu-card card-free">
+              <input type="checkbox" class="ciu-content-cb free-cb" value="Thuyền 12"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Thuyền 12</div>
+              <div class="ciu-card-price">Free</div>
+            </label>
+
+            <label class="ciu-card card-free">
+              <input type="checkbox" class="ciu-content-cb free-cb" value="Holo Diff 6"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Holo Diff 6</div>
+              <div class="ciu-card-price">Free</div>
+            </label>
+          </div>
+
+          <!-- SECTION ENDGAME TÍNH PHÍ (CARDS UI) -->
+          <div class="ciu-section-header" style="color: #fe2c55; border-color: rgba(254, 44, 85, 0.3);">
+            <i class="fa-solid fa-skull"></i> Content Endgame (Tính Phí)
+          </div>
+          
+          <div class="ciu-cards-grid">
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Tháp" data-price="30000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Tháp</div>
+              <div class="ciu-card-price">30k</div>
+            </label>
+
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Thuyền" data-price="30000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Thuyền</div>
+              <div class="ciu-card-price">30k</div>
+            </label>
+
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix Full Đá" data-price="30000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Matrix Full Đá</div>
+              <div class="ciu-card-price">30k</div>
+            </label>
+
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Task Matrix" data-price="50000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Task Matrix</div>
+              <div class="ciu-card-price">50k/1</div>
+            </label>
+
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 58k Điểm" data-price="70000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Matrix 58k Điểm</div>
+              <div class="ciu-card-price">70k</div>
+            </label>
+
+            <label class="ciu-card card-paid">
+              <input type="checkbox" class="ciu-content-cb paid-cb" value="Hologram" data-price="20000"> 
+              <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+              <div class="ciu-card-name">Hologram</div>
+              <div class="ciu-card-price">20k/1</div>
+            </label>
+          </div>
+
+          <!-- Card riêng cho mục đắt nhất/đặc biệt -->
+          <label class="ciu-card card-paid" style="flex-direction: row; justify-content: space-between; text-align: left; padding: 18px 24px; min-height: auto;">
+            <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 100k Điểm" data-price="100000"> 
+            <div class="ciu-card-check-indicator"><i class="fa-solid fa-check"></i></div>
+            
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div>
+                <div class="ciu-card-name" style="margin: 0; font-size: 1.05rem;">Matrix 100k Điểm</div>
+              </div>
+            </div>
+            <div class="ciu-card-price" style="font-size: 1.1rem;">100k</div>
+          </label>
+
+          <div id="ciuQrSection" class="qr-section" style="display: none; margin-top: 24px;">
+            <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Thanh Toán Dịch Vụ</div>
+            <p class="qr-sub">Quét mã để thanh toán cho các mục tính phí đã chọn</p>
+            <div class="qr-box-auto">
+              <img id="ciuAutoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
+            </div>
+            <div>
+              <button type="button" class="btn-download-qr" onclick="downloadQRCode('ciuAutoQrImg', 'QR_ThanhToan_Endgame.png')">
+                <i class="fa-solid fa-download"></i> Tải ảnh mã QR
+              </button>
+            </div>
+            <p class="qr-memo-preview" id="ciuMemoPreview">Lời nhắn chuyển khoản: PHALNNN CAY ENDGAME</p>
+            <div class="qr-notice" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.2); color: #fff;">
+              Tổng tiền: <strong id="ciuTotalPrice" style="color: #fe2c55; font-size: 1.1rem;">0đ</strong>
+            </div>
+            
+            <div class="bill-upload-wrap">
+              <label for="ciuBillUpload"><i class="fa-solid fa-image"></i> Tải lên ảnh Bill thanh toán (* Bắt buộc):</label>
+              <input type="file" id="ciuBillUpload" accept="image/png, image/jpeg, image/jpg" />
+              <div style="font-size: 0.75rem; color: #aaa; margin-top: 6px; font-style: italic;">
+                ⚠️ Nếu không bấm chọn ảnh được (do mở bằng TikTok), hãy bấm biểu tượng "..." ở góc phải trên cùng và chọn "Mở bằng trình duyệt".
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-submit" onclick="submitCiuAcc()" style="background: linear-gradient(135deg, #ff1493, #111111); border-color: #ff1493; width: 100%;">
+            <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- MODAL XEM CÁC MỤC ĐÃ CHỌN -->
@@ -1898,130 +2256,6 @@
   <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="image-modal-close">&times;</span>
     <img class="image-modal-content" id="modalImg" onclick="event.stopPropagation()">
-  </div>
-
-  <!-- MODAL ĐĂNG KÍ CÍU ACC -->
-  <div id="ciuAccModal" class="modal-overlay" onclick="closeCiuAccModal(event)">
-    <div class="music-popup-content scrollable-modal" style="max-width: 400px; text-align: left;" onclick="event.stopPropagation()">
-      <button type="button" class="music-popup-close" onclick="closeCiuAccModal()">&times;</button>
-      
-      <h3 style="color: #ff69b4; text-align: center; margin-bottom: 12px; font-size: 1.3rem;">
-        <i class="fa-solid fa-heart-pulse"></i> Đăng Kí Cíu Acc & Endgame
-      </h3>
-      
-      <div style="background: rgba(254, 44, 85, 0.15); border: 1px solid #fe2c55; padding: 12px; border-radius: 12px; font-size: 0.88rem; margin-bottom: 18px; color: #ffb8c6; line-height: 1.5; font-weight: 500;">
-        ⚠️ <strong>Lưu ý:</strong> Chỉ cứu free 2 tầng tháp giữa, Thuyền 12, Holo Diff6 💗. Các mục Endgame khác tính phí như bình thường nhé!
-      </div>
-      
-      <div class="form-group">
-        <label><i class="fa-brands fa-tiktok"></i> Tên / ID TikTok của bạn:</label>
-        <input type="text" id="ciuTikTok" placeholder="Ví dụ: @phalnnn..." autocomplete="off" />
-      </div>
-
-      <div class="form-group">
-        <label><i class="fa-solid fa-user"></i> Tài khoản (Account):</label>
-        <input type="text" id="ciuAccount" placeholder="Nhập tài khoản game..." autocomplete="off" />
-      </div>
-      
-      <div class="form-group">
-        <label><i class="fa-solid fa-lock"></i> Mật khẩu (Password):</label>
-        <input type="text" id="ciuPassword" placeholder="Nhập mật khẩu game..." autocomplete="off" />
-      </div>
-      
-      <div class="form-group">
-        <label><i class="fa-solid fa-server"></i> Server:</label>
-        <select id="ciuServer">
-          <option value="Asia">Asia</option>
-          <option value="SEA">SEA</option>
-          <option value="America">America</option>
-          <option value="Europe">Europe</option>
-          <option value="TW/HK/MO">TW/HK/MO</option>
-        </select>
-      </div>
-      
-      <div class="form-group" style="margin-top: 16px;">
-        <label style="margin-bottom: 10px; color: #ff69b4; font-weight: bold;"><i class="fa-solid fa-gift"></i> Content Cứu Free (Tối đa 3):</label>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb" value="2 Tầng Tháp Giữa"> 
-              <span>Tháp Giữa</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb" value="Thuyền 12"> 
-              <span>Thuyền 12</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb" value="Holo Diff6"> 
-              <span>Holo Diff6</span>
-            </label>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top: 16px; border-top: 1px dashed rgba(254, 44, 85, 0.4); padding-top: 16px;">
-        <label style="margin-bottom: 10px; color: #fe2c55; font-weight: bold;"><i class="fa-solid fa-skull"></i> Content Endgame (Tính Phí):</label>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Tháp (30k)" data-price="30000"> 
-              <span>Tháp (30k)</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Thuyền (30k)" data-price="30000"> 
-              <span>Thuyền (30k)</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix Full Đá (30k)" data-price="30000"> 
-              <span>Matrix Đá (30k)</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 58k Điểm (70k)" data-price="70000"> 
-              <span>Matrix 58k (70k)</span>
-            </label>
-            <label class="ciu-checkbox-wrap" style="grid-column: span 2;">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Matrix 100k Điểm (100k)" data-price="100000"> 
-              <span>Matrix 100k Điểm (100k)</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Task Matrix (50k/task)" data-price="50000"> 
-              <span>Task (50k/1)</span>
-            </label>
-            <label class="ciu-checkbox-wrap">
-              <input type="checkbox" class="ciu-content-cb paid-cb" value="Holo (20k/con)" data-price="20000"> 
-              <span>Holo (20k/1)</span>
-            </label>
-        </div>
-      </div>
-
-      <div id="ciuQrSection" class="qr-section" style="display: none; margin-top: 16px;">
-        <div class="qr-title"><i class="fa-solid fa-qrcode"></i> Thanh Toán Dịch Vụ</div>
-        <p class="qr-sub">Quét mã để thanh toán cho các mục tính phí đã chọn</p>
-        <div class="qr-box-auto">
-          <img id="ciuAutoQrImg" class="qr-img-auto" src="" alt="Mã VietQR Tự Động">
-        </div>
-        <div>
-          <button type="button" class="btn-download-qr" onclick="downloadQRCode('ciuAutoQrImg', 'QR_ThanhToan_Endgame.png')">
-            <i class="fa-solid fa-download"></i> Tải ảnh mã QR
-          </button>
-        </div>
-        <p class="qr-memo-preview" id="ciuMemoPreview">Lời nhắn chuyển khoản: PHALNNN CAY ENDGAME</p>
-        <div class="qr-notice" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.2); color: #fff;">
-          Tổng tiền: <strong id="ciuTotalPrice" style="color: #fe2c55; font-size: 1.1rem;">0đ</strong>
-        </div>
-        
-        <!-- Nút tải ảnh Bill thanh toán -->
-        <div class="bill-upload-wrap">
-          <label for="ciuBillUpload"><i class="fa-solid fa-image"></i> Tải lên ảnh Bill thanh toán (* Bắt buộc):</label>
-          <input type="file" id="ciuBillUpload" accept="image/png, image/jpeg, image/jpg" />
-          <!-- Thêm dòng chú ý cho TikTok Browser -->
-          <div style="font-size: 0.75rem; color: #aaa; margin-top: 6px; font-style: italic;">
-            ⚠️ Nếu không bấm chọn ảnh được (do mở bằng TikTok), hãy bấm biểu tượng "..." ở góc phải trên cùng và chọn "Mở bằng trình duyệt".
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-submit" onclick="submitCiuAcc()" style="background: linear-gradient(135deg, #ff1493, #111111); border-color: #ff1493; width: 100%;">
-        <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu
-      </button>
-    </div>
   </div>
 
   <!-- BONG BÓNG NHẠC FLOATING BUBBLE -->
@@ -2074,22 +2308,64 @@
     </div>
   </div>
 
+  <!-- CONTAINER CHO TOAST THÔNG BÁO -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- MODAL THÔNG BÁO ĐẸP (THAY CHO ALERT) -->
+  <div id="customAlertModal" class="modal-overlay" style="z-index: 10006;" onclick="closeCustomAlert()">
+    <div class="music-popup-content" style="max-width: 340px; padding: 28px 20px;" onclick="event.stopPropagation()">
+      <div style="font-size: 3.5rem; color: #fe2c55; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(254, 44, 85, 0.6));">
+        <i class="fa-solid fa-bell"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; margin-bottom: 12px; color: #fff; font-weight: 800;" id="customAlertTitle">Thông báo</h3>
+      <p style="font-size: 0.95rem; color: #cfd3e0; margin-bottom: 24px; line-height: 1.6;" id="customAlertMessage"></p>
+      <button type="button" class="btn-submit" style="margin-top: 0; padding: 12px; font-size: 0.95rem;" onclick="closeCustomAlert()">Đã Hiểu 💗</button>
+    </div>
+  </div>
+
   <audio id="bgAudio" preload="auto"></audio>
 
   <script>
+    /* CHUYỂN ĐỔI VIEW (SPA) */
     function switchView(viewName) {
       const viewProfile = document.getElementById('viewProfile');
       const viewService = document.getElementById('viewService');
+      const viewCiuAcc = document.getElementById('viewCiuAcc');
       
+      viewProfile.classList.remove('active');
+      viewService.classList.remove('active');
+      if (viewCiuAcc) viewCiuAcc.classList.remove('active');
+
       if (viewName === 'service') {
-        viewProfile.classList.remove('active');
         viewService.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         updateQR();
+        
+        if (isCiuAccMusicMode) {
+          isCiuAccMusicMode = false;
+          loadSong(currentSongIndex, isMusicPlaying, 0);
+        }
+      } else if (viewName === 'ciuAcc') {
+        viewCiuAcc.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        if (!isCiuAccMusicMode) {
+          isCiuAccMusicMode = true;
+          bgAudio.src = 'BG.mp3';
+          updateSongInfo("Nhạc Nền Cứu Acc", "Special Event");
+          bgAudio.play().then(() => {
+            isMusicPlaying = true;
+            updatePlayPauseUI();
+          }).catch(e => console.log('Chặn autoplay:', e));
+        }
       } else {
-        viewService.classList.remove('active');
         viewProfile.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        if (isCiuAccMusicMode) {
+          isCiuAccMusicMode = false;
+          loadSong(currentSongIndex, isMusicPlaying, 0);
+        }
       }
     }
 
@@ -2119,7 +2395,7 @@
     function downloadQRCode(imgId, filename) {
       const imgElement = document.getElementById(imgId);
       if (!imgElement || !imgElement.src) {
-        alert("Không tìm thấy ảnh mã QR để tải!");
+        showToast("Không tìm thấy ảnh mã QR để tải!", "error");
         return;
       }
 
@@ -2168,7 +2444,7 @@
 
     let currentSongIndex = 0;
     let savedCurrentTime = 0;
-    let isCiuAccMusicMode = false; // Cờ kiểm tra đang phát nhạc Cứu Acc đặc biệt
+    let isCiuAccMusicMode = false;
 
     const bgAudio = document.getElementById('bgAudio');
     const playPauseSvg = document.getElementById('playPauseSvg');
@@ -2187,7 +2463,7 @@
     let isMuted = false;
 
     function loadSong(index, shouldPlay = false, resumeTime = 0) {
-      isCiuAccMusicMode = false; // Reset chế độ nhạc cứu acc
+      isCiuAccMusicMode = false;
       currentSongIndex = (index + playlist.length) % playlist.length;
       const song = playlist[currentSongIndex];
       bgAudio.src = song.src;
@@ -2212,13 +2488,11 @@
       popupSongArtist.textContent = artist;
     }
 
-    // Init first song info
     updateSongInfo(playlist[0].title, playlist[0].artist);
 
     bgAudio.addEventListener('ended', () => {
       savedCurrentTime = 0;
       if(isCiuAccMusicMode) {
-        // Nếu vừa phát xong nhạc cứu acc, thì trở lại nhạc bình thường
         isCiuAccMusicMode = false;
         loadSong(currentSongIndex, true, 0);
       } else {
@@ -2320,8 +2594,10 @@
     document.addEventListener('click', autoPlayOnce, { passive: true });
     document.addEventListener('touchstart', autoPlayOnce, { passive: true });
 
+    let originalTitle = document.title;
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
+        document.title = "Nhớ phalnnn không? 🥺💗";
         if (isMusicPlaying) {
           savedCurrentTime = bgAudio.currentTime;
           bgAudio.pause();
@@ -2329,6 +2605,8 @@
           isMusicPlaying = false;
           updatePlayPauseUI();
         }
+      } else {
+        document.title = originalTitle;
       }
     });
 
@@ -2584,6 +2862,106 @@
     pickNewTarget();
     requestAnimationFrame(animateMascot);
 
+    /* HIỆU ỨNG THẢ TIM KHI CLICK & BACKGROUND PARTICLES */
+    document.addEventListener('click', function(e) {
+      // Bỏ qua nếu click vào nút/input để tránh loạn
+      if(e.target.closest('button') || e.target.closest('input') || e.target.closest('a')) return;
+
+      const heart = document.createElement('i');
+      heart.className = 'fa-solid fa-heart click-heart-anim';
+      heart.style.left = e.clientX + 'px';
+      heart.style.top = e.clientY + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    const canvas = document.getElementById('particlesCanvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+    
+    function initParticles() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      particlesArray = [];
+      const numberOfParticles = Math.min(window.innerWidth / 25, 60); // Giới hạn số lượng hạt
+      for (let i = 0; i < numberOfParticles; i++) {
+        let size = Math.random() * 2 + 0.5;
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let speedX = (Math.random() - 0.5) * 0.4;
+        let speedY = (Math.random() - 0.5) * 0.4 - 0.2; // Xu hướng bay lên nhẹ
+        let opacity = Math.random() * 0.4 + 0.1;
+        particlesArray.push({ x, y, size, speedX, speedY, opacity });
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        let p = particlesArray[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(254, 44, 85, ${p.opacity})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+    
+    initParticles();
+    animateParticles();
+
+    /* HỆ THỐNG TOAST & MODAL TÙY CHỈNH (THAY THẾ ALERT) */
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `custom-toast ${type}`;
+      
+      let icon = '<i class="fa-solid fa-circle-info"></i>';
+      if(type === 'success') icon = '<i class="fa-solid fa-circle-check"></i>';
+      if(type === 'error') icon = '<i class="fa-solid fa-circle-xmark"></i>';
+      if(type === 'warning') icon = '<i class="fa-solid fa-triangle-exclamation"></i>';
+      
+      toast.innerHTML = `${icon} <span>${message}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    let customAlertCallback = null;
+    function showCustomAlert(title, message, callback) {
+      document.getElementById('customAlertTitle').textContent = title;
+      document.getElementById('customAlertMessage').innerHTML = message.replace(/\n/g, '<br>');
+      document.getElementById('customAlertModal').classList.add('active');
+      customAlertCallback = callback;
+    }
+
+    function closeCustomAlert() {
+      document.getElementById('customAlertModal').classList.remove('active');
+      if (customAlertCallback) {
+        customAlertCallback();
+        customAlertCallback = null;
+      }
+    }
+
+
+    /* XỬ LÝ CHỌN MAP & TÍNH TIỀN DỊCH VỤ */
     const checkboxes = document.querySelectorAll('.map-cb');
     const totalDisplay = document.getElementById('totalDisplay');
     const selectedCountDisplay = document.getElementById('selectedCountDisplay');
@@ -2733,7 +3111,6 @@
         closeImageModal();
         closeSelectedModal();
         closeMusicModal();
-        closeCiuAccModal();
       }
     });
 
@@ -2753,7 +3130,7 @@
       });
 
       if (selectedMaps.length === 0) {
-        alert('Hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!');
+        showToast('Hãy tích chọn ít nhất 1 dịch vụ cần cày nhé!', 'warning');
         return;
       }
 
@@ -2770,33 +3147,17 @@
 - Yêu cầu đặc biệt: ${note || 'Không có'}`;
 
       navigator.clipboard.writeText(message).then(() => {
-        alert("✨ Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗");
-        window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        showCustomAlert("Sao chép thành công! ✨", "Đã copy đơn hàng bao gồm tài khoản & mật khẩu!\n\nWeb sẽ chuyển sang TikTok @phalnnn ngay bây giờ, bạn chỉ cần Dán (Paste) vào tin nhắn và chụp bill thanh toán gửi cho mình nhé 💗", function() {
+          window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        });
       }).catch(() => {
-        prompt("Hãy sao chép nội dung đơn này:", message);
-        window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        showCustomAlert("Lỗi sao chép tự động!", "Trình duyệt của bạn chặn sao chép. Vui lòng copy thủ công nội dung đơn hàng dưới đây:\n\n" + message, function() {
+          window.open('https://www.tiktok.com/@phalnnn', '_blank');
+        });
       });
     }
 
-    function openCiuAccModal() {
-      // Bật nhạc file BG.mp3
-      isCiuAccMusicMode = true;
-      bgAudio.src = 'BG.mp3';
-      updateSongInfo("Nhạc Nền Cứu Acc", "Special Event");
-      bgAudio.play().then(() => {
-        isMusicPlaying = true;
-        updatePlayPauseUI();
-      }).catch(e => console.log('Chặn autoplay:', e));
-
-      // Hiển thị Popup
-      document.getElementById('ciuAccModal').classList.add('active');
-    }
-
-    function closeCiuAccModal(event) {
-      if(event && event.target !== event.currentTarget) return; // Prevent close when click inside
-      document.getElementById('ciuAccModal').classList.remove('active');
-    }
-
+    /* XỬ LÝ FORM CỨU ACC & ENDGAME (DISCORD) */
     function clearCiuAccForm() {
       document.getElementById('ciuTikTok').value = '';
       document.getElementById('ciuAccount').value = '';
@@ -2841,6 +3202,17 @@
     });
     document.getElementById('ciuTikTok').addEventListener('input', updateCiuQR);
 
+    /* Xử lý chỉ cho phép chọn 1 mục Free */
+    document.querySelectorAll('.ciu-content-cb.free-cb').forEach(cb => {
+      cb.addEventListener('change', function() {
+        if (this.checked) {
+          document.querySelectorAll('.ciu-content-cb.free-cb').forEach(other => {
+            if (other !== this) other.checked = false;
+          });
+        }
+      });
+    });
+
     function submitCiuAcc() {
       const tiktok = document.getElementById('ciuTikTok').value.trim();
       const acc = document.getElementById('ciuAccount').value.trim();
@@ -2851,11 +3223,11 @@
       const contents = Array.from(contentCbs).map(cb => cb.value);
 
       if (!tiktok || !acc || !pw) {
-        alert("Vui lòng nhập đầy đủ Tên TikTok, Tài khoản và Mật khẩu!");
+        showToast("Vui lòng nhập đầy đủ Tên TikTok, Tài khoản và Mật khẩu!", "warning");
         return;
       }
       if (contents.length === 0) {
-        alert("Vui lòng chọn ít nhất 1 content để cứu/cày!");
+        showToast("Vui lòng chọn ít nhất 1 content để cứu/cày!", "warning");
         return;
       }
 
@@ -2870,14 +3242,14 @@
       let billFile = null;
       if (totalPrice > 0) {
         if (billInput.files.length === 0) {
-          alert("⚠️ Vui lòng đính kèm ảnh chụp màn hình Bill thanh toán để xác nhận nhé!");
+          showToast("⚠️ Vui lòng đính kèm ảnh chụp màn hình Bill để xác nhận nhé!", "warning");
           return;
         }
         billFile = billInput.files[0];
       }
 
       // Nút gửi đang loading (Tránh bấm 2 lần)
-      const btnSubmit = document.querySelector('#ciuAccModal .btn-submit');
+      const btnSubmit = document.querySelector('#viewCiuAcc .btn-submit');
       const originalText = btnSubmit.innerHTML;
       btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang Gửi...';
       btnSubmit.disabled = true;
@@ -2901,26 +3273,7 @@
           footer: {
             text: "Hệ thống Cứu Acc @phalnnn"
           }
-        }],
-        components: [
-          {
-            type: 1,
-            components: [
-              {
-                type: 2,
-                label: "Đã xong",
-                style: 3, // Nút màu Xanh
-                custom_id: "btn_done"
-              },
-              {
-                type: 2,
-                label: "Xóa acc",
-                style: 4, // Nút màu Đỏ
-                custom_id: "btn_delete"
-              }
-            ]
-          }
-        ]
+        }]
       };
 
       // Đóng gói dữ liệu thành FormData để có thể gửi kèm File ảnh
@@ -2937,23 +3290,16 @@
         body: formData
       }).then(async response => {
         if(response.ok) {
-          alert("Gửi yêu cầu cứu acc thành công! Vui lòng chờ mình xử lý nhé 💗");
-          closeCiuAccModal();
-          
-          // Reset fields
-          clearCiuAccForm();
+          showCustomAlert("Thành công! 🎉", "Gửi yêu cầu cứu acc thành công! Vui lòng chờ mình xử lý nhé 💗", function() {
+            switchView('profile');
+            clearCiuAccForm();
+          });
         } else {
-          const err = await response.json().catch(() => ({}));
-          // Bắt lỗi khi dùng Webhook thường (không được phép gửi nút bấm)
-          if (err.code === 50039) {
-            alert("⚠️ Lỗi Discord: Webhook kênh thường không hỗ trợ nút bấm! Để hiển thị nút 'Đã cứu' và 'Xóa acc', bạn cần tạo Webhook thông qua 1 Ứng dụng Bot trên Discord Developer Portal nhé.");
-          } else {
-            alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
-          }
+            showToast("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau!", "error");
         }
       }).catch(err => {
         console.error(err);
-        alert("Không thể kết nối đến máy chủ Discord!");
+        showToast("Không thể kết nối đến máy chủ Discord!", "error");
       }).finally(() => {
         btnSubmit.innerHTML = originalText;
         btnSubmit.disabled = false;
