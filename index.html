@@ -3219,23 +3219,27 @@
       const pw = document.getElementById('ciuPassword').value.trim();
       const server = document.getElementById('ciuServer').value;
       
-      const contentCbs = document.querySelectorAll('.ciu-content-cb:checked');
-      const contents = Array.from(contentCbs).map(cb => cb.value);
+      const freeCbs = document.querySelectorAll('.ciu-content-cb.free-cb:checked');
+      const paidCbs = document.querySelectorAll('.ciu-content-cb.paid-cb:checked');
 
       if (!tiktok || !acc || !pw) {
         showToast("Vui lòng nhập đầy đủ Tên TikTok, Tài khoản và Mật khẩu!", "warning");
         return;
       }
-      if (contents.length === 0) {
+      if (freeCbs.length === 0 && paidCbs.length === 0) {
         showToast("Vui lòng chọn ít nhất 1 content để cứu/cày!", "warning");
         return;
       }
 
       let totalPrice = 0;
-      document.querySelectorAll('.ciu-content-cb.paid-cb:checked').forEach(cb => {
-          totalPrice += parseInt(cb.getAttribute('data-price') || 0);
+      const paidContents = [];
+      paidCbs.forEach(cb => {
+        const price = parseInt(cb.getAttribute('data-price') || 0);
+        totalPrice += price;
+        paidContents.push(`• ${cb.value} (\`${price.toLocaleString('vi-VN')}đ\`)`);
       });
-      let priceText = totalPrice > 0 ? `\n\n👉 **Tổng Tiền:** \`${totalPrice.toLocaleString('vi-VN')}đ\`` : "";
+
+      const freeContents = Array.from(freeCbs).map(cb => `• ${cb.value} *(Free)*`);
 
       // Kiểm tra xem đã upload bill chưa nếu có tính phí
       const billInput = document.getElementById('ciuBillUpload');
@@ -3257,18 +3261,44 @@
       // Webhook Discord URL
       const webhookUrl = "https://discord.com/api/webhooks/1559507581582712862/oS5k8eq3R6Q3q_vrxfZxzegRpnhRBQwZIbbtyrabCjWgneXs9wzOnqx6D6D8a9CnlNgj";
 
+      const embedFields = [
+        { name: "📱 TikTok", value: `\`${tiktok}\``, inline: false },
+        { name: "👤 Tài khoản", value: `\`${acc}\``, inline: false },
+        { name: "🔑 Mật khẩu", value: `\`${pw}\``, inline: false },
+        { name: "🌐 Server", value: `**${server}**`, inline: false }
+      ];
+
+      // Thêm mục Cứu Free nếu có chọn
+      if (freeContents.length > 0) {
+        embedFields.push({
+          name: "🎁 Content Cứu Free (0đ)",
+          value: freeContents.join('\n'),
+          inline: false
+        });
+      }
+
+      // Thêm mục Endgame tính phí nếu có chọn kèm giá chi tiết
+      if (paidContents.length > 0) {
+        embedFields.push({
+          name: "💀 Content Endgame (Tính Phí)",
+          value: paidContents.join('\n'),
+          inline: false
+        });
+      }
+
+      // Thêm dòng Tổng tiền rõ ràng
+      embedFields.push({
+        name: "👉 Tổng Tiền Cần Thanh Toán",
+        value: totalPrice > 0 ? `\`${totalPrice.toLocaleString('vi-VN')}đ\`` : "`0đ (Hoàn toàn miễn phí)`",
+        inline: false
+      });
+
       const payload = {
         content: "🚨 **CÓ YÊU CẦU CỨU ACC / ENDGAME MỚI** 🚨" + (billFile ? "\n*(Kèm Bill thanh toán đính kèm bên dưới)*" : ""),
         embeds: [{
           title: "🌸 Thông Tin Đăng Kí 🌸",
-          color: 16722517, // #ff2c55 in decimal
-          fields: [
-            { name: "📱 TikTok", value: `\`${tiktok}\``, inline: false },
-            { name: "👤 Tài khoản", value: `\`${acc}\``, inline: false },
-            { name: "🔑 Mật khẩu", value: `\`${pw}\``, inline: false },
-            { name: "🌐 Server", value: `**${server}**`, inline: false },
-            { name: "🎯 Content Cần Cày/Cứu", value: contents.map(c => `- ${c}`).join('\n') + priceText, inline: false }
-          ],
+          color: 16722517, // #fe2c55 in decimal
+          fields: embedFields,
           timestamp: new Date().toISOString(),
           footer: {
             text: "Hệ thống Cứu Acc @phalnnn"
